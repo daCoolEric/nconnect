@@ -14,6 +14,10 @@ module.exports = {
       colors: {
         "primary-orange": "#FF5722",
       },
+      backgroundImage: {
+        landingpage: "url('/assets/images/background.png')",
+        nav: "url('/assets/images/navBg.svg')",
+      },
     },
   },
   plugins: [],

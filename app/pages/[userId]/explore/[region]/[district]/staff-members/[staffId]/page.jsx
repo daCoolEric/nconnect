@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 function IndividualStaff() {
   return (
-    <div>
+    <div className="h-3/4 w-screen">
       Individual Staff
       <Link href="/pages/userId/explore/">All Regions</Link>
       <Link href="/pages/userId/explore/region/">All Districts</Link>

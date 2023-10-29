@@ -1,3 +1,4 @@
+import "@styles/globals.css";
 import Nav from "@components/Nav";
 
 export const metadata = {
@@ -9,8 +10,7 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <main className="pages">
-        
+        <main className="app">
           <Nav />
           {children}
         </main>

@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 function SignIn() {
   return (
-    <div>
+    <div className="h-3/4 w-screen  outline outline-black">
       SignIn Page
       <Link href="/pages/signUp">Sign Up</Link>
       <Link href="/pages/123/explore">Explore</Link>

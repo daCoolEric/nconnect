@@ -2,12 +2,17 @@
 import Link from "next/link";
 const LandingPage = () => {
   return (
-    <div>
-      <div>LandingPages</div>
-      <div>
-        <Link href="/pages/signIn">Sign In</Link>
+    // Mobile view
+    <>
+      <div className="h-screen w-full bg-[url('/public/assets/images/background.png')]">
+        <div className="h-1/4 outline">NConnect</div>
+        <div className="h-4/5 outline outline-black">
+          <Link href="/pages/signIn">Sign In</Link>
+        </div>
       </div>
-    </div>
+
+      {/* Desktop View */}
+    </>
   );
 };
 

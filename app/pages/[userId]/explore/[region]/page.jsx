@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 function Region() {
   return (
-    <div>
+    <div className="h-3/4 w-screen">
       List of Districts
       <Link href="/pages/123/explore">Explore</Link>
       <Link href="/pages/userId/explore/">All Regions</Link>

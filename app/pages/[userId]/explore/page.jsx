@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 function Regions() {
   return (
-    <div>
+    <div className="h-3/4 w-screen">
       List of Regions
       <Link href="/pages/userId/explore/region">Selected Region</Link>
       <Link href="/pages/signIn">Sign In</Link>
