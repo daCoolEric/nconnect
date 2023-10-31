@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "./Modal";
 import Image from "next/image";
+import Search from "./Search";
 
 const Nav = () => {
   return (
@@ -17,7 +18,9 @@ const Nav = () => {
           />
         </div>
       </div>
-      <div>Search Bar</div>
+      <div className="flex justify-center items-center w-full h-1/2 outline outline-black">
+        <Search />
+      </div>
     </div>
   );
 };
