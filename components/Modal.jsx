@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import MenuList from "./MenuList";
+import { useDispatch, useSelector } from "react-redux";
+import { closeMenu } from "@app/GlobalRedux/Features/menu/menuSlice";
 
 const menuList = [
   {
@@ -31,11 +33,15 @@ const menuList = [
 ];
 
 function Modal() {
-  const [visible, setVisible] = useState("hidden");
+  //useSelector gets the state from store
+  const menuState = useSelector((state) => state.menu.value); // Access the counter state
+  // const [visible, setVisible] = useState("hidden");
+  const dispatch = useDispatch();
   return (
     <div
       className="w-screen h-screen bg-black/60 absolute z-10"
-      style={{ visibility: visible }}
+      style={{ visibility: menuState }}
+      onClick={() => dispatch(closeMenu("hidden"))}
     >
       <div className="w-8/12 h-full bg-white">
         <div className="w-full h-2/3 outline outline-red-500 flex flex-col justify-evenly">

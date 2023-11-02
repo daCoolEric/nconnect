@@ -1,4 +1,5 @@
 import "@styles/globals.css";
+import { Providers } from "./GlobalRedux/provider";
 
 export const metadata = {
   title: "NConnect",
@@ -9,7 +10,12 @@ const RootLayout = ({ children }) => {
   return (
     <html lang="en">
       <body>
-        <main className="main">{children}</main>
+        {/* import the custom provider component */}
+
+        <main className="main">
+          {" "}
+          <Providers>{children}</Providers>
+        </main>
       </body>
     </html>
   );

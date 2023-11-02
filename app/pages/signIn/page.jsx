@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+
 function SignIn() {
   return (
     <div className="h-3/4 w-screen  outline outline-black">
