@@ -1,13 +1,41 @@
 import React from "react";
 import Link from "next/link";
+import Input from "@components/Input";
+import Button from "@components/Button";
 
 function SignIn() {
   return (
-    <div className="h-3/4 w-screen  outline outline-black">
-      SignIn Page
-      <Link href="/pages/signUp">Sign Up</Link>
-      <Link href="/pages/123/explore">Explore</Link>
-      <Link href="/">Landing Page</Link>
+    <div className="h-3/4 w-screen  //outline //outline-black">
+      <div
+        className=" flex justify-evenly flex-col items-center //outline //outline-black"
+        style={{ height: "90%" }}
+      >
+        <div
+          className="w-11/12 text-2xl text-green-600 font-medium "
+          // style={{ color: "#339B20" }}
+        >
+          Staff Only
+        </div>
+        <div className="w-11/12 " style={{ height: "13%" }}>
+          <Input
+            placeholder="Enter your PIN (eg. GHA-000000000-0 )"
+            type="text"
+          />
+        </div>
+        <div className="w-11/12" style={{ height: "13%" }}>
+          <Input placeholder="Enter your password" type="password" />
+        </div>
+        <div className="w-11/12 text-xl text-green-600">Forgot password?</div>
+        <div className="w-11/12 h-1/6 flex justify-center items-center">
+          <Button name="Sign In" />
+        </div>
+        <div className="w-11/12 text-xl text-green-600">
+          Don't have an account?{" "}
+          <span className="text-blue-500">
+            <Link href="/pages/signUp">Sign Up</Link>{" "}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

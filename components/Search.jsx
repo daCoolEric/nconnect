@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Search() {
   return (
-    <div className="//outline //outline-black w-9/12 h-3/6 flex justify-center flex-row items-center bg-white rounded-3xl">
+    <div className="//outline //outline-black w-11/12 h-3/6 flex justify-center flex-row items-center bg-white rounded-3xl">
       <div className="w-5/6 h-full flex items-center">
         <input
           type="text"

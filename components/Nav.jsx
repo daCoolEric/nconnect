@@ -10,7 +10,7 @@ const Nav = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="w-full h-1/4  outline bg-gradient-to-b from-green-500 to-white //outline-black h-1/4 ">
+    <div className="w-full h-1/4  //outline bg-gradient-to-b from-green-500 to-white //outline-black ">
       <Modal />
       <div className="w-full h-1/2 //outline //outline-black">
         <div className="w-1/6 h-10/12 //outline //outline-blue-500 flex justify-center items-center pt-2 pb-2">
