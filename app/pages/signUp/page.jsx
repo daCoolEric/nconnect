@@ -4,7 +4,10 @@ import Link from "next/link";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import { useSelector } from "react-redux";
-import Select from "@components/Select";
+import Select from "@components/RegionsSelector";
+import DistrictsSelector from "@components/DistrictsSelector";
+import RankSelector from "@components/RankSelector";
+import RegionsSelector from "@components/RegionsSelector";
 
 function SignUp() {
   const specificRegion = useSelector((state) => state.districts.value);
@@ -33,13 +36,13 @@ function SignUp() {
           <Input placeholder="Confirm your password" type="password" />
         </div>
         <div className="w-11/12 h-14 m-auto">
-          <Select name="ranks" />
+          <RankSelector name="ranks" />
         </div>
         <div className="w-11/12 h-14 m-auto">
-          <Select name="regions" />
+          <RegionsSelector name="regions" />
         </div>
         <div className="w-11/12 h-14 m-auto">
-          <Select name={specificRegion} />
+          <DistrictsSelector name={specificRegion} />
         </div>
         <div className="w-11/12 h-14 m-auto">
           <Input placeholder="Enter your email" type="password" />
