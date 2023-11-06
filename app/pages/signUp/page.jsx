@@ -45,10 +45,10 @@ function SignUp() {
           <DistrictsSelector name={specificRegion} />
         </div>
         <div className="w-11/12 h-14 m-auto">
-          <Input placeholder="Enter your email" type="password" />
+          <Input placeholder="Enter your email" type="text" />
         </div>
         <div className="w-11/12 h-14 m-auto">
-          <Input placeholder="Enter your contact" type="password" />
+          <Input placeholder="Enter your contact" type="text" />
         </div>
         <div className="w-11/12 h-16 m-auto flex justify-center items-center">
           <Button name="Sign Up" />
