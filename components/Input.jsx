@@ -9,7 +9,7 @@ function Input({ placeholder, type }) {
       <input
         type={type}
         placeholder={placeholder}
-        className="w-full h-full focus:outline-none ml-4 text-lg bg-transparent"
+        className="w-full h-full focus:outline-none ml-4 text-xl bg-transparent"
         style={{ color: "#000" }}
       />
     </div>
