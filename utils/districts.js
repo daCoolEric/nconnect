@@ -196,7 +196,121 @@ export const districtDB = {
     },
   ],
   "GREATER ACCRA": [],
-  "WESTERN NORTH": [],
-  WESTERN: [],
+  "WESTERN NORTH": [
+    {
+      id: 1,
+      district: "REGIONAL",
+    },
+    {
+      id: 2,
+      district: "JUABOSO",
+    },
+    {
+      id: 3,
+      district: "SUAMAN",
+    },
+    {
+      id: 4,
+      district: "BIA EAST",
+    },
+    {
+      id: 5,
+      district: "BODI",
+    },
+    {
+      id: 6,
+      district: "AOWIN",
+    },
+    {
+      id: 7,
+      district: "BIA WEST",
+    },
+    {
+      id: 8,
+      district: "SEFWI WIAWSO",
+    },
+    {
+      id: 9,
+      district: "BIBIANI ANHWIASO BEKWAI",
+    },
+    {
+      id: 10,
+      district: "SEFWI AKONTOMBRA",
+    },
+  ],
+  WESTERN: [
+    {
+      id: 1,
+      district: "REGIONAL",
+    },
+    {
+      id: 2,
+      district: "AHANTA WEST",
+    },
+    {
+      id: 3,
+      district: "AMENFI EAST",
+    },
+    {
+      id: 4,
+      district: "EFFIA",
+    },
+    {
+      id: 5,
+      district: "ELLEMBELLE",
+    },
+    {
+      id: 6,
+      district: "ESSIKADO-KETAN",
+    },
+    {
+      id: 7,
+      district: "JOMORO MUNICIPAL",
+    },
+    {
+      id: 8,
+      district: "KWESIMINTSIM",
+    },
+    {
+      id: 9,
+      district: "MPOHOR",
+    },
+    {
+      id: 10,
+      district: "NZEMA EAST",
+    },
+    {
+      id: 11,
+      district: "PRESTEA HUNI VALLEY",
+    },
+    {
+      id: 12,
+      district: "SEKONDI",
+    },
+    {
+      id: 13,
+      district: "SHAMA",
+    },
+    {
+      id: 14,
+      district: "TAKORADI",
+    },
+    {
+      id: 15,
+      district: "TARKWA-NSUAEM MUNICIPAL",
+    },
+    {
+      id: 16,
+      district: "WASSA AMENFI CENTRAL",
+    },
+    {
+      id: 17,
+      district: "WASSA AMENFI WEST MUNICIPAL",
+    },
+    {
+      id: 18,
+      district: "WASSA EAST",
+    },
+  ],
   VOLTA: [],
 };
