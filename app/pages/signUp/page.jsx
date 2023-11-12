@@ -7,8 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { NIA_Staff } from "@utils/users";
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@utils/database";
 
 function SignUp() {
   //useSelector gets the state from store
@@ -19,9 +17,6 @@ function SignUp() {
   const { password, setPassword } = useState("");
   const { confirmPassword, setConfirmPassword } = useState("");
 
-  const createUser = () => {
-    createUserWithEmailAndPassword(auth, userName, password);
-  };
   const validate_NIA_Staff = () => {
     if (userNameState !== NIA_Staff.pin) {
       return alert("You are not a staff");
