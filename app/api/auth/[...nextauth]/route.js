@@ -1,47 +1,40 @@
-// import NextAuth from "next-auth";
-// import GoogleProvider from "next-auth/providers/google";
+import { auth } from "@utils/database";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import NextAuth from "next-auth";
+import CredentialsProvider from "next-auth/providers/credentials";
 
-// import User from "@models/user";
-// import { connectToDB } from "@utils/database";
+const handler = NextAuth({
+  pages: {
+    signIn: "/pages/signIn",
+  },
+  providers: [
+    CredentialsProvider({
+      // The name to display on the sign in form (e.g. 'Sign in with...')
+      name: "Credentials",
+      // The credentials is used to generate a suitable form on the sign in page.
+      // You can specify whatever fields you are expecting to be submitted.
+      // e.g. domain, username, password, 2FA token, etc.
+      // You can pass any HTML attribute to the <input> tag through the object.
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        return await signInWithEmailAndPassword(
+          auth,
+          credentials.username || "",
+          credentials.password || ""
+        )
+          .then((userCredential) => {
+            if (userCredential.user) {
+              return userCredential.user;
+            }
+            return null;
+          })
+          .catch((error) => console.log(error));
+      },
+    }),
+  ],
+});
 
-// const handler = NextAuth({
-//   providers: [
-//     GoogleProvider({
-//       clientId: process.env.GOOGLE_ID,
-//       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-//     }),
-//   ],
-//   callbacks: {
-//     async session({ session }) {
-//       // store the user id from MongoDB to session
-//       const sessionUser = await User.findOne({ email: session.user.email });
-//       session.user.id = sessionUser._id.toString();
-
-//       return session;
-//     },
-//     async signIn({ account, profile, user, credentials }) {
-//       try {
-//         await connectToDB();
-
-//         // check if user already exists
-//         const userExists = await User.findOne({ email: profile.email });
-
-//         // if not, create a new document and save user in MongoDB
-//         if (!userExists) {
-//           await User.create({
-//             email: profile.email,
-//             username: profile.name.replace(" ", "").toLowerCase(),
-//             image: profile.picture,
-//           });
-//         }
-
-//         return true;
-//       } catch (error) {
-//         console.log("Error checking if user exists: ", error.message);
-//         return false;
-//       }
-//     },
-//   },
-// });
-
-// export { handler as GET, handler as POST };
+export { handler as GET, handler as POST };

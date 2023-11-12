@@ -22,13 +22,23 @@ const menuList = [
   },
   {
     id: 4,
+    name: "Add Details",
+    path: "/pages/userId/addDetails",
+  },
+  {
+    id: 5,
     name: "Profile",
     path: `/pages/userId/explore/region/district/staff-members/staffId`,
   },
   {
-    id: 5,
+    id: 6,
     name: "Log Out",
-    path: "/",
+    path: "/pages/signIn/",
+  },
+  {
+    id: 7,
+    name: "Forgot Password",
+    path: "/pages/forgotPassword/",
   },
 ];
 
@@ -44,7 +54,7 @@ function Modal() {
       onClick={() => dispatch(closeMenu("hidden"))}
     >
       <div className="w-8/12 h-full bg-white">
-        <div className="w-full h-2/3 outline outline-red-500 flex flex-col justify-evenly">
+        <div className="w-full h-2/3 //outline //outline-red-500 flex flex-col justify-evenly">
           {menuList.map((item) => {
             return <MenuList key={item.id} name={item.name} page={item.path} />;
           })}

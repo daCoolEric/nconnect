@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { getApp, getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import "firebase/firestore";
 import "dotenv/config";
 
@@ -17,7 +18,9 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
+
+export const auth = getAuth(app);

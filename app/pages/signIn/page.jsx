@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import Input from "@components/Input";
@@ -25,7 +26,9 @@ function SignIn() {
         <div className="w-11/12" style={{ height: "13%" }}>
           <Input placeholder="Enter your password" type="password" />
         </div>
-        <div className="w-11/12 text-xl text-green-600">Forgot password?</div>
+        <div className="w-11/12 text-xl text-green-600">
+          <Link href="/pages/forgotPassword">Forgot password?</Link>
+        </div>
         <div className="w-11/12 h-1/6 flex justify-center items-center">
           <Button name="Sign In" />
         </div>

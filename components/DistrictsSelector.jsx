@@ -14,8 +14,8 @@ function DistrictsSelector({ name }) {
   }
   return (
     <div
-      className="w-full h-full flex justify-center items-center rounded-3xl "
-      style={{ backgroundColor: "#CAFDDE" }}
+      className="w-full h-full flex justify-center items-center outline outline-green-400 rounded-3xl "
+      style={{ backgroundColor: "#FFFFFF" }}
     >
       <select
         value={value}
