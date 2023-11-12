@@ -1,6 +1,6 @@
 import "@styles/globals.css";
 import Nav from "@components/Nav";
-import Provider from "@app/sessionProvider";
+// import Provider from "@app/sessionProvider";
 
 export const metadata = {
   title: "NConnect",
@@ -12,10 +12,8 @@ const RootLayout = ({ children }) => {
     <html lang="en">
       <body>
         <main className="app">
-          <Provider>
-            <Nav />
-            {children}
-          </Provider>
+          <Nav />
+          {children}
         </main>
       </body>
     </html>
