@@ -19,7 +19,7 @@ function SignUp() {
 
   const validate_NIA_Staff = () => {
     if (userNameState !== NIA_Staff.pin) {
-      return alert("You are not a staff");
+      return alert(userNameState);
     } else {
       alert("You are a staff");
     }
@@ -31,10 +31,10 @@ function SignUp() {
         // style={{ height: "100%" }}
       >
         <div
-          className="w-11/12 m-auto text-2xl text-green-600 font-medium "
+          className="w-11/12 h-14 m-auto text-2xl flex justify-center items-center text-green-600 font-medium //outline //outline-black "
           // style={{ color: "#339B20" }}
         >
-          Staff Only
+          Sign Up
         </div>
         <div className="w-11/12 h-14 m-auto //outline //outline-black ">
           <Input
@@ -45,7 +45,7 @@ function SignUp() {
         <div className="w-11/12 h-14 m-auto">
           <Input placeholder="Enter your password" type="password" />
         </div>
-        <div className="w-11/12 h-14 m-auto">
+        <div className="w-11/12 h-14 m-auto //outline //outline-black">
           <Input placeholder="Confirm your password" type="password" />
         </div>
 

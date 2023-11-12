@@ -2,11 +2,11 @@ import { setUserName } from "@app/GlobalRedux/Features/userName/userNameSlice";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-function Input({ placeholder, type, userNameValue }) {
+function Input({ placeholder, type }) {
   const dispatch = useDispatch();
   return (
     <div
-      className="w-full h-full flex justify-center items-center outline outline-green-400 rounded-3xl  "
+      className="w-full h-full flex justify-center items-center outline outline-green-400 rounded-lg  "
       style={{ backgroundColor: "#FFFFFF" }}
     >
       <input

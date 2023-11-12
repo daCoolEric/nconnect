@@ -23,10 +23,10 @@ function ForgotPassword() {
         >
           Please enter your email below to reset your password.
         </div>
-        <div className="w-11/12 " style={{ height: "13%" }}>
+        <div className="w-11/12 h-14 " style={{ height: "13%" }}>
           <Input placeholder="Enter your email" type="email" />
         </div>
-        <div className="w-11/12 h-1/6 flex justify-center items-center">
+        <div className="w-11/12 h-16 flex justify-center items-center">
           <Button name="Reset Password" />
         </div>
         <div className="w-11/12 text-xl text-green-600">

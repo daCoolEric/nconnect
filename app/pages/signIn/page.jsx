@@ -12,10 +12,10 @@ function SignIn() {
         style={{ height: "90%" }}
       >
         <div
-          className="w-11/12 text-2xl text-green-600 font-medium "
+          className="w-11/12 text-2xl flex justify-center items-center text-green-600 font-medium "
           // style={{ color: "#339B20" }}
         >
-          Staff Only
+          Sign In
         </div>
         <div className="w-11/12 " style={{ height: "13%" }}>
           <Input
@@ -29,7 +29,7 @@ function SignIn() {
         <div className="w-11/12 text-xl text-green-600">
           <Link href="/pages/forgotPassword">Forgot password?</Link>
         </div>
-        <div className="w-11/12 h-1/6 flex justify-center items-center">
+        <div className="w-11/12 h-16  flex justify-center items-center">
           <Button name="Sign In" />
         </div>
         <div className="w-11/12 text-xl text-green-600">
