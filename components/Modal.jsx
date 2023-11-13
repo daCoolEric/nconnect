@@ -40,6 +40,16 @@ const menuList = [
     name: "Forgot Password",
     path: "/pages/forgotPassword/",
   },
+  {
+    id: 8,
+    name: "Staff members",
+    path: "/pages/userId/explore/region/district/staff-members",
+  },
+  {
+    id: 9,
+    name: "Specific Office",
+    path: "/pages/userId/explore/region/district",
+  },
 ];
 
 function Modal() {
