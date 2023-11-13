@@ -14,26 +14,32 @@ function page() {
   return (
     <div className="w-screen h-3/4  //outline //outline-black">
       <div className="grid grid-cols-1 gap-4 //outline //outline-black">
-        <div className="w-11/12 m-auto text-2xl text-green-600 font-medium ">
+        <div className="w-10/12 m-auto text-2xl text-green-600 font-medium ">
           Add Details
         </div>
-        <div className="w-11/12 h-14 m-auto">
+        <div className="w-10/12 h-14 m-auto">
+          <Input placeholder="Enter your firstname" type="text" />
+        </div>
+        <div className="w-10/12 h-14 m-auto">
+          <Input placeholder="Enter your lastname" type="text" />
+        </div>
+        <div className="w-10/12 h-14 m-auto">
           <RankSelector name="ranks" />
         </div>
-        <div className="w-11/12 h-14 m-auto">
+        <div className="w-10/12 h-14 m-auto">
           <RegionsSelector name="regions" />
         </div>
-        <div className="w-11/12 h-14 m-auto">
+        <div className="w-10/12 h-14 m-auto">
           <DistrictsSelector name={specificRegion} />
         </div>
-        <div className="w-11/12 h-14 m-auto">
-          <Input placeholder="Enter your email" type="text" />
+        <div className="w-10/12 h-14 m-auto">
+          <Input placeholder="Enter your email" type="email" />
         </div>
-        <div className="w-11/12 h-14 m-auto">
+        <div className="w-10/12 h-14 m-auto">
           <Input placeholder="Enter your contact" type="text" />
         </div>
         <div
-          className="w-11/12 h-16 m-auto flex justify-center items-center"
+          className="w-10/12 h-16 m-auto flex justify-center items-center"
           onClick={() => {
             validate_NIA_Staff();
           }}

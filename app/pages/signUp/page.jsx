@@ -31,33 +31,30 @@ function SignUp() {
         // style={{ height: "100%" }}
       >
         <div
-          className="w-11/12 h-14 m-auto text-2xl flex justify-center items-center text-green-600 font-medium //outline //outline-black "
+          className="w-10/12 h-14 m-auto text-2xl flex justify-center items-center text-green-600 font-medium //outline //outline-black "
           // style={{ color: "#339B20" }}
         >
           Sign Up
         </div>
-        <div className="w-11/12 h-14 m-auto //outline //outline-black ">
-          <Input
-            placeholder="Enter your PIN (eg. GHA-000000000-0 )"
-            type="text"
-          />
+        <div className="w-10/12 h-14 m-auto //outline //outline-black ">
+          <Input placeholder="Enter your PIN (GHA-000000000-0)" type="text" />
         </div>
-        <div className="w-11/12 h-14 m-auto">
+        <div className="w-10/12 h-14 m-auto">
           <Input placeholder="Enter your password" type="password" />
         </div>
-        <div className="w-11/12 h-14 m-auto //outline //outline-black">
+        <div className="w-10/12 h-14 m-auto //outline //outline-black">
           <Input placeholder="Confirm your password" type="password" />
         </div>
 
         <div
-          className="w-11/12 h-16 m-auto flex justify-center items-center"
+          className="w-10/12 h-16 m-auto flex justify-center items-center"
           onClick={() => {
             validate_NIA_Staff();
           }}
         >
           <Button name="Sign Up" />
         </div>
-        <div className="w-11/12 h-14 m-auto text-xl text-green-600">
+        <div className="w-10/12 h-14 m-auto text-xl text-green-600">
           Already have an account?{" "}
           <span className="text-blue-500">
             <Link href="/pages/signIn">Sign In</Link>{" "}

@@ -1,0 +1,38 @@
+export const Office_Staff = [
+  {
+    id: 1,
+    firstName: "Daniel",
+    lastName: "Adu-Gyamfi",
+    rank: "District Registration Officer",
+    email: "dadg@gmail.com",
+    contact: "0500000000",
+    profilePic: "/assets/images/profilePic.png",
+  },
+  {
+    id: 2,
+    firstName: "Joseph Obededom",
+    lastName: "Eshun",
+    rank: "Assistant Administrative Officer",
+    email: "josehun@gmail.com",
+    contact: "0500000000",
+    profilePic: "/assets/images/profilePic.png",
+  },
+  {
+    id: 3,
+    firstName: "Lydia",
+    lastName: "Asraah",
+    rank: "Assistant Registration Officer",
+    email: "lydiasraah@gmail.com",
+    contact: "0500000000",
+    profilePic: "/assets/images/profilePic.png",
+  },
+  {
+    id: 4,
+    firstName: "Eric Kodzo",
+    lastName: "Ayi",
+    rank: "Assistant Technical Enrollment Officer",
+    email: "ayieric7@gmail.com",
+    contact: "0500000000",
+    profilePic: "/assets/images/profilePic.png",
+  },
+];

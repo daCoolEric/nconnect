@@ -9,7 +9,7 @@ function RankSelector({ name }) {
   }
   return (
     <div
-      className="w-full h-full flex justify-center items-center outline outline-green-400 rounded-3xl "
+      className="w-full h-full flex justify-center items-center outline outline-green-400 rounded-lg "
       style={{ backgroundColor: "#FFFFFF" }}
     >
       <select

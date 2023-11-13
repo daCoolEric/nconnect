@@ -17,22 +17,22 @@ function SignIn() {
         >
           Sign In
         </div>
-        <div className="w-11/12 " style={{ height: "13%" }}>
+        <div className="w-10/12 " style={{ height: "13%" }}>
           <Input
             placeholder="Enter your PIN (eg. GHA-000000000-0 )"
             type="text"
           />
         </div>
-        <div className="w-11/12" style={{ height: "13%" }}>
+        <div className="w-10/12" style={{ height: "13%" }}>
           <Input placeholder="Enter your password" type="password" />
         </div>
-        <div className="w-11/12 text-xl text-green-600">
+        <div className="w-10/12 text-xl text-green-600">
           <Link href="/pages/forgotPassword">Forgot password?</Link>
         </div>
-        <div className="w-11/12 h-16  flex justify-center items-center">
+        <div className="w-10/12 h-16  flex justify-center items-center">
           <Button name="Sign In" />
         </div>
-        <div className="w-11/12 text-xl text-green-600">
+        <div className="w-10/12 text-xl text-green-600">
           Don't have an account?{" "}
           <span className="text-blue-500">
             <Link href="/pages/signUp">Sign Up</Link>{" "}

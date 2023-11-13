@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { regionDB } from "@utils/categories";
+import { regionDB } from "@utils/regions";
 
 import { useDispatch } from "react-redux";
 import { setDistricts } from "@app/GlobalRedux/Features/district/districtSlice";
@@ -14,7 +14,7 @@ function RegionsSelector({ name }) {
   }
   return (
     <div
-      className="w-full h-full flex justify-center items-center outline outline-green-400 rounded-3xl "
+      className="w-full h-full flex justify-center items-center outline outline-green-400 rounded-lg "
       style={{ backgroundColor: "#FFFFFF" }}
     >
       <select

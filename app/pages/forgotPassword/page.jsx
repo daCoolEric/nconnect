@@ -12,24 +12,24 @@ function ForgotPassword() {
         style={{ height: "90%" }}
       >
         <div
-          className="w-11/12 text-2xl text-green-600 font-medium "
+          className="w-10/12 text-2xl text-green-600 font-medium "
           // style={{ color: "#339B20" }}
         >
           Forgot your password?
         </div>
         <div
-          className="w-11/12 text-2xl text-green-600 font-medium "
+          className="w-10/12 text-2xl text-green-600 font-medium "
           // style={{ color: "#339B20" }}
         >
           Please enter your email below to reset your password.
         </div>
-        <div className="w-11/12 h-14 " style={{ height: "13%" }}>
+        <div className="w-10/12 h-14 " style={{ height: "13%" }}>
           <Input placeholder="Enter your email" type="email" />
         </div>
-        <div className="w-11/12 h-16 flex justify-center items-center">
+        <div className="w-10/12 h-16 flex justify-center items-center">
           <Button name="Reset Password" />
         </div>
-        <div className="w-11/12 text-xl text-green-600">
+        <div className="w-10/12 text-xl text-green-600">
           Remembered your password?{" "}
           <span className="text-blue-500">
             <Link href="/pages/signIn">Sign In</Link>{" "}
