@@ -17,6 +17,7 @@ function StaffMembers() {
         return (
           <StaffMembersCard
             key={staff.id}
+            staffId={staff.id}
             firstname={staff.firstName}
             lastname={staff.lastName}
             rank={staff.rank}

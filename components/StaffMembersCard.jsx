@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { useRouter } from "next/navigation";
 
-function StaffMembersCard({ firstname, lastname, rank, profilePic }) {
+function StaffMembersCard({ staffId, firstname, lastname, rank, profilePic }) {
   const router = useRouter();
   return (
     <div className="w-full h-72 //outline //outline-black">
@@ -11,7 +11,7 @@ function StaffMembersCard({ firstname, lastname, rank, profilePic }) {
         className=" w-full h-full  bg-transparent p-5 rounded-lg"
         onClick={() =>
           router.push(
-            "/pages/userId/explore/region/district/staff-members/staffId"
+            `/pages/userId/explore/region/district/staff-members/${staffId}`
           )
         }
       >
@@ -25,10 +25,7 @@ function StaffMembersCard({ firstname, lastname, rank, profilePic }) {
           />
         </div>
         <div className="w-full h-1/4 flex flex-col justify-center items-center //outline //outline-blue-500">
-          <div>
-            {firstname}
-            {lastname}
-          </div>
+          <div>{`${firstname} ${lastname}`}</div>
           <div>{rank}</div>
         </div>
       </button>
