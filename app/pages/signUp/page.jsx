@@ -18,47 +18,84 @@ function SignUp() {
   const { confirmPassword, setConfirmPassword } = useState("");
 
   const validate_NIA_Staff = () => {
-    if (userNameState !== NIA_Staff.pin) {
-      return alert(userNameState);
-    } else {
-      alert("You are a staff");
+    if (!NIA_Staff[userNameState]) {
+      alert("Your are not a staff");
     }
   };
   return (
     <div className="w-screen h-3/4 flex justify-center items-center //outline //outline-black">
-      <div
-        className="grid grid-cols-1 gap-6 //outline //outline-black w-full"
-        // style={{ height: "100%" }}
-      >
-        <div
-          className="w-10/12 h-14 m-auto text-2xl flex justify-center items-center text-green-600 font-medium //outline //outline-black "
-          // style={{ color: "#339B20" }}
-        >
-          Sign Up
-        </div>
-        <div className="w-10/12 h-14 m-auto //outline //outline-black ">
-          <Input placeholder="Enter your PIN (GHA-000000000-0)" type="text" />
-        </div>
-        <div className="w-10/12 h-14 m-auto">
-          <Input placeholder="Enter your password" type="password" />
-        </div>
-        <div className="w-10/12 h-14 m-auto //outline //outline-black">
-          <Input placeholder="Confirm your password" type="password" />
+      <div className="flex min-h-full flex-1 flex-col justify-start px-6 py-3 lg:px-8 //outline //outline-black">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm //outline //outline-black">
+          <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-green-600">
+            Create an account
+          </h2>
         </div>
 
-        <div
-          className="w-10/12 h-16 m-auto flex justify-center items-center"
-          onClick={() => {
-            validate_NIA_Staff();
-          }}
-        >
-          <Button name="Sign Up" />
-        </div>
-        <div className="w-10/12 h-14 m-auto text-xl text-green-600">
-          Already have an account?{" "}
-          <span className="text-blue-500">
-            <Link href="/pages/signIn">Sign In</Link>{" "}
-          </span>
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <form className="space-y-6" action="#" method="POST">
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium leading-6 text-green-600"
+              >
+                Pin
+              </label>
+              <Input
+                id="text"
+                name="text"
+                type="text"
+                autoComplete="text"
+                placeholder="Enter your pin (ex. GHA-712580702-6 )"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-green-600"
+              >
+                Password
+              </label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                autoComplete="password"
+                placeholder="Enter your password"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-green-600"
+              >
+                Confirm Password
+              </label>
+              <Input
+                id="confirm-password"
+                name="confirm-password"
+                type="password"
+                autoComplete="confirm-password"
+                placeholder="Confirm your password"
+              />
+            </div>
+
+            <div
+              onClick={() => {
+                validate_NIA_Staff();
+              }}
+            >
+              <Button type="submit" name="Sign Up" />
+            </div>
+            <div>
+              <div className="w-full h-14 m-auto text-xl text-green-600">
+                Already have an account?{" "}
+                <span className="text-blue-500">
+                  <Link href="/pages/signIn">Sign In</Link>{" "}
+                </span>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
