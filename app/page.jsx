@@ -17,7 +17,7 @@ const LandingPage = () => {
         </div>
         <div className="grid justify-items-center">
           <button className="bg-slate-50 w-5/6 mb-5 text-green-600 block p-3 text-2xl font-medium rounded-lg z-0">
-            <Link href="/pages/regional">Explore</Link>
+            <Link href="/pages/userId/explore/">Explore</Link>
           </button>{" "}
           <br />
           <button className="bg-green-600 w-5/6 text-slate-50 block p-3  text-2xl font-medium rounded-lg z-0">

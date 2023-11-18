@@ -131,14 +131,15 @@ function page() {
                 placeholder="Enter your phone number (ex. 0500000000 )"
               />
             </div>
-
-            <div
-              onClick={() => {
-                validate_NIA_Staff();
-              }}
-              className="mt-3"
-            >
-              <Button type="submit" name="Add details" />
+            <div className="h-16 //outline //outline-black">
+              <div
+                onClick={() => {
+                  validate_NIA_Staff();
+                }}
+                className="h-full mt-3 //outline //outline-black"
+              >
+                <Button type="submit" name="Add details" />
+              </div>
             </div>
           </form>
         </div>

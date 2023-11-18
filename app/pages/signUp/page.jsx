@@ -84,6 +84,7 @@ function SignUp() {
               onClick={() => {
                 validate_NIA_Staff();
               }}
+              className="h-16"
             >
               <Button type="submit" name="Sign Up" />
             </div>

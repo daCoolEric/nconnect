@@ -13,18 +13,28 @@ function StaffMembers() {
       >
         Staff Members
       </div>
-      {Office_Staff.map((staff) => {
-        return (
-          <StaffMembersCard
-            key={staff.id}
-            staffId={staff.id}
-            firstname={staff.firstName}
-            lastname={staff.lastName}
-            rank={staff.rank}
-            profilePic={staff.profilePic}
-          />
-        );
-      })}
+
+      <div className="bg-gray-100 py-6  sm:py-5 //outline //outline-green-600">
+        <div className="flex justify-center //outline //outline-red-500">
+          <ul
+            role="list"
+            className="grid gap-x-2 gap-y-6 sm:grid-cols-2 sm:gap-y-6 xl:col-span-2 w-11/12 //outline //outline-black"
+          >
+            {Office_Staff.map((staff) => {
+              return (
+                <StaffMembersCard
+                  key={staff.id}
+                  staffId={staff.id}
+                  forenames={staff.forenames}
+                  surname={staff.surname}
+                  rank={staff.rank}
+                  profilePic={staff.profilePic}
+                />
+              );
+            })}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }
