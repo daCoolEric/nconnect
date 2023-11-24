@@ -5,11 +5,9 @@ import DistrictsCard from "@components/DistrictsCard";
 import { districtDB } from "@utils/districts";
 import { useSelector } from "react-redux";
 
-
-
 function Region() {
   const region = useSelector((state) => state.districts.value);
-  
+
   return (
     <div className="h-3/4 w-screen  //outline //outline-black">
       <div

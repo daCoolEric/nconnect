@@ -11,7 +11,7 @@ function StaffMembers() {
         className="w-10/12 h-14 m-auto text-2xl flex justify-center items-center text-green-600 font-medium //outline //outline-black "
         // style={{ color: "#339B20" }}
       >
-        Staff Members
+        Meet our Staff
       </div>
 
       <div className="bg-gray-100 py-6  sm:py-5 //outline //outline-green-600">

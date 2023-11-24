@@ -19,7 +19,7 @@ function Regions() {
           Select a region
         </div>
         <div className="w-10/12 m-auto">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-4 h-fit">
             {regionDB.map((region) => (
               <RegionsCard key={region.id} region={region.region} />
             ))}

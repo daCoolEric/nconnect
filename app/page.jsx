@@ -53,9 +53,6 @@ const LandingPage = () => {
                     Sign In
                   </button>
                 </div>
-                {/* <button className="bg-green-600 w-5/6 text-slate-50 block p-3  text-2xl font-medium rounded-lg z-0">
-              <Link href="/pages/signIn">Sign In</Link>
-            </button> */}
               </div>
             </div>
           </div>

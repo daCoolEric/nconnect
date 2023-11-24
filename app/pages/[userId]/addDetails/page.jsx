@@ -15,14 +15,14 @@ function page() {
 
   return (
     <div className="w-screen h-3/4  //outline //outline-black">
-      <div className="flex min-h-full flex-1 flex-col justify-start px-6 py-3 lg:px-8 //outline //outline-black">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm //outline //outline-black">
+      <div className="flex h-fit flex-1 flex-col justify-start px-6 py-3 lg:px-8 outline outline-black">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm h-fit //outline //outline-black">
           <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-green-600">
             Add more information
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm h-fit outline outline-blue-700">
           <form className="space-y-6" action="#" method="POST">
             <div className="flex justify-center items-center">
               <div className="flex justify-center items-center //outline //outline-red-500 w-2/6 gap-x-3 relative">
