@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import OfficeInfo from "@components/OfficeInfo";
 import { officeIcons } from "@utils/officeIcons";
+import { Gallery } from "@utils/gallery";
 
 function District() {
   return (
@@ -64,7 +65,40 @@ function District() {
             data={"Description will go there."}
           />
         </div>
-        <div className="//outline //outline-yellow-600 w-11/12 m-auto h-1/2"></div>
+        <div className="//outline //outline-yellow-600 w-11/12 m-auto mt-5 h-fit ">
+          <Link href="/pages/userId/explore/region/district/staff-members ">
+            <div className="w-full h-full mt-2 flex justify-center bg-green-400 rounded-lg hover:bg-green-300 py-1 pt-4 pb-4">
+              <button type="submit" className="text-white text-2xl font-medium">
+                Meet our amazing team
+              </button>
+            </div>
+          </Link>
+        </div>
+        <div className="//outline //outline-yellow-600 w-11/12 m-auto mt-5 h-fit ">
+          <div className="mb-5">
+            <h1 className="text-green-500 text-2xl font-medium">Gallery</h1>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {Gallery.map((image) => (
+              <div
+                key={image.id}
+                className="w-full //outline //outline-yellow-600 "
+              >
+                <Image
+                  src={image.img}
+                  width={200}
+                  height={200}
+                  objectFit="cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="//outline //outline-yellow-600 w-11/12 m-auto mt-8 h-fit text-blue-700 text-2xl underline decoration-solid font-medium ">
+          <a href="https://nia.gov.gh/registration-process/" target="blank">
+            Registration Process
+          </a>
+        </div>
       </div>
     </div>
   );
