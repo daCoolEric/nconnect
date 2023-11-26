@@ -1,5 +1,7 @@
 import "@styles/globals.css";
 import Nav from "@components/Nav";
+import { Suspense } from "react";
+import Loading from "@app/loading";
 // import Provider from "@app/sessionProvider";
 
 export const metadata = {
@@ -13,7 +15,7 @@ const RootLayout = ({ children }) => {
       <body>
         <main className="app">
           <Nav />
-          {children}
+          <Suspense fallback={<Loading />}>{children}</Suspense>
         </main>
       </body>
     </html>
