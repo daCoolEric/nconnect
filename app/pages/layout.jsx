@@ -1,7 +1,7 @@
 import "@styles/globals.css";
 import Nav from "@components/Nav";
-import { Suspense } from "react";
-import Loading from "@app/loading";
+
+import { SkeletonTheme } from "react-loading-skeleton";
 // import Provider from "@app/sessionProvider";
 
 export const metadata = {
@@ -15,7 +15,7 @@ const RootLayout = ({ children }) => {
       <body>
         <main className="app">
           <Nav />
-          <Suspense fallback={<Loading />}>{children}</Suspense>
+          <SkeletonTheme baseColor="#d9d9d9">{children}</SkeletonTheme>
         </main>
       </body>
     </html>

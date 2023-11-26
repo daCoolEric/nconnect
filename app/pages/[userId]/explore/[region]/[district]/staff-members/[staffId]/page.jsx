@@ -1,9 +1,7 @@
 "use client";
-import React, { Suspense } from "react";
-import Link from "next/link";
+import React from "react";
 import StaffCard from "@components/StaffCard";
 import { useSelector } from "react-redux";
-import Loading from "@app/loading";
 
 const people = [
   {
@@ -25,23 +23,21 @@ function IndividualStaff() {
   // const email = useSelector((state) => state.email.value);
   // const contact = useSelector((state) => state.contact.value);
   return (
-    <Suspense fallback={<Loading />}>
-      <div className="h-3/4 w-screen">
-        <div
-          role="list"
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        >
-          <StaffCard
-            forenames="Daniel"
-            surname="Adu-Gyamfi"
-            rank="District Registration Officer"
-            profilePic="/assets/images/profilePic.png"
-            email="dadgy@gmail.com"
-            contact="0500000000"
-          />
-        </div>
+    <div className="h-3/4 w-screen">
+      <div
+        role="list"
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <StaffCard
+          forenames="Daniel"
+          surname="Adu-Gyamfi"
+          rank="District Registration Officer"
+          profilePic="/assets/images/profilePic.png"
+          email="dadgy@gmail.com"
+          contact="0500000000"
+        />
       </div>
-    </Suspense>
+    </div>
   );
 }
 

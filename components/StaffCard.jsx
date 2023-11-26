@@ -1,8 +1,11 @@
 "use client";
 import Image from "next/image";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import InfoTab from "./InfoTab";
+import DeleteModal from "./DeleteModal";
+import { openMenu } from "@app/GlobalRedux/Features/menu/menuSlice";
 
 function StaffCard({
   staffId,
@@ -14,8 +17,10 @@ function StaffCard({
   profilePic,
 }) {
   const router = useRouter();
+  const dispatch = useDispatch();
   return (
     <div className="w-full h-max //outline //outline-black">
+      <DeleteModal />
       <div
         key={staffId}
         className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
@@ -66,12 +71,20 @@ function StaffCard({
         <div>
           <div className="-mt-px flex divide-x divide-gray-200">
             <div className="flex w-0 flex-1">
-              <button className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+              <button
+                className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
+                onClick={() => {
+                  router.push("/pages/userId/addDetails");
+                }}
+              >
                 Edit
               </button>
             </div>
             <div className="-ml-px flex w-0 flex-1">
-              <button className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+              <button
+                className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
+                onClick={() => dispatch(openMenu("visible"))}
+              >
                 Delete
               </button>
             </div>
