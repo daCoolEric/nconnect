@@ -1,73 +1,43 @@
 "use client";
 import React, { useState } from "react";
-import MenuList from "./MenuList";
+import { closeDeleteModal } from "@app/GlobalRedux/Features/delete/deleteSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { closeMenu } from "@app/GlobalRedux/Features/menu/menuSlice";
-
-const menuList = [
-  {
-    id: 1,
-    name: "Explore",
-    path: `/pages/userId/explore/`,
-  },
-  {
-    id: 2,
-    name: "Sign-In",
-    path: "/pages/signIn/",
-  },
-  {
-    id: 3,
-    name: "Sign-Up",
-    path: "/pages/signUp/",
-  },
-  {
-    id: 4,
-    name: "Add Details",
-    path: "/pages/userId/addDetails",
-  },
-  {
-    id: 5,
-    name: "Profile",
-    path: `/pages/userId/explore/region/district/staff-members/staffId`,
-  },
-  {
-    id: 6,
-    name: "Log Out",
-    path: "/",
-  },
-  {
-    id: 7,
-    name: "Forgot Password",
-    path: "/pages/forgotPassword/",
-  },
-  {
-    id: 8,
-    name: "Staff members",
-    path: "/pages/userId/explore/region/district/staff-members",
-  },
-  {
-    id: 9,
-    name: "Specific Office",
-    path: "/pages/userId/explore/region/district",
-  },
-];
 
 function DeleteModal() {
   //useSelector gets the state from store
-  const menuState = useSelector((state) => state.menu.value); // Access the counter state
+  const deleteModalState = useSelector((state) => state.delete.value); // Access the counter state
   // const [visible, setVisible] = useState("hidden");
   const dispatch = useDispatch();
   return (
     <div
-      className="w-screen h-screen bg-black/60 absolute z-10"
-      style={{ visibility: menuState }}
-      onClick={() => dispatch(closeMenu("hidden"))}
+      className="w-screen h-screen bg-black/60 absolute z-10 flex justify-center items-center"
+      style={{ visibility: deleteModalState }}
+      onClick={() => dispatch(closeDeleteModal("hidden"))}
     >
-      <div className="w-8/12 h-full bg-white">
-        <div className="w-full h-2/3 //outline //outline-red-500 flex flex-col justify-evenly">
-          {menuList.map((item) => {
-            return <MenuList key={item.id} name={item.name} page={item.path} />;
-          })}
+      <div className="w-10/12 h-3/6 bg-white rounded-lg">
+        <div className="w-full h-full divide-y //outline //outline-red-500 flex flex-col justify-evenly">
+          <div className="w-full h-2/3 flex flex-col justify-center items-center">
+            <div className="w-full h-1/2 flex justify-center items-center">
+              Icon
+            </div>
+            <div className="w-10/12 h-1/2 flex justify-center items-start">
+              <p className="text-xl font-semibold text-gray-900">
+                Are you sure you want to delete your profile?
+              </p>
+            </div>
+          </div>
+          <div className="-mt-px flex divide-x  divide-gray-200">
+            <div className="flex w-0 flex-1 ">
+              <button className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                Yes
+              </button>
+            </div>
+            <div className="-ml-px flex w-0 flex-1">
+              <button className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900">
+                No
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

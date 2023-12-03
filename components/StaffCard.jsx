@@ -4,8 +4,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import InfoTab from "./InfoTab";
-import DeleteModal from "./DeleteModal";
-import { openMenu } from "@app/GlobalRedux/Features/menu/menuSlice";
+
+import { openDeleteModal } from "@app/GlobalRedux/Features/delete/deleteSlice";
+import { openUpdateModal } from "@app/GlobalRedux/Features/update/updateSlice";
 
 function StaffCard({
   staffId,
@@ -20,7 +21,6 @@ function StaffCard({
   const dispatch = useDispatch();
   return (
     <div className="w-full h-max //outline //outline-black">
-      <DeleteModal />
       <div
         key={staffId}
         className="col-span-1 flex flex-col divide-y divide-gray-200 rounded-lg bg-white text-center shadow"
@@ -74,7 +74,7 @@ function StaffCard({
               <button
                 className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
                 onClick={() => {
-                  router.push("/pages/userId/addDetails");
+                  router.push("/pages/userId/updateDetails");
                 }}
               >
                 Edit
@@ -83,7 +83,7 @@ function StaffCard({
             <div className="-ml-px flex w-0 flex-1">
               <button
                 className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                onClick={() => dispatch(openMenu("visible"))}
+                onClick={() => dispatch(openDeleteModal("visible"))}
               >
                 Delete
               </button>
