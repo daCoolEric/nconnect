@@ -86,7 +86,7 @@ function SignUp() {
               }}
               className="h-16"
             >
-              <Button type="submit" name="Sign Up" />
+              <Button id="signUp" type="submit" name="Sign Up" />
             </div>
             <div>
               <div className="w-full h-14 m-auto text-xl text-green-600">

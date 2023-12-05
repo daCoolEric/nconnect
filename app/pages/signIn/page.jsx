@@ -61,7 +61,7 @@ function SignIn() {
             </div>
 
             <div className="h-16">
-              <Button type="submit" name="Sign In" />
+              <Button id="signIn" type="submit" name="Sign In" />
             </div>
             <div>
               <div className="w-10/12 text-xl text-green-600">

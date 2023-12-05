@@ -138,7 +138,7 @@ function page() {
                 }}
                 className="h-full mt-3 //outline //outline-black"
               >
-                <Button type="submit" name="Add details" />
+                <Button id="addDetails" type="submit" name="Add details" />
               </div>
             </div>
           </form>
