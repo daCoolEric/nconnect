@@ -15,9 +15,7 @@ function DeleteModal() {
     <div
       className="w-screen h-screen bg-black/60 absolute z-10 flex justify-center items-center"
       style={{ visibility: deleteModalState }}
-      onClick={() => dispatch(closeDeleteModal("hidden"))}
     >
-      {/* <LoadingModal prompt="Deleting Profile..." /> */}
       <ModalTemplate
         alert_message="Delete Profile!"
         sub_message="Deleting this profile will pemanently remove your profile. Are you sure?"

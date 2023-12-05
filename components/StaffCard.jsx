@@ -7,6 +7,7 @@ import InfoTab from "./InfoTab";
 
 import { openDeleteModal } from "@app/GlobalRedux/Features/delete/deleteSlice";
 import { openUpdateModal } from "@app/GlobalRedux/Features/update/updateSlice";
+import { setButtonType } from "@app/GlobalRedux/Features/button/buttonSlice";
 
 function StaffCard({
   staffId,
@@ -83,7 +84,10 @@ function StaffCard({
             <div className="-ml-px flex w-0 flex-1">
               <button
                 className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                onClick={() => dispatch(openDeleteModal("visible"))}
+                onClick={() => {
+                  dispatch(openDeleteModal("visible"));
+                  dispatch(setButtonType("delete"));
+                }}
               >
                 Delete
               </button>
