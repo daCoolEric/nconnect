@@ -9,14 +9,11 @@ export const GET = async (req, res) => {
 
     querySnapshot.forEach((doc) => {
       let office = {};
+      office.officeName = doc.id;
+      office.officeData = doc.data();
+      result.push(office);
 
-      if (doc.id == "subin") {
-        office.officeName = doc.id;
-        office.officeData = doc.data();
-        result.push(office);
-      }
-
-      console.log(`${doc.id} => ${doc.data()}`);
+      //   console.log(`${doc.id} => ${doc.data()}`);
     });
 
     console.log(result);

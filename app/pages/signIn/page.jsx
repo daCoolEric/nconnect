@@ -9,7 +9,10 @@ function SignIn() {
     <div className="h-3/4 w-screen  //outline //outline-black">
       <div className="flex min-h-full flex-1 flex-col justify-start px-6 py-3 lg:px-8 //outline //outline-black">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm //outline //outline-black">
-          <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-green-600">
+          <h2
+            className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight"
+            style={{ color: "#6dab3c" }}
+          >
             Sign in to your account
           </h2>
         </div>

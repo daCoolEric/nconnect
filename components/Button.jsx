@@ -11,7 +11,10 @@ import { useDispatch } from "react-redux";
 function Button({ name, type, id }) {
   const dispatch = useDispatch();
   return (
-    <div className="w-full h-full mt-2 flex justify-center bg-green-400 rounded-lg hover:bg-green-300 py-1">
+    <div
+      className="w-full h-full mt-2 flex justify-center bg-green-400 rounded-lg hover:bg-green-300 py-1"
+      style={{ backgroundColor: "#6dab3c" }}
+    >
       <button
         type={type}
         className="w-full text-white text-2xl font-medium

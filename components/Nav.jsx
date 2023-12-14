@@ -13,7 +13,10 @@ const Nav = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="w-full h-1/4  //outline bg-gradient-to-b from-green-500 to-white //outline-black ">
+    <div
+      className="w-full h-1/4  //outline //bg-gradient-to-b //from-green-500 //to-white //outline-black "
+      style={{ backgroundColor: "linear-gradient(to left top, blue, red)" }}
+    >
       <UpdateModal />
       <DeleteModal />
       <LoadingModal />

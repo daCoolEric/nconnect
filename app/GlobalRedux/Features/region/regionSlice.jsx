@@ -6,16 +6,16 @@ const initialState = {
   value: "",
 };
 
-export const districtSlice = createSlice({
-  name: "district",
+export const RegionSlice = createSlice({
+  name: "region",
   initialState,
   reducers: {
-    setDistricts: (state, action) => {
+    setRegion: (state, action) => {
       state.value = action.payload;
     },
   },
 });
 
-export const { setDistricts } = districtSlice.actions;
+export const { setRegion } = RegionSlice.actions;
 
-export default districtSlice.reducer;
+export default RegionSlice.reducer;

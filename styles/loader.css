@@ -62,21 +62,21 @@
 
   top: 10%;
   left: 10%;
-  box-shadow: 7px -4px 0 rgba(209, 34, 60, 0.73),
+  box-shadow: 7px -4px 0 rgba(109, 171, 60, 0.73),
     7px 7px 0 rgba(100, 255, 100, 0.7), -4px 7px 0 rgba(1, 124, 60, 0.7),
-    -7px -7px 0 rgba(248, 216, 11, 0.7);
-  -o-box-shadow: 7px -4px 0 rgba(209, 34, 60, 0.73),
+    -7px -7px 0 rgba(144, 238, 144 0.7);
+  -o-box-shadow: 7px -4px 0 rgba(76, 187, 23, 0.73),
     7px 7px 0 rgba(100, 255, 100, 0.7), -4px 7px 0 rgba(1, 124, 60, 0.7),
-    -7px -7px 0 rgba(248, 216, 11, 0.7);
-  -ms-box-shadow: 7px -4px 0 rgba(209, 34, 60, 0.73),
+    -7px -7px 0 rgba(144, 238, 144, 0.7);
+  -ms-box-shadow: 7px -4px 0 rgba(76, 187, 23, 0.73),
     7px 7px 0 rgba(100, 255, 100, 0.7), -4px 7px 0 rgba(1, 124, 60, 0.7),
-    -7px -7px 0 rgba(248, 216, 11, 0.7);
-  -webkit-box-shadow: 7px -4px 0 rgba(209, 34, 60, 0.73),
+    -7px -7px 0 rgba(144, 238, 144, 0.7);
+  -webkit-box-shadow: 7px -4px 0 rgba(76, 187, 23, 0.73),
     7px 7px 0 rgba(100, 255, 100, 0.7), -4px 7px 0 rgba(1, 124, 60, 0.7),
-    -7px -7px 0 rgba(248, 216, 11, 0.7);
-  -moz-box-shadow: 7px -4px 0 rgba(209, 34, 60, 0.73),
+    -7px -7px 0 rgba(144, 238, 144, 0.7);
+  -moz-box-shadow: 7px -4px 0 rgba(76, 187, 23, 0.73),
     7px 7px 0 rgba(100, 255, 100, 0.7), -4px 7px 0 rgba(1, 124, 60, 0.7),
-    -7px -7px 0 rgba(248, 216, 11, 0.7);
+    -7px -7px 0 rgba(144, 238, 144, 0.7);
 }
 .cssload-loader:after {
   content: "";

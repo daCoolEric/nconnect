@@ -9,6 +9,8 @@ import deleteReducer from "./Features/delete/deleteSlice";
 import updateReducer from "./Features/update/updateSlice";
 import loaderReducer from "./Features/loader/loaderSlice";
 import buttonReducer from "./Features/button/buttonSlice";
+import dataReducer from "./Features/data/dataSlice";
+import regionReducer from "./Features/region/regionSlice";
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -18,6 +20,8 @@ const rootReducer = combineReducers({
   update: updateReducer,
   loader: loaderReducer,
   button: buttonReducer,
+  data: dataReducer,
+  region: regionReducer,
   //add all your reducers here
 });
 

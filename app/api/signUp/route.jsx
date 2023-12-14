@@ -28,3 +28,11 @@
 //   // return dispatch(setTodoList(returnData));
 // };
 // getInfos();
+
+export const GET = async (req, res) => {
+  try {
+    return new Response(JSON.stringify({ text: "Hello" }), { status: 200 });
+  } catch (error) {
+    return new Response("Failed to fetch all prompts", { status: 500 });
+  }
+};

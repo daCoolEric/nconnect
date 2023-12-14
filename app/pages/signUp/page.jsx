@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { NIA_Staff } from "@utils/users";
 import { useState } from "react";
+import RankSelector from "@components/RankSelector";
 
 function SignUp() {
   //useSelector gets the state from store
@@ -47,6 +48,15 @@ function SignUp() {
                 autoComplete="text"
                 placeholder="Enter your pin (ex. GHA-712580702-6 )"
               />
+            </div>
+            <div>
+              <label
+                htmlFor="text"
+                className="block text-sm font-medium leading-6 text-green-600"
+              >
+                Rank
+              </label>
+              <RankSelector name="ranks" />
             </div>
 
             <div>
