@@ -26,9 +26,6 @@ function EmptyOffice() {
         <div>
           <Button id="create_office" type="button" name="Create an Office" />
         </div>
-        <div>
-          <Button id="explore" type="button" name="Explore" />
-        </div>
       </div>
     </div>
   );
