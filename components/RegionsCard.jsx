@@ -17,7 +17,8 @@ const RegionsCard = ({ region }) => {
   const getRegionData = async ({ region }) => {
     try {
       const response = await axios.get(
-        `http://localhost:3000/api/userId/${region}`
+        `https://nconnect-nu.vercel.app/${region}`
+        // `http://localhost:3000/api/userId/${region}`
       );
       response.data.map((info) => {
         dispatch(setData(info));
