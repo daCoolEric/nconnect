@@ -11,6 +11,8 @@ import loaderReducer from "./Features/loader/loaderSlice";
 import buttonReducer from "./Features/button/buttonSlice";
 import dataReducer from "./Features/data/dataSlice";
 import regionReducer from "./Features/region/regionSlice";
+import officeReducer from "./Features/office/office";
+import officeDataReducer from "./Features/officeData/officeDataSlice";
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -22,6 +24,8 @@ const rootReducer = combineReducers({
   button: buttonReducer,
   data: dataReducer,
   region: regionReducer,
+  office: officeReducer,
+  officeData: officeDataReducer,
   //add all your reducers here
 });
 

@@ -1,21 +1,27 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setDistricts } from "@app/GlobalRedux/Features/district/districtSlice";
+import { setOffice } from "@app/GlobalRedux/Features/office/office";
+import { setOfficeData } from "@app/GlobalRedux/Features/officeData/officeDataSlice";
 
 function DistrictsCard({ district, userId }) {
   const router = useRouter();
   // const districtName = useSelector((state) => state.districts.value);
+  const dispatch = useDispatch();
   const region = useSelector((state) => state.region.value);
   const officeData = useSelector((state) => state.data.value);
+
   let subin = "subin";
 
   const getDistrictData = (district) => {
     // console.log(officeData);
     officeData.map((office) => {
       if (office.officeName === district.toLowerCase()) {
-        console.log(office);
+        dispatch(setOffice(true));
+        dispatch(setOfficeData(office.officeData));
+        console.log(office.officeData);
       }
     });
     // console.log(district);

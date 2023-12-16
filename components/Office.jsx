@@ -5,10 +5,16 @@ import Image from "next/image";
 import OfficeInfo from "@components/OfficeInfo";
 import { officeIcons } from "@utils/officeIcons";
 import { Gallery } from "@utils/gallery";
+import { useSelector } from "react-redux";
 
 function Office() {
+  const officeData = useSelector((state) => state.officeData.value);
   return (
     <>
+      <div className="//outline //outline-blue-700 w-screen h-fit relative ">
+        {console.log(officeData)}
+        <h1>{officeData.districtname}</h1>
+      </div>
       <div
         className="//outline //outline-blue-700 w-screen h-1/2 relative "
         style={{
@@ -40,22 +46,22 @@ function Office() {
           <OfficeInfo
             source={officeIcons.location.src}
             alt={officeIcons.location.alt}
-            data={"Description will go there."}
+            data={`${officeData.location}. ${officeData.address}`}
           />
           <OfficeInfo
             source={officeIcons.time.src}
             alt={officeIcons.time.alt}
-            data={"Description will go there."}
+            data={"8:00am - 5:00pm"}
           />
           <OfficeInfo
             source={officeIcons.calendar.src}
             alt={officeIcons.calendar.alt}
-            data={"Description will go there."}
+            data={"Monday - Friday"}
           />
           <OfficeInfo
             source={officeIcons.contact.src}
             alt={officeIcons.contact.alt}
-            data={"Description will go there."}
+            data={"0209684566"}
           />
         </div>
         <div className="//outline //outline-yellow-600 w-11/12 m-auto mt-5 h-fit ">

@@ -1,16 +1,14 @@
 "use client";
 import React from "react";
-import Link from "next/link";
-import Image from "next/image";
-import OfficeInfo from "@components/OfficeInfo";
-import { officeIcons } from "@utils/officeIcons";
-import { Gallery } from "@utils/gallery";
 import EmptyOffice from "@components/EmptyOffice";
+import { useSelector } from "react-redux";
+import Office from "@components/Office";
 
 function District() {
+  const officeAvailable = useSelector((state) => state.office.value);
   return (
     <div className="h-3/4 w-screen">
-      <EmptyOffice />
+      {officeAvailable ? <Office /> : <EmptyOffice />}
     </div>
   );
 }
