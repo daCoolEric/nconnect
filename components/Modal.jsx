@@ -50,6 +50,11 @@ const menuList = [
     name: "Specific Office",
     path: "/pages/userId/explore/region/district",
   },
+  {
+    id: 10,
+    name: "Create Office",
+    path: "/pages/userId/region/createOffice",
+  },
 ];
 
 function Modal() {

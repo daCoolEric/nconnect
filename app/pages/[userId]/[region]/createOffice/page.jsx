@@ -5,8 +5,6 @@ import Button from "@components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import DistrictsSelector from "@components/DistrictsSelector";
 import Input from "@components/Input";
-import RankSelector from "@components/RankSelector";
-import RegionsSelector from "@components/RegionsSelector";
 
 import Image from "next/image";
 
@@ -15,7 +13,7 @@ function page() {
 
   return (
     <div className="w-screen h-3/4  //outline //outline-black">
-      <div className="flex h-fit flex-1 flex-col justify-start px-6 py-3 lg:px-8 //outline //outline-black">
+      <div className="flex h-fit flex-1 flex-col justify-start px-4  lg:px-8 //outline //outline-black">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm h-fit //outline //outline-black">
           <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-green-600">
             Create your Office
@@ -24,12 +22,12 @@ function page() {
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm h-fit //outline //outline-blue-700">
           <form className="space-y-6" action="#" method="POST">
-            <div className="flex justify-center items-center outline outline-green-500">
-              <div className="flex justify-center items-center outline outline-red-500 w-2/6 gap-x-3 relative">
+            <div className="flex justify-center items-center //outline //outline-green-500 w-full h-56 ">
+              <div className="flex justify-center items-center //outline //outline-red-500 w-full h-full gap-x-3 relative">
                 <Image
-                  src="/assets/images/profilePic.png"
+                  src="/assets/images/officePlaceholder.png"
                   width={400}
-                  height={100}
+                  height={400}
                   alt="Profile Picture"
                   style={{ objectFit: "contain" }}
                 />
@@ -46,74 +44,54 @@ function page() {
                 htmlFor="text"
                 className="block text-sm font-medium leading-6 text-green-600"
               >
-                Forenames
-              </label>
-              <Input
-                id="text"
-                name="text"
-                type="text"
-                autoComplete="text"
-                placeholder="Enter your forenames (ex. Eric Kodzo )"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="text"
-                className="block text-sm font-medium leading-6 text-green-600"
-              >
-                Surname
-              </label>
-              <Input
-                id="text"
-                name="text"
-                type="text"
-                autoComplete="text"
-                placeholder="Enter your surname (ex. Ayi )"
-              />
-            </div>
-
-            <div>
-              <label
-                htmlFor="text"
-                className="block text-sm font-medium leading-6 text-green-600"
-              >
-                Rank
-              </label>
-              <RankSelector name="ranks" />
-            </div>
-
-            <div>
-              <label
-                htmlFor="text"
-                className="block text-sm font-medium leading-6 text-green-600"
-              >
-                Region
-              </label>
-              <RegionsSelector name="regions" />
-            </div>
-            <div>
-              <label
-                htmlFor="text"
-                className="block text-sm font-medium leading-6 text-green-600"
-              >
                 District
               </label>
               <DistrictsSelector name={specificRegion} />
             </div>
             <div>
               <label
-                htmlFor="email"
+                htmlFor="text"
                 className="block text-sm font-medium leading-6 text-green-600"
               >
-                Email
+                Staff Capacity
               </label>
               <Input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                placeholder="Enter your email address"
+                id="text"
+                name="text"
+                type="text"
+                autoComplete="text"
+                placeholder="Enter the number of staff (ex. 5 )"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="text"
+                className="block text-sm font-medium leading-6 text-green-600"
+              >
+                Location
+              </label>
+              <Input
+                id="text"
+                name="text"
+                type="text"
+                autoComplete="text"
+                placeholder="Enter office location"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="text"
+                className="block text-sm font-medium leading-6 text-green-600"
+              >
+                Address
+              </label>
+              <Input
+                id="text"
+                name="text"
+                type="text"
+                autoComplete="text"
+                placeholder="Enter office digital address"
               />
             </div>
             <div>
@@ -128,7 +106,7 @@ function page() {
                 name="contact"
                 type="contact"
                 autoComplete="contact"
-                placeholder="Enter your phone number (ex. 0500000000 )"
+                placeholder="Enter office contact number (ex. 0500000000 )"
               />
             </div>
             <div className="h-16 //outline //outline-black">

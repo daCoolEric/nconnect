@@ -46,7 +46,7 @@ function EmptyOffice() {
                 className="w-full"
               >
                 <Link href="/pages/userId/explore/" className="w-full">
-                  <p className="text-2xl text-blue-600">Other Offices</p>
+                  <p className="text-2xl text-blue-600">Explore</p>
                 </Link>
               </button>
             </div>
