@@ -15,9 +15,12 @@ export const dataSlice = createSlice({
     setData: (state, action) => {
       return { value: [...state.value, action.payload] };
     },
+    resetData: (state, action) => {
+      return { value: [] };
+    },
   },
 });
 
-export const { setData } = dataSlice.actions;
+export const { setData, resetData } = dataSlice.actions;
 
 export default dataSlice.reducer;

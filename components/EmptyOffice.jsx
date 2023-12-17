@@ -2,6 +2,10 @@ import React from "react";
 import Button from "./Button";
 import Image from "next/image";
 import Link from "next/link";
+import { resetData } from "@app/GlobalRedux/Features/data/dataSlice";
+import { resetOffice } from "@app/GlobalRedux/Features/office/office";
+import { resetOfficeData } from "@app/GlobalRedux/Features/officeData/officeDataSlice";
+
 import { useRouter } from "next/router";
 
 function EmptyOffice() {
@@ -33,9 +37,18 @@ function EmptyOffice() {
         <div className="w-full h-2/6 flex justify-center items-center //outline //outline-lime-500">
           <div className="w-full  flex justify-between items-center //outline //outline-lime-500">
             <div className="w-1/3 pl-5 //outline //outline-lime-500">
-              <Link href="/pages/userId/explore/" className="w-full">
-                <p className="text-2xl text-blue-600">Other Offices</p>
-              </Link>
+              <button
+                onClick={() => {
+                  dispatch(resetOfficeData());
+                  dispatch(resetData());
+                  dispatch(resetOffice());
+                }}
+                className="w-full"
+              >
+                <Link href="/pages/userId/explore/" className="w-full">
+                  <p className="text-2xl text-blue-600">Other Offices</p>
+                </Link>
+              </button>
             </div>
 
             <Link

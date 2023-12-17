@@ -13,9 +13,12 @@ export const officeSlice = createSlice({
     setOffice: (state, action) => {
       state.value = action.payload;
     },
+    resetOffice: (state, action) => {
+      state.value = false;
+    },
   },
 });
 
-export const { setOffice } = officeSlice.actions;
+export const { setOffice, resetOffice } = officeSlice.actions;
 
 export default officeSlice.reducer;

@@ -13,11 +13,14 @@ export const officeDataSlice = createSlice({
   initialState,
   reducers: {
     setOfficeData: (state, action) => {
-      return { ...state.value, value: action.payload };
+      return { value: action.payload };
+    },
+    resetOfficeData: (state, action) => {
+      return { value: {} };
     },
   },
 });
 
-export const { setOfficeData } = officeDataSlice.actions;
+export const { setOfficeData, resetOfficeData } = officeDataSlice.actions;
 
 export default officeDataSlice.reducer;
