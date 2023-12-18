@@ -2,7 +2,6 @@
 import React from "react";
 import { regionDB } from "@utils/regions";
 import RegionsCard from "@components/RegionsCard";
-import { useDispatch, useSelector } from "react-redux";
 
 function Regions() {
   return (

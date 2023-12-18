@@ -25,6 +25,6 @@ export const GET = async (req, res) => {
       status: 200,
     });
   } catch (error) {
-    return new Response("Failed to fetch all prompts", { status: 500 });
+    return new Response("Failed to fetch resources", { status: 500 });
   }
 };
