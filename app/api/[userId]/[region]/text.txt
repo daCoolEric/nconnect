@@ -1,0 +1,28 @@
+{
+  "districtname": "Bekwai Municipal",
+  "location": "Beside ABBIS park, Ashtown",
+  "address": "AK-443-9811",
+  "staffCapacity": "5",
+  "officeContact": "0509999999",
+  "staffMembers": []
+  
+}
+
+{
+   "id": "GHA-712580702-6",
+    "forenames": "Eric Kodzo",
+    "surname": "Ayi",
+    "rank": "Assistant Technical Enrollment Officer",
+    "region": "ashanti",
+    "district": "subin",
+    "email": "ayieric7@gmail.com",
+    "contact": "0592404201",
+    "profilepic": "profile pic"
+}
+
+{
+    "id": "GHA-712580702-6",
+    "region": "ashanti",
+    "district": "subin"
+   
+}
