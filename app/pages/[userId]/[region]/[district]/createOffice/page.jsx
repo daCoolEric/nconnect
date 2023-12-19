@@ -1,14 +1,56 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Button from "@components/Button";
+import { useParams } from "next/navigation";
 
 import { useDispatch, useSelector } from "react-redux";
 import DistrictsSelector from "@components/DistrictsSelector";
 import Input from "@components/Input";
 
 import Image from "next/image";
+import axios from "axios";
+import { setLocation } from "@app/GlobalRedux/Features/createOffice/locationSlice";
+import { setStaffCapacity } from "@app/GlobalRedux/Features/createOffice/staffCapacitySlice";
+import { setDistrictName } from "@app/GlobalRedux/Features/createOffice/districtNameSlice";
+import { setAddress } from "@app/GlobalRedux/Features/createOffice/addressSlice";
+import { setOfficeContact } from "@app/GlobalRedux/Features/createOffice/officeContactSlice";
 
 function page() {
+  const params = useParams();
+  const dispatch = useDispatch();
+  // states
+  const location = useSelector((state) => state.location.value);
+  const staffCapacity = useSelector((state) => state.staffCapacity.value);
+  const districtName = useSelector((state) => state.districtName.value);
+  const officeContact = useSelector((state) => state.officeContact.value);
+  const address = useSelector((state) => state.address.value);
+  const staffmembers = [];
+
+  // Route -> /shop/[tag]/[item]
+  // URL -> /shop/shoes/nike-air-max-97
+  // `params` -> { tag: 'shoes', item: 'nike-air-max-97' }
+
+  const createOffice = async () => {
+    try {
+      const response = await axios.post(
+        // `http://localhost:3000/api/userId/ashanti`,
+        `https://nconnect-nu.vercel.app/api/userId/ashanti`,
+        {
+          districtName,
+          location,
+          address,
+          staffCapacity,
+          officeContact,
+          staffmembers,
+        }
+      );
+
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const specificRegion = useSelector((state) => state.districts.value);
 
   return (
@@ -46,7 +88,12 @@ function page() {
               >
                 District
               </label>
-              <DistrictsSelector name={specificRegion} />
+              <DistrictsSelector
+                name={specificRegion}
+                onChange={(e) => {
+                  dispatch(setDistrictName(e.target.value));
+                }}
+              />
             </div>
             <div>
               <label
@@ -59,6 +106,9 @@ function page() {
                 id="text"
                 name="text"
                 type="text"
+                onChange={(e) => {
+                  dispatch(setStaffCapacity(e.target.value));
+                }}
                 autoComplete="text"
                 placeholder="Enter the number of staff (ex. 5 )"
               />
@@ -75,6 +125,9 @@ function page() {
                 id="text"
                 name="text"
                 type="text"
+                onChange={(e) => {
+                  dispatch(setLocation(e.target.value));
+                }}
                 autoComplete="text"
                 placeholder="Enter office location"
               />
@@ -90,6 +143,9 @@ function page() {
                 id="text"
                 name="text"
                 type="text"
+                onChange={(e) => {
+                  dispatch(setAddress(e.target.value));
+                }}
                 autoComplete="text"
                 placeholder="Enter office digital address"
               />
@@ -105,6 +161,9 @@ function page() {
                 id="contact"
                 name="contact"
                 type="contact"
+                onChange={(e) => {
+                  dispatch(setOfficeContact(e.target.value));
+                }}
                 autoComplete="contact"
                 placeholder="Enter office contact number (ex. 0500000000 )"
               />
@@ -112,7 +171,14 @@ function page() {
             <div className="h-16 //outline //outline-black">
               <div
                 onClick={() => {
-                  validate_NIA_Staff();
+                  createOffice();
+                  // console.log({
+                  //   location,
+                  //   districtName,
+                  //   address,
+                  //   officeContact,
+                  //   staffCapacity,
+                  // });
                 }}
                 className="h-full mt-3 //outline //outline-black"
               >
