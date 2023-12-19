@@ -1,132 +1,21 @@
 .wrapper {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.cssload-loader {
-  width: 69px;
-  height: 69px;
-  border-radius: 50%;
-  margin: 4em;
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-}
-
-.cssload-loader {
-  width: 69px;
-  height: 69px;
-  border-radius: 50%;
-  margin: 4em;
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-}
-.cssload-loader,
-.cssload-loader:before,
-.cssload-loader:after {
-  animation: 1.6s infinite ease-in-out;
-  -o-animation: 1.6s infinite ease-in-out;
-  -ms-animation: 1.6s infinite ease-in-out;
-  -webkit-animation: 1.6s infinite ease-in-out;
-  -moz-animation: 1.6s infinite ease-in-out;
-}
-.cssload-loader:before,
-.cssload-loader:after {
   width: 100%;
   height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.spinner {
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 0;
+  background: conic-gradient(#0000 10%, #6dab3c);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
+  animation: spinner-zp9dbg 1s infinite linear;
 }
 
-.cssload-loader:before,
-.cssload-loader:after {
-  content: "";
-}
-
-.cssload-loader {
-  background-color: white;
-  animation: cssload-flower-fan 0.64s infinite linear;
-  -o-animation: cssload-flower-fan 0.64s infinite linear;
-  -ms-animation: cssload-flower-fan 0.64s infinite linear;
-  -webkit-animation: cssload-flower-fan 0.64s infinite linear;
-  -moz-animation: cssload-flower-fan 0.64s infinite linear;
-}
-.cssload-loader:before {
-  content: "";
-  width: 80%;
-  height: 80%;
-
-  top: 10%;
-  left: 10%;
-  box-shadow: 7px -4px 0 rgba(109, 171, 60, 0.73),
-    7px 7px 0 rgba(100, 255, 100, 0.7), -4px 7px 0 rgba(1, 124, 60, 0.7),
-    -7px -7px 0 rgba(144, 238, 144 0.7);
-  -o-box-shadow: 7px -4px 0 rgba(76, 187, 23, 0.73),
-    7px 7px 0 rgba(100, 255, 100, 0.7), -4px 7px 0 rgba(1, 124, 60, 0.7),
-    -7px -7px 0 rgba(144, 238, 144, 0.7);
-  -ms-box-shadow: 7px -4px 0 rgba(76, 187, 23, 0.73),
-    7px 7px 0 rgba(100, 255, 100, 0.7), -4px 7px 0 rgba(1, 124, 60, 0.7),
-    -7px -7px 0 rgba(144, 238, 144, 0.7);
-  -webkit-box-shadow: 7px -4px 0 rgba(76, 187, 23, 0.73),
-    7px 7px 0 rgba(100, 255, 100, 0.7), -4px 7px 0 rgba(1, 124, 60, 0.7),
-    -7px -7px 0 rgba(144, 238, 144, 0.7);
-  -moz-box-shadow: 7px -4px 0 rgba(76, 187, 23, 0.73),
-    7px 7px 0 rgba(100, 255, 100, 0.7), -4px 7px 0 rgba(1, 124, 60, 0.7),
-    -7px -7px 0 rgba(144, 238, 144, 0.7);
-}
-.cssload-loader:after {
-  content: "";
-
-  z-index: 2;
-  top: -4px;
-  left: -4px;
-}
-
-@keyframes cssload-flower-fan {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@-o-keyframes cssload-flower-fan {
-  0% {
-    -o-transform: rotate(0deg);
-  }
-  100% {
-    -o-transform: rotate(360deg);
-  }
-}
-
-@-ms-keyframes cssload-flower-fan {
-  0% {
-    -ms-transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes cssload-flower-fan {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@-moz-keyframes cssload-flower-fan {
-  0% {
-    -moz-transform: rotate(0deg);
-  }
-  100% {
-    -moz-transform: rotate(360deg);
+@keyframes spinner-zp9dbg {
+  to {
+    transform: rotate(1turn);
   }
 }

@@ -36,6 +36,10 @@ function Button({ name, type, id }) {
             dispatch(openLoaderModal("visible"));
             dispatch(setButtonType(id));
             dispatch(setLoaderPrompt("Adding Details"));
+          }else if(id === "createOffice"){
+            dispatch(openLoaderModal("visible"));
+            dispatch(setButtonType(id));
+            dispatch(setLoaderPrompt("Creating Office"));
           }
         }}
       >

@@ -4,7 +4,7 @@ import "@styles/loader.css";
 function Loader() {
   return (
     <div class="wrapper">
-      <div class="cssload-loader"></div>
+      <div class="spinner"></div>
     </div>
   );
 }

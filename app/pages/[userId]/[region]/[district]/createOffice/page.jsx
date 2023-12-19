@@ -14,6 +14,7 @@ import { setStaffCapacity } from "@app/GlobalRedux/Features/createOffice/staffCa
 import { setDistrictName } from "@app/GlobalRedux/Features/createOffice/districtNameSlice";
 import { setAddress } from "@app/GlobalRedux/Features/createOffice/addressSlice";
 import { setOfficeContact } from "@app/GlobalRedux/Features/createOffice/officeContactSlice";
+import { closeLoaderModal } from "@app/GlobalRedux/Features/loader/loaderSlice";
 
 function page() {
   const params = useParams();
@@ -45,7 +46,10 @@ function page() {
         }
       );
 
-      console.log(response.data);
+      if (response.status === 200) {
+        dispatch(closeLoaderModal("hidden"));
+        console.log(response.data);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -172,13 +176,6 @@ function page() {
               <div
                 onClick={() => {
                   createOffice();
-                  // console.log({
-                  //   location,
-                  //   districtName,
-                  //   address,
-                  //   officeContact,
-                  //   staffCapacity,
-                  // });
                 }}
                 className="h-full mt-3 //outline //outline-black"
               >
