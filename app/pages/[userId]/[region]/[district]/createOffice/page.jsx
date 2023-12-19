@@ -21,7 +21,7 @@ function page() {
   // states
   const location = useSelector((state) => state.location.value);
   const staffCapacity = useSelector((state) => state.staffCapacity.value);
-  const districtName = useSelector((state) => state.districtName.value);
+  const districtname = useSelector((state) => state.districtName.value);
   const officeContact = useSelector((state) => state.officeContact.value);
   const address = useSelector((state) => state.address.value);
   const staffmembers = [];
@@ -36,7 +36,7 @@ function page() {
         // `http://localhost:3000/api/userId/ashanti`,
         `https://nconnect-nu.vercel.app/api/userId/ashanti`,
         {
-          districtName,
+          districtname,
           location,
           address,
           staffCapacity,

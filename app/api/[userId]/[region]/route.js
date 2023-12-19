@@ -30,17 +30,17 @@ export const GET = async (req, res) => {
 // POST REQUEST FOR CREATING AN OFFICE
 export const POST = async (request, res) => {
   const {
-    districtName,
+    districtname,
     location,
     address,
     staffCapacity,
     officeContact,
     staffmembers,
   } = await request.json();
-  const docRef = doc(db, "ashanti", districtName.toLowerCase());
+  const docRef = doc(db, "ashanti", districtname.toLowerCase());
 
   const data = {
-    districtName,
+    districtname,
     location,
     address,
     staffCapacity,
