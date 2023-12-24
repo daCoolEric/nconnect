@@ -2,8 +2,17 @@
 import React from "react";
 import { regionDB } from "@utils/regions";
 import RegionsCard from "@components/RegionsCard";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 function Regions() {
+  // const session = useSession({
+  //   required: true,
+  //   onUnauthenticated() {
+  //     redirect("/pages/signIn");
+  //   },
+  // });
+
   return (
     <div className="h-3/4 w-screen  //outline //outline-black">
       <div
@@ -28,5 +37,6 @@ function Regions() {
     </div>
   );
 }
+Regions.requireAuth = true;
 
 export default Regions;

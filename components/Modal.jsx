@@ -33,7 +33,7 @@ const menuList = [
   {
     id: 6,
     name: "Log Out",
-    path: "/",
+    path: "/pages/signIn/",
   },
   {
     id: 7,

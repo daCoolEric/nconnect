@@ -1,9 +1,18 @@
+"use client";
 // Import the functions you need from the SDKs you need
 import { getApp, getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 import "firebase/firestore";
 import "dotenv/config";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { useEffect, useState } from "react";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -24,3 +33,33 @@ const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 export const auth = getAuth(app);
+
+// Initialize Cloud Storage and get a reference to the service
+export const storage = getStorage(app);
+
+//signOut function
+export const logout = () => {
+  return signOut(auth);
+};
+
+// signUp function
+export const signUp = (email, password) => {
+  return createUserWithEmailAndPassword(auth, email, password);
+};
+
+//login function
+export function login(email, password) {
+  return signInWithEmailAndPassword(auth, email, password);
+}
+
+//Custom Hook
+export const useAuth = () => {
+  const [currentUser, setCurrentUser] = useState();
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => setCurrentUser(user));
+    return unsub;
+  }, []);
+
+  return currentUser;
+};

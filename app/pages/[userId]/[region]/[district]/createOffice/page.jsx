@@ -2,6 +2,14 @@
 import React, { useState } from "react";
 import Button from "@components/Button";
 import { useParams } from "next/navigation";
+// import {
+//   ref,
+//   uploadBytes,
+//   getDownloadURL,
+//   listAll,
+//   list,
+// } from "firebase/storage";
+// import { storage } from "./firebase";
 
 import { useDispatch, useSelector } from "react-redux";
 import DistrictsSelector from "@components/DistrictsSelector";

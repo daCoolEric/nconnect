@@ -1,15 +1,67 @@
 "use client";
 import { setButtonType } from "@app/GlobalRedux/Features/button/buttonSlice";
+import { redirect } from "next/navigation";
+
 import {
+  closeLoaderModal,
   openLoaderModal,
   setLoaderPrompt,
 } from "@app/GlobalRedux/Features/loader/loaderSlice";
+import { setLoading } from "@app/GlobalRedux/Features/loading/loadingSlice";
 import { openUpdateModal } from "@app/GlobalRedux/Features/update/updateSlice";
+import { signUp, logout, login, useAuth } from "@utils/database";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Button({ name, type, id }) {
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.loading.value);
+  const username = useSelector((state) => state.username.value);
+  const password = useSelector((state) => state.password.value);
+  const confirm_password = useSelector((state) => state.confirm_password.value);
+  const currentUser = useAuth();
+
+  // functions
+  async function handleSignup() {
+    setLoading(true);
+    try {
+      await signUp(username, password);
+      dispatch(closeLoaderModal("hidden"));
+    } catch {
+      alert("Error!");
+      dispatch(closeLoaderModal("hidden"));
+    }
+    setLoading(false);
+  }
+
+  async function handleLogin() {
+    setLoading(true);
+
+    try {
+      await login(username, password);
+      console.log((username, password));
+      dispatch(closeLoaderModal("hidden"));
+    } catch {
+      alert("Error!");
+      console.log((username, password));
+      dispatch(closeLoaderModal("hidden"));
+    }
+    setLoading(false);
+  }
+
+  const handleLogout = async () => {
+    setLoading(true);
+    try {
+      await logout();
+      dispatch(closeLoaderModal("hidden"));
+      // alert("User logged out");
+    } catch {
+      alert("Error!");
+      dispatch(closeLoaderModal("hidden"));
+    }
+    setLoading(false);
+  };
+
   return (
     <div
       className="w-full h-full mt-2 flex justify-center bg-green-400 rounded-lg hover:bg-green-300 py-1"
@@ -17,29 +69,37 @@ function Button({ name, type, id }) {
     >
       <button
         type={type}
-        className="w-full text-white text-2xl font-medium
+        className="w-full text-white text-2xl font-medium focus:outline-none disabled:opacity-25
       
       "
+        // disabled={currentUser}
         onClick={() => {
           if (id === "update") {
             dispatch(openUpdateModal("visible"));
             dispatch(setButtonType(id));
           } else if (id === "signIn") {
+            handleLogin();
             dispatch(openLoaderModal("visible"));
             dispatch(setButtonType(id));
-            dispatch(setLoaderPrompt("Signing In"));
+            dispatch(setLoaderPrompt("Signing User In"));
           } else if (id === "signUp") {
+            handleSignup();
             dispatch(openLoaderModal("visible"));
             dispatch(setButtonType(id));
-            dispatch(setLoaderPrompt("Creating Account"));
+            dispatch(setLoaderPrompt("Creating User Account"));
+          } else if (id === "logout") {
+            handleLogout();
+            dispatch(openLoaderModal("visible"));
+            dispatch(setButtonType(id));
+            dispatch(setLoaderPrompt("Signing User Out"));
           } else if (id === "addDetails") {
             dispatch(openLoaderModal("visible"));
             dispatch(setButtonType(id));
-            dispatch(setLoaderPrompt("Adding Details"));
-          }else if(id === "createOffice"){
+            dispatch(setLoaderPrompt("Adding User Details"));
+          } else if (id === "createOffice") {
             dispatch(openLoaderModal("visible"));
             dispatch(setButtonType(id));
-            dispatch(setLoaderPrompt("Creating Office"));
+            dispatch(setLoaderPrompt("Creating an Office"));
           }
         }}
       >

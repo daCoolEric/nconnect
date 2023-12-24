@@ -53,6 +53,7 @@ const LandingPage = () => {
                     Sign In
                   </button>
                 </div>
+                
               </div>
             </div>
           </div>
