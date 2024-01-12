@@ -6,16 +6,16 @@ const initialState = {
   value: " ",
 };
 
-export const userNameSlice = createSlice({
-  name: "username",
+export const pinSlice = createSlice({
+  name: "pin",
   initialState,
   reducers: {
-    setUserName: (state, action) => {
+    setPin: (state, action) => {
       state.value = action.payload;
     },
   },
 });
 
-export const { setUserName } = userNameSlice.actions;
+export const { setPin } = pinSlice.actions;
 
-export default userNameSlice.reducer;
+export default pinSlice.reducer;

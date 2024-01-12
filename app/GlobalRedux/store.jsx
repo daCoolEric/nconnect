@@ -20,9 +20,11 @@ import staffCapacityReducer from "./Features/createOffice/staffCapacitySlice";
 import officeContactReducer from "./Features/createOffice/officeContactSlice";
 import officeProfileReducer from "./Features/createOffice/officeProfileSlice";
 import loadingReducer from "./Features/loading/loadingSlice";
-import usernameReducer from "./Features/signup/userNameSlice";
+import emailReducer from "./Features/signup/emailSlice";
 import passwordReducer from "./Features/signup/passwordSlice";
 import confirmPasswordReducer from "./Features/signup/confirmPasswordSlice";
+import pinReducer from "./Features/signup/pinSlice";
+import roleReducer from "./Features/signup/roleSlice";
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -43,9 +45,11 @@ const rootReducer = combineReducers({
   officeContact: officeContactReducer,
   officeProfile: officeProfileReducer,
   loading: loadingReducer,
-  username: usernameReducer,
+  email: emailReducer,
   password: passwordReducer,
   confirm_password: confirmPasswordReducer,
+  pin: pinReducer,
+  role: roleReducer,
   //add all your reducers here
 });
 

@@ -1,0 +1,54 @@
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id       String @id @default(auto()) @map("_id") @db.ObjectId
+    pin       String   @unique
+    email     String   @unique
+    hashedPassword String @unique
+    photoUrl String?
+    role     String
+    createdAt DateTime @default(now())
+}
+
+model User_Profile {
+    id       String @id @default(auto()) @map("_id") @db.ObjectId
+    forename String
+    surname  String
+    rank     String
+    email    String
+    contact  String
+    photoUrl String?
+    createdAt DateTime @default(now())
+}
+
+model District {
+    id            String           @id @default(auto()) @map("_id") @db.ObjectId
+    districtname  String           @unique
+    location      String           @unique
+    address       String           @unique
+    staffCapacity String
+    staffmembers  Staff_Profile[]
+    gallery       Office_Gallery[]
+    createdAt DateTime @default(now())
+}
+
+type Staff_Profile {
+    forename String
+    surname  String
+    rank     String
+    email    String
+    contact  String
+    photoUrl String
+    createdAt DateTime @default(now())
+}
+
+type Office_Gallery {
+    imageUrl String
+}
