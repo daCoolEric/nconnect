@@ -1,7 +1,3 @@
-import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
-
-import { db } from "@utils/database";
-
 // POST REQUEST FOR ADDING STAFF DETAILS TO SPECIFIC DISTRICT OFFICE IN A SPECIFIC REGION
 // export const GET = async (req, res) => {
 //   try {
@@ -35,84 +31,84 @@ import { db } from "@utils/database";
 //   regions: arrayRemove("east_coast"),
 // });
 
-export const POST = async (request, res) => {
-  const {
-    id,
-    forenames,
-    surname,
-    rank,
-    region,
-    district,
-    email,
-    contact,
-    profilepic,
-  } = await request.json();
-  const docRef = doc(db, region, district.toLowerCase());
+// export const POST = async (request, res) => {
+//   const {
+//     id,
+//     forenames,
+//     surname,
+//     rank,
+//     region,
+//     district,
+//     email,
+//     contact,
+//     profilepic,
+//   } = await request.json();
+//   const docRef = doc(db, region, district.toLowerCase());
 
-  const staffDetails = {
-    id,
-    forenames,
-    surname,
-    rank,
-    region,
-    district,
-    email,
-    contact,
-    profilepic,
-  };
+//   const staffDetails = {
+//     id,
+//     forenames,
+//     surname,
+//     rank,
+//     region,
+//     district,
+//     email,
+//     contact,
+//     profilepic,
+//   };
 
-  try {
-    // Atomically add a new region to the "regions" array field.
-    await updateDoc(docRef, {
-      staffmembers: arrayUnion(staffDetails),
-    });
+//   try {
+//     // Atomically add a new region to the "regions" array field.
+//     await updateDoc(docRef, {
+//       staffmembers: arrayUnion(staffDetails),
+//     });
 
-    return new Response("Staff successfully added", {
-      status: 200,
-    });
-  } catch (error) {
-    return new Response("Failed to add staff to the office", { status: 500 });
-  }
-};
+//     return new Response("Staff successfully added", {
+//       status: 200,
+//     });
+//   } catch (error) {
+//     return new Response("Failed to add staff to the office", { status: 500 });
+//   }
+// };
 
-export const DELETE = async (request, res) => {
-  const {
-    id,
-    forenames,
-    surname,
-    rank,
-    region,
-    district,
-    email,
-    contact,
-    profilepic,
-  } = await request.json();
-  const docRef = doc(db, region, district.toLowerCase());
+// export const DELETE = async (request, res) => {
+//   const {
+//     id,
+//     forenames,
+//     surname,
+//     rank,
+//     region,
+//     district,
+//     email,
+//     contact,
+//     profilepic,
+//   } = await request.json();
+//   const docRef = doc(db, region, district.toLowerCase());
 
-  const staffDetails = {
-    id,
-    forenames,
-    surname,
-    rank,
-    region,
-    district,
-    email,
-    contact,
-    profilepic,
-  };
+//   const staffDetails = {
+//     id,
+//     forenames,
+//     surname,
+//     rank,
+//     region,
+//     district,
+//     email,
+//     contact,
+//     profilepic,
+//   };
 
-  try {
-    // Atomically add a new region to the "regions" array field.
-    await updateDoc(docRef, {
-      staffmembers: arrayRemove(staffDetails),
-    });
+//   try {
+//     // Atomically add a new region to the "regions" array field.
+//     await updateDoc(docRef, {
+//       staffmembers: arrayRemove(staffDetails),
+//     });
 
-    return new Response("Staff successfully removed", {
-      status: 200,
-    });
-  } catch (error) {
-    return new Response("Failed to remove staff from the office", {
-      status: 500,
-    });
-  }
-};
+//     return new Response("Staff successfully removed", {
+//       status: 200,
+//     });
+//   } catch (error) {
+//     return new Response("Failed to remove staff from the office", {
+//       status: 500,
+//     });
+//   }
+// };
