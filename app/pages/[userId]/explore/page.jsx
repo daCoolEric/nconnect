@@ -1,15 +1,15 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { regionDB } from "@utils/regions";
 import RegionsCard from "@components/RegionsCard";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/router";
 
 function Regions() {
   const session = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/pages/signIn");
+      return null;
     },
   });
 
