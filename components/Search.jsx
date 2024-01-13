@@ -9,6 +9,8 @@ function Search() {
     >
       <div className="w-5/6 h-full flex items-center">
         <input
+          id="search"
+          name="search"
           type="text"
           placeholder="Search ..."
           className="w-full m-5 focus:outline-none"

@@ -24,6 +24,7 @@ function RoleSelector({ name }) {
   return (
     <div className="mt-2 " style={{ backgroundColor: "#FFFFFF" }}>
       <select
+        id="role_selector"
         value={role}
         onChange={(e) => {
           dispatch(setRole(e.target.value));
