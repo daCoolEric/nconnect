@@ -12,7 +12,7 @@ import {
 } from "@app/GlobalRedux/Features/loader/loaderSlice";
 import { setLoading } from "@app/GlobalRedux/Features/loading/loadingSlice";
 import { openUpdateModal } from "@app/GlobalRedux/Features/update/updateSlice";
-// import { signUp, logout, login, useAuth } from "@utils/database";
+import { signOut } from "next-auth/react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -22,7 +22,8 @@ function MenuList({ name, page }) {
   const handleLogout = async () => {
     setLoading(true);
     try {
-      // await logout();
+      await signOut();
+
       dispatch(closeLoaderModal("hidden"));
       // alert("User logged out");
     } catch {

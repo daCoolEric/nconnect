@@ -1,7 +1,8 @@
 "use client";
 import "@styles/globals.css";
-import { Providers } from "./GlobalRedux/provider";
-import { SessionProvider } from "next-auth/react";
+
+import Provider from "./sessionProvider";
+import { ReduxProvider } from "./GlobalRedux/provider";
 
 const metadata = {
   title: "NConnect",
@@ -16,9 +17,9 @@ const RootLayout = ({ children }) => {
 
         <main className="main">
           {" "}
-          <SessionProvider>
-            <Providers>{children}</Providers>
-          </SessionProvider>
+          <ReduxProvider>
+            <Provider>{children}</Provider>
+          </ReduxProvider>
         </main>
       </body>
     </html>

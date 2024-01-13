@@ -9,14 +9,13 @@ import DeleteModal from "./DeleteModal";
 import UpdateModal from "./UpdateModal";
 import LoadingModal from "./LoadingModal";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 const Nav = () => {
   const dispatch = useDispatch();
   const session = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/pages/signIn");
+      return null;
     },
   });
 
@@ -43,8 +42,8 @@ const Nav = () => {
         <div className="w-4/6 h-10/12 //outline //outline-blue-500 flex justify-center items-center pt-2 pb-2">
           <div className="w-full h-full flex justify-between items-center //outline //outline-red-500">
             <div className="flex flex-col items-end ml-11">
-              <div>{session.data?.user?.pin}</div>
-              <div>{session.data?.user?.role}</div>
+              <div>{session.data?.user?.pin || "GHA-XXXXXXXXX-X"}</div>
+              <div>{session.data?.user?.role || "guest"}</div>
             </div>
             <div className="mr-4">
               <Image
