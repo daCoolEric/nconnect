@@ -1,15 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import Input from "@components/Input";
 import Button from "@components/Button";
-import {
-  setEmail,
-  setUserName,
-} from "@app/GlobalRedux/Features/signup/emailSlice";
+import { setEmail } from "@app/GlobalRedux/Features/signup/emailSlice";
 import { setPassword } from "@app/GlobalRedux/Features/signup/passwordSlice";
 import { useDispatch } from "react-redux";
-import Regions from "../[userId]/explore/page";
 
 function SignIn() {
   const dispatch = useDispatch();
