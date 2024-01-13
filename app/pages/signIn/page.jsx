@@ -57,7 +57,7 @@ function SignIn() {
                 name="password"
                 type="password"
                 onChange={(e) => dispatch(setPassword(e.target.value))}
-                autoComplete="password"
+                autoComplete="current-password"
                 placeholder="Enter your password"
               />
             </div>

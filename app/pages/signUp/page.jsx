@@ -92,7 +92,7 @@ function SignUp() {
                 name="password"
                 type="password"
                 onChange={(e) => dispatch(setPassword(e.target.value))}
-                autoComplete="password"
+                autoComplete="new-password"
                 placeholder="Enter your password"
               />
             </div>
@@ -107,7 +107,7 @@ function SignUp() {
                 id="confirm-password"
                 name="confirm-password"
                 type="password"
-                autoComplete="confirm-password"
+                autoComplete="new-password"
                 placeholder="Confirm your password"
               />
             </div>
