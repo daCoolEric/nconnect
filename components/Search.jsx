@@ -12,6 +12,7 @@ function Search() {
           id="search"
           name="search"
           type="text"
+          autoComplete="off"
           placeholder="Search ..."
           className="w-full m-5 focus:outline-none"
         />
