@@ -40,7 +40,6 @@ function Button({ name, type, id }) {
 
   async function handleLogin() {
     setLoading(true);
-
     try {
       // await login(username, password);
       await signIn("credentials", {
