@@ -46,7 +46,7 @@ function SignUp() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
+          <div className="space-y-6">
             <div>
               <label
                 htmlFor="text"
@@ -124,7 +124,7 @@ function SignUp() {
             <div className="h-16">
               <Button id="signUp" type="button" name="Sign Up" />
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
