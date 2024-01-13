@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { districtDB } from "@utils/districts";
+import { districtDB } from "@utils/districts.mjs";
 import { useDispatch, useSelector } from "react-redux";
 
 function DistrictsSelector({ name, onChange }) {

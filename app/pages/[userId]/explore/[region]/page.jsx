@@ -2,7 +2,7 @@
 import React from "react";
 
 import DistrictsCard from "@components/DistrictsCard";
-import { districtDB } from "@utils/districts";
+import { districtDB } from "@utils/districts.mjs";
 import { useSelector } from "react-redux";
 
 function Region() {

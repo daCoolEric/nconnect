@@ -12,7 +12,7 @@ import { openUpdateModal } from "@app/GlobalRedux/Features/update/updateSlice";
 // import { signUp, logout, login, useAuth } from "@utils/database";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { connectToDatabase, createUser, loginUser } from "@utils/database";
+import { connectToDatabase, createUser, loginUser } from "@utils/database.js";
 import { signIn } from "next-auth/react";
 
 function Button({ name, type, id }) {
