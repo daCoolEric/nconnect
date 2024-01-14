@@ -45,8 +45,8 @@ function Button({ name, type, id }) {
       await signIn("credentials", {
         email,
         password,
-        callbackUrl: "https://nconnect-nu.vercel.app/pages/userId/explore",
-        // callbackUrl: "http://localhost:3000/pages/userId/explore",
+        // callbackUrl: "https://nconnect-nu.vercel.app/pages/userId/explore",
+        callbackUrl: "http://localhost:3000/pages/userId/explore",
       });
       // await connectToDatabase();
       // await loginUser(email, password);
