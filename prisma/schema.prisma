@@ -1,54 +1,319 @@
 datasource db {
-    provider = "mongodb"
-    url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
-model User {
-    id       String @id @default(auto()) @map("_id") @db.ObjectId
-    pin       String   @unique
-    email     String   @unique
-    hashedPassword String @unique
-    photoUrl String?
-    role     String
-    createdAt DateTime @default(now())
+model Users {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  pin            String    @unique
+  email          String    @unique
+  hashedPassword String    @unique
+  photoUrl       String?
+  role           String
+  createdAt      DateTime  @default(now())
+  updatedAt     DateTime         @default(now())
+  // Staff_Profile  Profile[]
+  Profile        Profile[]
 }
 
-model User_Profile {
-    id       String @id @default(auto()) @map("_id") @db.ObjectId
-    forename String
-    surname  String
-    rank     String
-    email    String
-    contact  String
-    photoUrl String?
-    createdAt DateTime @default(now())
+
+model Ashanti {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
 }
 
-model District {
-    id            String           @id @default(auto()) @map("_id") @db.ObjectId
-    districtname  String           @unique
-    location      String           @unique
-    address       String           @unique
-    staffCapacity String
-    staffmembers  Staff_Profile[]
-    gallery       Office_Gallery[]
-    createdAt DateTime @default(now())
+model Greater_Accra {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
 }
 
-type Staff_Profile {
-    forename String
-    surname  String
-    rank     String
-    email    String
-    contact  String
-    photoUrl String
-    createdAt DateTime @default(now())
+model Bono {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
 }
 
-type Office_Gallery {
-    imageUrl String
+model Bono_East {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Ahafo {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Savanna {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Volta {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Oti {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Northern {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model North_East {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Upper_West {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Upper_East {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Western {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Western_North {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Eastern {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+model Central {
+  id            String           @id @default(auto()) @map("_id") @db.ObjectId
+  districtname  String           @unique
+  location      String           @unique
+  address       String           @unique
+  staffCapacity String
+  contact       String
+  staffmembers  Profile[]
+  gallery       Office_Gallery[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now())
+}
+
+
+
+model Profile {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  forename  String
+  surname   String
+  rank      String
+  email     String
+  contact   String
+  photoUrl  String
+  staff     Users    @relation(fields: [staffId], references: [id])
+  staffId   String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt     DateTime         @default(now())
+
+  Ashanti         Ashanti?       @relation(fields: [ashantiId], references: [id])
+  ashantiId       String?        @db.ObjectId
+  Greater_Accra   Greater_Accra? @relation(fields: [greater_AccraId], references: [id])
+  greater_AccraId String?        @db.ObjectId
+  Bono            Bono?          @relation(fields: [bonoId], references: [id])
+  bonoId          String?        @db.ObjectId
+  Bono_East       Bono_East?     @relation(fields: [bono_EastId], references: [id])
+  bono_EastId     String?        @db.ObjectId
+  Ahafo           Ahafo?         @relation(fields: [ahafoId], references: [id])
+  ahafoId         String?        @db.ObjectId
+  Savanna         Savanna?       @relation(fields: [savannaId], references: [id])
+  savannaId       String?        @db.ObjectId
+  Volta           Volta?         @relation(fields: [voltaId], references: [id])
+  voltaId         String?        @db.ObjectId
+  Oti             Oti?           @relation(fields: [otiId], references: [id])
+  otiId           String?        @db.ObjectId
+  Northern        Northern?      @relation(fields: [northernId], references: [id])
+  northernId      String?        @db.ObjectId
+  North_East      North_East?    @relation(fields: [north_EastId], references: [id])
+  north_EastId    String?        @db.ObjectId
+  Upper_West      Upper_West?    @relation(fields: [upper_WestId], references: [id])
+  upper_WestId    String?        @db.ObjectId
+  Upper_East      Upper_East?    @relation(fields: [upper_EastId], references: [id])
+  upper_EastId    String?        @db.ObjectId
+  Western         Western?       @relation(fields: [westernId], references: [id])
+  westernId       String?        @db.ObjectId
+  Western_North   Western_North? @relation(fields: [western_NorthId], references: [id])
+  western_NorthId String?        @db.ObjectId
+  Eastern         Eastern?       @relation(fields: [easternId], references: [id])
+  easternId       String?        @db.ObjectId
+  Central         Central?       @relation(fields: [centralId], references: [id])
+  centralId       String?        @db.ObjectId
+}
+
+model Office_Gallery {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  imageUrl String
+  createdAt DateTime @default(now())
+  updatedAt     DateTime         @default(now())
+
+  Ashanti         Ashanti?       @relation(fields: [ashantiId], references: [id])
+  ashantiId       String?        @db.ObjectId
+  Greater_Accra   Greater_Accra? @relation(fields: [greater_AccraId], references: [id])
+  greater_AccraId String?        @db.ObjectId
+  Bono            Bono?          @relation(fields: [bonoId], references: [id])
+  bonoId          String?        @db.ObjectId
+  Bono_East       Bono_East?     @relation(fields: [bono_EastId], references: [id])
+  bono_EastId     String?        @db.ObjectId
+  Ahafo           Ahafo?         @relation(fields: [ahafoId], references: [id])
+  ahafoId         String?        @db.ObjectId
+  Savanna         Savanna?       @relation(fields: [savannaId], references: [id])
+  savannaId       String?        @db.ObjectId
+  Volta           Volta?         @relation(fields: [voltaId], references: [id])
+  voltaId         String?        @db.ObjectId
+  Oti             Oti?           @relation(fields: [otiId], references: [id])
+  otiId           String?        @db.ObjectId
+  Northern        Northern?      @relation(fields: [northernId], references: [id])
+  northernId      String?        @db.ObjectId
+  North_East      North_East?    @relation(fields: [north_EastId], references: [id])
+  north_EastId    String?        @db.ObjectId
+  Upper_West      Upper_West?    @relation(fields: [upper_WestId], references: [id])
+  upper_WestId    String?        @db.ObjectId
+  Upper_East      Upper_East?    @relation(fields: [upper_EastId], references: [id])
+  upper_EastId    String?        @db.ObjectId
+  Western         Western?       @relation(fields: [westernId], references: [id])
+  westernId       String?        @db.ObjectId
+  Western_North   Western_North? @relation(fields: [western_NorthId], references: [id])
+  western_NorthId String?        @db.ObjectId
+  Eastern         Eastern?       @relation(fields: [easternId], references: [id])
+  easternId       String?        @db.ObjectId
+   Central         Central?       @relation(fields: [centralId], references: [id])
+  centralId       String?        @db.ObjectId
 }

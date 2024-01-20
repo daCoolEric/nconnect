@@ -16,12 +16,12 @@ function DistrictsCard({ district, userId }) {
   let subin = "subin";
 
   const getDistrictData = (district) => {
-    // console.log(officeData);
+    console.log(officeData);
     officeData.map((office) => {
-      if (office.officeName === district.toLowerCase()) {
+      if (office.districtname === district.toLowerCase()) {
         dispatch(setOffice(true));
-        dispatch(setOfficeData(office.officeData));
-        console.log(office.officeData);
+        dispatch(setOfficeData(office));
+        console.log(office);
       }
     });
     // console.log(district);

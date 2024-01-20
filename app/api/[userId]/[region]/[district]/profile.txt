@@ -1,0 +1,33 @@
+// create profile
+{
+        "userId": "65abd373ee3514f3ccac31dc", 
+        "districtId": "65abf931fe208646fa5e0213",
+        "forename": "Eric Kodzo",
+        "surname": "Ayi",
+        "rank": "Assistant Technical Enrolment Officer",
+        "email": "ayieric7@gmail.com",
+        "contact": "0592404201",
+        "photoUrl": "imageUrl"
+        
+}
+
+// update profile
+{
+        "profileId": "65ac1524fe208646fa5e0224", 
+        "userId": "65abd373ee3514f3ccac31dc", 
+        "districtId": "65abf931fe208646fa5e0213",
+        "forename": "Eric Kodzo",
+        "surname": "Ayi",
+        "rank": "Assistant Technical Enrolment Officer",
+        "email": "ayieric7@gmail.com",
+        "contact": "0541204923",
+        "photoUrl": "imageUrl"
+        
+}
+
+//DELETE
+{
+        "profileId": "65ac1524fe208646fa5e0224"
+       
+        
+}

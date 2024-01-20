@@ -1,0 +1,21 @@
+create
+{
+       "districtId": "65abf865fe208646fa5e0212",
+       "imageUrl": "Gallery_Url"
+       
+}
+
+update
+{
+       "galleryId": "65ac2a3b77c260a9a87e824f",
+       "districtId": "65abf865fe208646fa5e0212",
+       "imageUrl": "Updated Gallery_Url"
+       
+}
+
+delete
+{
+       "galleryId": "65ac2a3b77c260a9a87e824f"
+       
+       
+}

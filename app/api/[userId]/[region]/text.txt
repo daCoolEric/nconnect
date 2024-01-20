@@ -1,11 +1,32 @@
+// create an office
 {
   "districtname": "Bekwai Municipal",
   "location": "Beside ABBIS park, Ashtown",
   "address": "AK-443-9811",
   "staffCapacity": "5",
-  "officeContact": "0509999999",
-  "staffMembers": []
+  "contact": "0509999999",
   
+  
+}
+
+//update an office
+{
+       "districtId": "65abf931fe208646fa5e0213",
+       "districtname": "Bekwai Municipal",
+       "location": "Beside ABBIS park, Ashtown",
+       "address": "AK-443-9811",
+       "staffCapacity": "5",
+       "contact": "0509999999"
+
+        
+}
+
+// remove an office
+{
+       "districtId": "65abf931fe208646fa5e0213"
+       
+
+        
 }
 
 {

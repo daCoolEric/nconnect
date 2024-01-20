@@ -1,0 +1,18 @@
+{
+   "districtname": "Bantama",
+  "location" : "NHIS office building",
+        "address" : "AK-456-5432",
+        "staffCapacity": "4",
+        "officeContact": "0292222222",
+        "staffmembers": []
+}
+
+{"_id":{"$oid":"65a44d33da82e581d324ffb4"},"address":"AK-003-7501","districtname":"Regional","location":"Adum, beside Opoku Trading Enterprise","staffCapacity":"9","staffmembers":[{"staffId":"GHA-712027995-0","forenames":"Emmanuel","surname":"Arthur"}]}
+
+{"_id":{"$oid":"65a5d65f717e76e430c1cc12"},"districtname":"Subin","location":"Beside Physical Planning Department","address":"AK-056-5678","staffCapacity":"4","staffmembers":[""]}
+
+{"_id":{"$oid":"659ce53ee2e31ed3d7c29c38"},"pin":"GHA-712580702-6","email":"ayieric7@gmail.com","hashedPassword":"$2b$10$a0kMrfNGAK4L0.2QKYJjwOl4YYd6YICkBOIyUs7QWAJX/cx.avP9q","role":"admin","createdAt":{"$date":{"$numberLong":"1704781117208"}}}
+
+{"_id":{"$oid":"65a0c137ead01c9c3ce97839"},"pin":"GHA-002455992-8","email":"danieladugyamfi@gmail.com","hashedPassword":"$2b$10$7ZuddWAAv3Pu6vwN.cJcwuBKEgUstDK0KkO0DDVr7g1IwpkY8JjUq","role":"manager","createdAt":{"$date":{"$numberLong":"1705034033814"}}}
+
+{"_id":{"$oid":"65a0c6ceead01c9c3ce9783e"},"pin":"GHA-715277259-5","email":"lydiasraah@gmail.com","hashedPassword":"$2b$10$.WaRNgM5ibEMpKQFfg1LxOBl2tIRB0b.a9Vg.6C5Be.nrbanlZBZW","role":"staff","createdAt":{"$date":{"$numberLong":"1705035467468"}}}

@@ -1,114 +1,158 @@
-// POST REQUEST FOR ADDING STAFF DETAILS TO SPECIFIC DISTRICT OFFICE IN A SPECIFIC REGION
-// export const GET = async (req, res) => {
-//   try {
-//     const querySnapshot = await getDocs(collection(db, "ashanti"));
-//     let result = [];
+// import prisma from "@prisma";
+import { PrismaClient } from "@prisma/client";
 
-//     querySnapshot.forEach((doc) => {
-//       let office = {};
+const prisma = new PrismaClient();
 
-//       if (doc.id == "subin") {
-//         office.officeName = doc.id;
-//         office.officeData = doc.data();
-//         result.push(office);
-//       }
+// async function main() {
+//   // ... you will write your Prisma Client queries here
+//   const ashantis = await prisma.ashanti.findMany();
+//   console.log(ashantis);
+// }
 
-//       console.log(`${doc.id} => ${doc.data()}`);
-//     });
+// GET REQUEST FOR ALL DISTRICT OFFICES IN A SPECIFIC REGION
+export const GET = async (req, res) => {
+  try {
+    await prisma.$connect();
+    const profile = await prisma.profile.findMany({});
 
-//     console.log(result);
-//     return new Response(JSON.stringify(result), {
-//       status: 200,
-//     });
-//   } catch (error) {
-//     return new Response("Failed to fetch resources", { status: 500 });
-//   }
-// };
-// const washingtonRef = doc(db, "cities", "DC");
+    let result = [];
 
-// // Atomically remove a region from the "regions" array field.
-// await updateDoc(washingtonRef, {
-//   regions: arrayRemove("east_coast"),
-// });
+    console.log(profile);
+    return new Response(JSON.stringify(profile), {
+      status: 200,
+    });
+  } catch (error) {
+    return new Response("Failed to fetch all district offices", {
+      status: 500,
+    });
+  }
+};
 
-// export const POST = async (request, res) => {
-//   const {
-//     id,
-//     forenames,
-//     surname,
-//     rank,
-//     region,
-//     district,
-//     email,
-//     contact,
-//     profilepic,
-//   } = await request.json();
-//   const docRef = doc(db, region, district.toLowerCase());
+// POST REQUEST FOR CREATING A PROFILE
+export const POST = async (req) => {
+  const {
+    userId,
+    districtId,
+    forename,
+    surname,
+    rank,
+    email,
+    contact,
+    photoUrl,
+  } = await req.json();
 
-//   const staffDetails = {
-//     id,
-//     forenames,
-//     surname,
-//     rank,
-//     region,
-//     district,
-//     email,
-//     contact,
-//     profilepic,
-//   };
+  const data = {
+    userId,
+    districtId,
+    forename,
+    surname,
+    rank,
+    email,
+    contact,
+    photoUrl,
+  };
+  console.log(data);
+  try {
+    await prisma.$connect();
+    const profile = await prisma.profile.create({
+      data: {
+        forename,
+        surname,
+        rank,
+        email,
+        contact,
+        photoUrl,
+        staff: { connect: { id: userId } },
+        Ashanti: { connect: { id: districtId } },
+      },
+    });
 
-//   try {
-//     // Atomically add a new region to the "regions" array field.
-//     await updateDoc(docRef, {
-//       staffmembers: arrayUnion(staffDetails),
-//     });
+    console.log(profile);
+    return new Response("User details successfully added", {
+      status: 200,
+    });
+  } catch (error) {
+    console.log(error);
+    return new Response("Failed to update user details", { status: 500 });
+    // return new Response(req.body, { status: 500 });
+  }
+};
 
-//     return new Response("Staff successfully added", {
-//       status: 200,
-//     });
-//   } catch (error) {
-//     return new Response("Failed to add staff to the office", { status: 500 });
-//   }
-// };
+// PUT REQUEST FOR UPDATING A PROFILE
+export const PUT = async (req) => {
+  const {
+    profileId,
+    userId,
+    districtId,
+    forename,
+    surname,
+    rank,
+    email,
+    contact,
+    photoUrl,
+  } = await req.json();
 
-// export const DELETE = async (request, res) => {
-//   const {
-//     id,
-//     forenames,
-//     surname,
-//     rank,
-//     region,
-//     district,
-//     email,
-//     contact,
-//     profilepic,
-//   } = await request.json();
-//   const docRef = doc(db, region, district.toLowerCase());
+  const data = {
+    profileId,
+    userId,
+    districtId,
+    forename,
+    surname,
+    rank,
+    email,
+    contact,
+    photoUrl,
+  };
+  console.log(data);
+  try {
+    await prisma.$connect();
+    const profile = await prisma.profile.update({
+      where: {
+        id: profileId,
+      },
+      data: {
+        forename,
+        surname,
+        rank,
+        email,
+        contact,
+        photoUrl,
+        staff: { connect: { id: userId } },
+        Ashanti: { connect: { id: districtId } },
+      },
+    });
 
-//   const staffDetails = {
-//     id,
-//     forenames,
-//     surname,
-//     rank,
-//     region,
-//     district,
-//     email,
-//     contact,
-//     profilepic,
-//   };
+    console.log(profile);
+    return new Response("User details successfully updated", {
+      status: 200,
+    });
+  } catch (error) {
+    console.log(error);
+    return new Response("Failed to update user details", { status: 500 });
+    // return new Response(req.body, { status: 500 });
+  }
+};
 
-//   try {
-//     // Atomically add a new region to the "regions" array field.
-//     await updateDoc(docRef, {
-//       staffmembers: arrayRemove(staffDetails),
-//     });
+// DELETE REQUEST FOR DELETING A PROFILE
+export const DELETE = async (req) => {
+  const { profileId } = await req.json();
 
-//     return new Response("Staff successfully removed", {
-//       status: 200,
-//     });
-//   } catch (error) {
-//     return new Response("Failed to remove staff from the office", {
-//       status: 500,
-//     });
-//   }
-// };
+  console.log(profileId);
+  try {
+    await prisma.$connect();
+    const profile = await prisma.profile.delete({
+      where: {
+        id: profileId,
+      },
+    });
+
+    console.log(profile);
+    return new Response("User details successfully deleted", {
+      status: 200,
+    });
+  } catch (error) {
+    console.log(error);
+    return new Response("Failed to delete user details", { status: 500 });
+    // return new Response(req.body, { status: 500 });
+  }
+};

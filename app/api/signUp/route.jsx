@@ -15,7 +15,7 @@ export const POST = async (req) => {
     // await connectToDatabase();
     await prisma.$connect();
 
-    const user = await prisma.user.create({
+    const user = await prisma.users.create({
       data: {
         pin,
         email,
