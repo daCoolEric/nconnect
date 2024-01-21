@@ -2,14 +2,6 @@
 import React, { useState } from "react";
 import Button from "@components/Button";
 import { useParams } from "next/navigation";
-// import {
-//   ref,
-//   uploadBytes,
-//   getDownloadURL,
-//   listAll,
-//   list,
-// } from "firebase/storage";
-// import { storage } from "./firebase";
 
 import { useDispatch, useSelector } from "react-redux";
 import DistrictsSelector from "@components/DistrictsSelector";
@@ -31,9 +23,8 @@ function page() {
   const location = useSelector((state) => state.location.value);
   const staffCapacity = useSelector((state) => state.staffCapacity.value);
   const districtname = useSelector((state) => state.districtName.value);
-  const officeContact = useSelector((state) => state.officeContact.value);
+  const contact = useSelector((state) => state.officeContact.value);
   const address = useSelector((state) => state.address.value);
-  const staffmembers = [];
 
   // Route -> /shop/[tag]/[item]
   // URL -> /shop/shoes/nike-air-max-97
@@ -41,16 +32,22 @@ function page() {
 
   const createOffice = async () => {
     try {
+      console.log({
+        districtname,
+        location,
+        address,
+        staffCapacity,
+        contact,
+      });
       const response = await axios.post(
         // `http://localhost:3000/api/userId/ashanti`,
         `https://nconnect-nu.vercel.app/api/userId/ashanti`,
         {
-          districtname,
+          districtname: districtname.toLowerCase(),
           location,
           address,
           staffCapacity,
-          officeContact,
-          staffmembers,
+          contact,
         }
       );
 

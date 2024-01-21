@@ -22,7 +22,7 @@ function MenuList({ name, page }) {
   const handleLogout = async () => {
     setLoading(true);
     try {
-      await signOut();
+      await signOut({ callbackUrl: "/pages/signIn/" });
 
       dispatch(closeLoaderModal("hidden"));
       // alert("User logged out");
@@ -38,6 +38,7 @@ function MenuList({ name, page }) {
         onClick={() => {
           if (name === "Log Out") {
             handleLogout();
+
             dispatch(openLoaderModal("visible"));
             dispatch(resetOfficeData());
             dispatch(resetData());

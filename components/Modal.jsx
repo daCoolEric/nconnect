@@ -8,7 +8,7 @@ const menuList = [
   {
     id: 1,
     name: "Explore",
-    path: `/pages/userId/explore/`,
+    path: "/pages/userId/explore/",
   },
   {
     id: 2,
@@ -54,6 +54,11 @@ const menuList = [
     id: 10,
     name: "Create Office",
     path: "/pages/userId/region/createOffice",
+  },
+  {
+    id: 11,
+    name: "Upload Image",
+    path: "/pages/upload",
   },
 ];
 

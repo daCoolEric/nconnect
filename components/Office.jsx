@@ -11,9 +11,17 @@ function Office() {
   const officeData = useSelector((state) => state.officeData.value);
   return (
     <>
-      <div className="//outline //outline-blue-700 w-screen h-fit relative ">
+      <div className="//outline //outline-blue-700 w-screen h-fit relative mb-6">
         {console.log(officeData)}
-        <h1>{officeData.districtname}</h1>
+        <h1
+          className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight"
+          style={{ color: "#6dab3c" }}
+        >
+          {`${
+            officeData.districtname[0].toUpperCase() +
+            officeData.districtname.substring(1)
+          } Office`}
+        </h1>
       </div>
       <div
         className="//outline //outline-blue-700 w-screen h-1/2 relative "
@@ -61,7 +69,7 @@ function Office() {
           <OfficeInfo
             source={officeIcons.contact.src}
             alt={officeIcons.contact.alt}
-            data={"0209684566"}
+            data={officeData.contact}
           />
         </div>
         <div className="//outline //outline-yellow-600 w-11/12 m-auto mt-5 h-fit ">

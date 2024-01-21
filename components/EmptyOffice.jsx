@@ -2,6 +2,7 @@ import React from "react";
 import Button from "./Button";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { resetData } from "@app/GlobalRedux/Features/data/dataSlice";
 import { resetOffice } from "@app/GlobalRedux/Features/office/office";
 import { resetOfficeData } from "@app/GlobalRedux/Features/officeData/officeDataSlice";
@@ -10,6 +11,12 @@ import { useRouter } from "next/router";
 
 function EmptyOffice() {
   //   const router = useRouter();
+  const session = useSession({
+    required: true,
+    onUnauthenticated() {
+      return null;
+    },
+  });
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
       <div className="w-full h-5/6 flex flex-col justify-center items-center">
@@ -50,19 +57,21 @@ function EmptyOffice() {
                 </Link>
               </button>
             </div>
-
-            <Link
-              className="w-1/3 flex justify-center items-center //outline //outline-red-500"
-              href={"/pages/userId/region/district/createOffice"}
-            >
-              <Image
-                src="/assets/icons/add.png"
-                width={70}
-                height={70}
-                alt="Create Office Icon"
-                style={{ objectFit: "contain" }}
-              />
-            </Link>
+            {console.log(session)}
+            {session?.data.user?.role !== "staff" ? (
+              <Link
+                className="w-1/3 flex justify-center items-center //outline //outline-red-500"
+                href={"/pages/userId/region/district/createOffice"}
+              >
+                <Image
+                  src="/assets/icons/add.png"
+                  width={70}
+                  height={70}
+                  alt="Create Office Icon"
+                  style={{ objectFit: "contain" }}
+                />
+              </Link>
+            ) : null}
           </div>
         </div>
       </div>

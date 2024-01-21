@@ -14,7 +14,9 @@ function OfficeInfo({ source, alt, data }) {
             style={{ objectFit: "contain" }}
           />
         </div>
-        <div className="w-10/12">{data}</div>
+        <div className="w-10/12 flex items-center //outline //outline-red-500">
+          {data}
+        </div>
       </div>
     </div>
   );

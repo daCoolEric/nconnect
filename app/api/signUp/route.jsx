@@ -23,6 +23,7 @@ export const POST = async (req) => {
         role,
       },
     });
+
     return NextResponse.json({ user }, { status: 201 });
   } catch (error) {
     console.log(error);
