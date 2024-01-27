@@ -11,9 +11,52 @@ import RegionsSelector from "@components/RegionsSelector";
 
 import Image from "next/image";
 import SignIn from "@app/pages/signIn/page";
+import axios from "axios";
+import { useState } from "react";
 
 function AddDetails() {
   const specificRegion = useSelector((state) => state.districts.value);
+  const [avatar, setAvatar] = useState("");
+  const [avatarPreview, setAvatarPreview] = useState(
+    "/assets/images/profilePic.png"
+  );
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    // formData.set("name", name);
+    // formData.set("email", email);
+    formData.set("image", avatar);
+    axios.post(
+      // "http://localhost:3000/api/userId/ashanti/subin/update_profile",
+      "https://nconnect-nu.vercel.app/api/userId/ashanti/subin/update_profile",
+      {
+        image: avatar,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+
+    console.log(formData);
+  };
+
+  const onChange = (e) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatarPreview(reader.result);
+      }
+    };
+
+    setAvatar(e.target.files[0]);
+    reader.readAsDataURL(e.target.files[0]);
+  };
+
   const session = useSession({
     required: true,
     onUnauthenticated() {
@@ -33,25 +76,43 @@ function AddDetails() {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm h-fit //outline //outline-blue-700">
-              <form className="space-y-6" action="#" method="POST">
+              <form
+                className="space-y-6"
+                action="#"
+                method="POST"
+                onSubmit={submitHandler}
+              >
                 <div className="flex justify-center items-center">
-                  <div className="flex justify-center items-center //outline //outline-red-500 w-2/6 gap-x-3 relative">
-                    <Image
-                      src="/assets/images/profilePic.png"
-                      width={100}
-                      height={100}
-                      alt="Profile Picture"
-                      style={{ objectFit: "contain" }}
-                    />
+                  <div className="flex justify-center items-center   //outline //outline-red-500 w-2/6 gap-x-3 relative">
+                    <div className="flex items-center mb-4 space-x-3 mt-4 cursor-pointer md:w-1/5 lg:w-1/4">
+                      <img
+                        className="w-28 h-28 rounded-full"
+                        src={avatarPreview}
+                      />
+                    </div>
+
                     <button
                       type="button"
                       className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 absolute bottom-1 right-1 "
                     >
-                      +
+                      <label
+                        htmlFor="formFile"
+                        className="block text-sm font-medium leading-6 text-black-600"
+                      >
+                        +
+                      </label>
+
+                      <input
+                        className="form-control block w-full px-2 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none mt-6 hidden"
+                        type="file"
+                        id="formFile"
+                        onChange={onChange}
+                        hidden
+                      />
                     </button>
                   </div>
                 </div>
-                <div>
+                {/* <div>
                   <label
                     htmlFor="text"
                     className="block text-sm font-medium leading-6 text-green-600"
@@ -102,7 +163,7 @@ function AddDetails() {
                   </label>
                   <RegionsSelector name="regions" />
                 </div>
-                <div>
+                {/* <div>
                   <label
                     htmlFor="text"
                     className="block text-sm font-medium leading-6 text-green-600"
@@ -110,8 +171,8 @@ function AddDetails() {
                     District
                   </label>
                   <DistrictsSelector name={specificRegion} />
-                </div>
-                <div>
+                </div> */}
+                {/* <div>
                   <label
                     htmlFor="email"
                     className="block text-sm font-medium leading-6 text-green-600"
@@ -139,16 +200,23 @@ function AddDetails() {
                     type="contact"
                     autoComplete="contact"
                     placeholder="Enter your phone number (ex. 0500000000 )"
-                  />
-                </div>
+                  /> 
+                 </div> */}
                 <div className="h-16 //outline //outline-black">
-                  <div
-                    onClick={() => {
-                      validate_NIA_Staff();
-                    }}
-                    className="h-full mt-3 //outline //outline-black"
-                  >
-                    <Button id="addDetails" type="submit" name="Add details" />
+                  <div className="h-full mt-3 //outline //outline-black">
+                    <button
+                      type="submit"
+                      className="my-2 px-4 py-2 text-center w-full inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+                      // disabled={loading ? true : false}
+                    >
+                      {/* {loading ? "Updating..." : "Update"} */}
+                      Update
+                    </button>
+                    {/* <Button
+                        id="addDetails"
+                        type="submit"
+                        name="Add details"
+                      /> */}
                   </div>
                 </div>
               </form>

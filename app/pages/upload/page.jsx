@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import React, { useState } from "react";
 // import { toast } from "react-toastify";
 
@@ -24,15 +25,26 @@ const UpdateProfile = () => {
   //     }
   //   }, [error, user]);
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.set("name", name);
-    formData.set("email", email);
+    // formData.set("name", name);
+    // formData.set("email", email);
     formData.set("image", avatar);
+    axios.post(
+      "http://localhost:3000/api/userId/ashanti/subin/update_profile",
+      {
+        image: avatar,
+      },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
 
-    updateProfile(formData);
+    console.log(formData);
   };
 
   const onChange = (e) => {
