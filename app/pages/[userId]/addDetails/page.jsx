@@ -28,20 +28,26 @@ function AddDetails() {
     // formData.set("name", name);
     // formData.set("email", email);
     formData.set("image", avatar);
-    axios.post(
-      // "http://localhost:3000/api/userId/ashanti/subin/update_profile",
-      "https://nconnect-nu.vercel.app/api/userId/ashanti/subin/update_profile",
-      {
-        image: avatar,
-      },
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
+    try {
+      const response = await axios.post(
+        // "http://localhost:3000/api/userId/ashanti/subin/update_profile",
+        "https://nconnect-nu.vercel.app/api/userId/ashanti/subin/update_profile",
+        {
+          image: avatar,
         },
-      }
-    );
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-    console.log(formData);
+      alert(response.data.Message);
+    } catch (error) {
+      console.log(error);
+    }
+
+    // console.log(formData);
   };
 
   const onChange = (e) => {
