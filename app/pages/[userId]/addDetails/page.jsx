@@ -42,7 +42,7 @@ function AddDetails() {
         }
       );
 
-      alert(response.data.Message);
+      alert("Image uploaded successfully");
     } catch (error) {
       console.log(error);
     }
