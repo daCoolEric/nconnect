@@ -11,7 +11,7 @@ function StaffMembers() {
       try {
         const response = await axios.get(
           //`http://localhost:3000/api/userId/ashanti/subin`
-          `https://nconnect-nu.vercel.app/api/userId/ashanti`
+          `https://nconnect-nu.vercel.app/api/userId/ashanti/subin`
         );
         setStaffProfiles(response.data);
         console.log(staffProfiles);
