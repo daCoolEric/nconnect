@@ -2,24 +2,9 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import path from "path";
-import { ApolloServer } from "@apollo/server";
-import { startStandaloneServer } from "@apollo/server/standalone";
-import { typeDefs } from "@app/api/graphql/schema";
-import { resolvers } from "@app/api/graphql/resolvers";
 import { uploadToCloudinary } from "@backend/utils/cloudinary";
 
 const prisma = new PrismaClient();
-
-// const server = new ApolloServer({
-//   typeDefs,
-//   resolvers,
-// });
-
-// const { url } = await startStandaloneServer(server, {
-//   listen: { port: 4000 },
-// });
-
-// console.log(`🚀 Server ready at ${url}`);
 
 // GET REQUEST FOR ALL DISTRICT OFFICES IN A SPECIFIC REGION
 export const GET = async (req, res) => {
