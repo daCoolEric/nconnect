@@ -3,6 +3,10 @@
 export const districtDB = {
   ASHANTI: [
     {
+      id: 0,
+      district: "SELECT YOUR DISTRICT",
+    },
+    {
       id: 1,
       district: "REGIONAL",
     },

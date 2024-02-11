@@ -1,9 +1,26 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import StaffMembersCard from "@components/StaffMembersCard";
-import { Office_Staff } from "@utils/staff";
+// import { Office_Staff } from "@utils/staff";
 
 function StaffMembers() {
+  const [staffProfiles, setStaffProfiles] = useState([]);
+  useEffect(() => {
+    const getStaffProfiles = async () => {
+      try {
+        const response = await axios.get(
+          //`http://localhost:3000/api/userId/ashanti/subin`
+          `https://nconnect-nu.vercel.app/api/userId/ashanti`
+        );
+        setStaffProfiles(response.data);
+        console.log(staffProfiles);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getStaffProfiles();
+  }, []);
   return (
     <div className="h-3/4 w-screen">
       <div
@@ -13,21 +30,22 @@ function StaffMembers() {
         Meet our Staff
       </div>
 
-      <div className="bg-gray-100 py-6  sm:py-5 //outline //outline-green-600">
+      <div className="bg-gray-100 py-4  sm:py-5 //outline //outline-green-600">
         <div className="flex justify-center //outline //outline-red-500">
           <ul
             role="list"
             className="grid gap-x-2 gap-y-6 sm:grid-cols-2 sm:gap-y-6 xl:col-span-2 w-11/12 //outline //outline-black"
           >
-            {Office_Staff.map((staff) => {
+            {console.log(staffProfiles)}
+            {staffProfiles.map((staff) => {
               return (
                 <StaffMembersCard
-                  key={staff.id}
-                  staffId={staff.id}
-                  forenames={staff.forenames}
-                  surname={staff.surname}
-                  rank={staff.rank}
-                  profilePic={staff.profilePic}
+                  key={staff?.id}
+                  staffId={staff?.id}
+                  forenames={staff?.forenames}
+                  surname={staff?.surname}
+                  rank={staff?.rank}
+                  profilePic={staff?.photoUrl}
                 />
               );
             })}

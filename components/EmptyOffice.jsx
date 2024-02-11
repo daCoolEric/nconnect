@@ -20,6 +20,19 @@ function EmptyOffice() {
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
       <div className="w-full h-5/6 flex flex-col justify-center items-center">
+        <div
+          className="w-10/12 text-xl flex justify-center items-center text-red-600 font-medium //outline //outline-black "
+          // style={{ color: "#339B20" }}
+        >
+          <marquee
+            behavior="scroll"
+            direction="left"
+            scrollamount="10"
+            className="w-full"
+          >
+            Do not refresh this page
+          </marquee>
+        </div>
         <div className="w-full h-2/6 flex justify-center items-center //outline //outline-lime-500">
           <Image
             src="/assets/images/emptyOffice.png"
@@ -52,16 +65,19 @@ function EmptyOffice() {
                 }}
                 className="w-full"
               >
-                <Link href="/pages/userId/explore/" className="w-full">
+                <Link
+                  href={`/pages/${session?.data?.user?.id}/explore/`}
+                  className="w-full"
+                >
                   <p className="text-2xl text-blue-600">Explore</p>
                 </Link>
               </button>
             </div>
             {console.log(session)}
-            {session?.data.user?.role !== "staff" ? (
+            {session?.data?.user?.role !== "staff" ? (
               <Link
                 className="w-1/3 flex justify-center items-center //outline //outline-red-500"
-                href={"/pages/userId/region/district/createOffice"}
+                href={`/pages/${session?.data?.user?.id}/createOffice`}
               >
                 <Image
                   src="/assets/icons/add.png"

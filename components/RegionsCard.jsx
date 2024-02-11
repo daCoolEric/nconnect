@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setDistricts } from "@app/GlobalRedux/Features/district/districtSlice";
@@ -24,7 +24,7 @@ const RegionsCard = ({ region }) => {
         dispatch(setData(info));
       });
       console.log(response.data);
-      console.log(officeData);
+      // console.log(officeData);
     } catch (error) {
       console.error(error);
     }

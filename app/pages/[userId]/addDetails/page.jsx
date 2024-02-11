@@ -1,13 +1,14 @@
 "use client";
 import React from "react";
+import { ranksDB } from "@utils/ranks";
+import { regionDB } from "@utils/regions";
+import { districtDB } from "@utils/districts.js";
 import Button from "@components/Button";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
-import DistrictsSelector from "@components/DistrictsSelector";
+
 import Input from "@components/Input";
-import RankSelector from "@components/RankSelector";
-import RegionsSelector from "@components/RegionsSelector";
 
 import Image from "next/image";
 import SignIn from "@app/pages/signIn/page";
@@ -20,19 +21,48 @@ function AddDetails() {
   const [avatarPreview, setAvatarPreview] = useState(
     "/assets/images/profilePic.png"
   );
+  const [forenames, setFornames] = useState("");
+  const [surname, setSurname] = useState("");
+  const [rank, setRank] = useState("SELECT YOUR RANK");
+  const [region, setRegion] = useState("SELECT YOUR REGION");
+  const [district, setDistrict] = useState("SELECT YOUR DISTRICT");
+  const [email, setEmail] = useState("");
+  const [contact, setContact] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    const data = {
+      forenames: forenames,
+      surname: surname,
+      rank: rank,
+      region: region,
+      district: district,
+      email: email,
+      contact: contact,
+      image: avatar,
+    };
 
     const formData = new FormData();
-    // formData.set("name", name);
-    // formData.set("email", email);
+    formData.set("forenames", forenames);
+    formData.set("surname", surname);
+    formData.set("rank", rank);
+    formData.set("region", region);
+    formData.set("district", district);
+    formData.set("email", email);
+    formData.set("contact", contact);
     formData.set("image", avatar);
     try {
-      const response = await axios.post(
-        // "http://localhost:3000/api/userId/ashanti/subin/update_profile",
-        "https://nconnect-nu.vercel.app/api/userId/ashanti/subin/update_profile",
+      const imageUploadResponse = await axios.post(
+        "http://localhost:3000/api/userId/ashanti/subin/update_profile",
+        //"https://nconnect-nu.vercel.app/api/userId/ashanti/subin/update_profile",
         {
+          forenames: forenames,
+          surname: surname,
+          rank: rank,
+          region: region,
+          district: district,
+          email: email,
+          contact: contact,
           image: avatar,
         },
         {
@@ -43,6 +73,7 @@ function AddDetails() {
       );
 
       alert("Image uploaded successfully");
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -118,7 +149,7 @@ function AddDetails() {
                     </button>
                   </div>
                 </div>
-                {/* <div>
+                <div>
                   <label
                     htmlFor="text"
                     className="block text-sm font-medium leading-6 text-green-600"
@@ -130,6 +161,7 @@ function AddDetails() {
                     name="text"
                     type="text"
                     autoComplete="text"
+                    onChange={(e) => setFornames(e.target.value)}
                     placeholder="Enter your forenames (ex. Eric Kodzo )"
                   />
                 </div>
@@ -146,6 +178,7 @@ function AddDetails() {
                     name="text"
                     type="text"
                     autoComplete="text"
+                    onChange={(e) => setSurname(e.target.value)}
                     placeholder="Enter your surname (ex. Ayi )"
                   />
                 </div>
@@ -157,7 +190,20 @@ function AddDetails() {
                   >
                     Rank
                   </label>
-                  <RankSelector name="ranks" />
+                  <div className="mt-2 " style={{ backgroundColor: "#FFFFFF" }}>
+                    <select
+                      value={rank}
+                      onChange={(e) => {
+                        // e.target.value !== "SELECT YOUR RANK"
+                        setRank(e.target.value);
+                      }}
+                      className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
+                    >
+                      {ranksDB.map((rank) => (
+                        <option value={rank.rank}>{rank.rank}</option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 <div>
@@ -167,18 +213,46 @@ function AddDetails() {
                   >
                     Region
                   </label>
-                  <RegionsSelector name="regions" />
+                  <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
+                    <select
+                      value={region}
+                      onChange={(e) => {
+                        setRegion(e.target.value);
+                      }}
+                      className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
+                    >
+                      {regionDB.map((region) => (
+                        <option value={region.region}>{region.region}</option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
-                {/* <div>
+                <div>
                   <label
                     htmlFor="text"
                     className="block text-sm font-medium leading-6 text-green-600"
                   >
                     District
                   </label>
-                  <DistrictsSelector name={specificRegion} />
-                </div> */}
-                {/* <div>
+                  <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
+                    <select
+                      value={district}
+                      onChange={(e) => {
+                        setDistrict(e.target.value);
+                      }}
+                      className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
+                    >
+                      {region !== "SELECT YOUR REGION"
+                        ? districtDB[region].map((district) => (
+                            <option value={district.district}>
+                              {district.district}
+                            </option>
+                          ))
+                        : null}
+                    </select>
+                  </div>
+                </div>
+                <div>
                   <label
                     htmlFor="email"
                     className="block text-sm font-medium leading-6 text-green-600"
@@ -189,6 +263,7 @@ function AddDetails() {
                     id="email"
                     name="email"
                     type="email"
+                    onChange={(e) => setEmail(e.target.value)}
                     autoComplete="email"
                     placeholder="Enter your email address"
                   />
@@ -204,10 +279,11 @@ function AddDetails() {
                     id="contact"
                     name="contact"
                     type="contact"
+                    onChange={(e) => setContact(e.target.value)}
                     autoComplete="contact"
                     placeholder="Enter your phone number (ex. 0500000000 )"
-                  /> 
-                 </div> */}
+                  />
+                </div>
                 <div className="h-16 //outline //outline-black">
                   <div className="h-full mt-3 //outline //outline-black">
                     <button
@@ -215,7 +291,7 @@ function AddDetails() {
                       className="my-2 px-4 py-2 text-center w-full inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
                       // disabled={loading ? true : false}
                     >
-                      {/* {loading ? "Updating..." : "Update"} */}
+                      {/*  {loading ? "Updating..." : "Update"} */}
                       Update
                     </button>
                     {/* <Button

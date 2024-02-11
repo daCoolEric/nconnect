@@ -2,6 +2,10 @@
 
 export const ranksDB = [
   {
+    id: 0,
+    rank: "SELECT YOUR RANK",
+  },
+  {
     id: 1,
     rank: "REGIONAL REGISTRATION OFFICER",
   },

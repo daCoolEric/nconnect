@@ -1,7 +1,25 @@
 // import prisma from "@prisma";
 import { PrismaClient } from "@prisma/client";
+import { NextResponse } from "next/server";
+import path from "path";
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { typeDefs } from "@app/api/graphql/schema";
+import { resolvers } from "@app/api/graphql/resolvers";
+import { uploadToCloudinary } from "@backend/utils/cloudinary";
 
 const prisma = new PrismaClient();
+
+// const server = new ApolloServer({
+//   typeDefs,
+//   resolvers,
+// });
+
+// const { url } = await startStandaloneServer(server, {
+//   listen: { port: 4000 },
+// });
+
+// console.log(`🚀 Server ready at ${url}`);
 
 // GET REQUEST FOR ALL DISTRICT OFFICES IN A SPECIFIC REGION
 export const GET = async (req, res) => {
@@ -24,33 +42,60 @@ export const GET = async (req, res) => {
 
 // POST REQUEST FOR CREATING AN OFFICE
 export const POST = async (req) => {
-  const { districtname, location, address, staffCapacity, contact } =
-    await req.json();
+  const formData = await req.formData();
 
-  const data = {
+  const banner = formData.get("banner");
+  const region = formData.get("region");
+  const districtname = formData.get("districtname");
+  const location = formData.get("location");
+  const address = formData.get("address");
+  const staffCapacity = formData.get("staffCapacity");
+  const contact = formData.get("contact");
+
+  const officeDetails = {
+    region,
     districtname,
     location,
     address,
     staffCapacity,
     contact,
+    banner,
   };
-  console.log(data);
+  console.log(officeDetails);
+  const fileBuffer = await banner.arrayBuffer();
+  if (!banner) {
+    return NextResponse.json({ error: "No files received." }, { status: 400 });
+  }
+
+  let mime = banner.type;
+  let encoding = "base64";
+  let buffer = Buffer.from(fileBuffer).toString("base64");
+  let fileUri = "data:" + mime + ";" + encoding + "," + buffer;
+
+  //   const buffer = Buffer.from(await file.arrayBuffer());
+  const filename = Date.now() + banner.name.replaceAll(" ", "_");
+  const filePath = path.join(
+    process.cwd(),
+    "public/assets/uploads/" + filename
+  );
+  // console.log(filename);
+  // console.log(buffer);
+
   try {
-    await prisma.$connect();
-    const Ashanti = await prisma.ashanti.create({
-      data: {
-        districtname,
-        location,
-        address,
-        staffCapacity,
-        contact,
-      },
+    const result = await uploadToCloudinary(
+      fileUri,
+      "nconnect/ashanti/regional"
+    );
+    let imageUrl = result.secure_url;
+    officeDetails.banner = imageUrl;
+    await prisma.ashanti.create({
+      data: officeDetails,
     });
 
-    console.log(Ashanti);
-    return new Response("Office successfully created", {
-      status: 200,
-    });
+    return NextResponse.json(
+      { success: true, imageUrl: imageUrl, officeDetails: officeDetails },
+      { status: 200 }
+    );
   } catch (error) {
     console.log(error);
     return new Response("Failed to create an office", { status: 500 });

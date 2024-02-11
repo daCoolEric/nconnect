@@ -2,6 +2,10 @@
 
 export const regionDB = [
   {
+    id: 0,
+    region: "SELECT YOUR REGION",
+  },
+  {
     id: 1,
     region: "ASHANTI",
   },

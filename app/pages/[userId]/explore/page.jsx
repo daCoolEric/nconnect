@@ -30,9 +30,11 @@ function Regions() {
             </div>
             <div className="w-10/12 m-auto">
               <div className="grid grid-cols-2 gap-4 h-fit">
-                {regionDB.map((region) => (
-                  <RegionsCard key={region.id} region={region.region} />
-                ))}
+                {regionDB.map((region) =>
+                  region.region !== "SELECT YOUR REGION" ? (
+                    <RegionsCard key={region.id} region={region.region} />
+                  ) : null
+                )}
               </div>
             </div>
           </>

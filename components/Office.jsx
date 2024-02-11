@@ -24,14 +24,29 @@ function Office() {
         </h1>
       </div>
       <div
-        className="//outline //outline-blue-700 w-screen h-1/2 relative "
+        className="w-full text-xl flex justify-center items-center text-red-600 font-medium mb-5 //outline //outline-black "
+        // style={{ color: "#339B20" }}
+      >
+        <div className="w-10/12 ">
+          <marquee
+            behavior="scroll"
+            direction="left"
+            scrollamount="10"
+            className="w-full"
+          >
+            Do not refresh this page
+          </marquee>
+        </div>
+      </div>
+      <div
+        className="//outline //outline-blue-700 w-full h-1/2 relative "
         style={{
           borderBottomRightRadius: "30px",
           borderBottomLeftRadius: "30px",
         }}
       >
         <Image
-          src="/assets/images/office.jpg"
+          src={officeData?.banner}
           fill
           alt="Office Picture"
           // style={{ objectFit: "contain" }}
