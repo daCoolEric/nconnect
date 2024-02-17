@@ -59,21 +59,23 @@ function StaffCard({
                   />
                 </a>
               </div>
-              <div className="w-1/3 flex justify-center">
-                <a
-                  href={`tel:${contact}`}
-                  className="w-full flex justify-center"
-                >
-                  <Image
-                    src="/assets/icons/call.png"
-                    width={35}
-                    height={35}
-                    alt="Navigation Icon"
-                    style={{ objectFit: "contain" }}
-                    //   onClick={() => dispatch(openMenu("visible"))}
-                  />
-                </a>
-              </div>
+              {session?.data?.user?.id ? (
+                <div className="w-1/3 flex justify-center">
+                  <a
+                    href={`tel:${contact}`}
+                    className="w-full flex justify-center"
+                  >
+                    <Image
+                      src="/assets/icons/call.png"
+                      width={35}
+                      height={35}
+                      alt="Navigation Icon"
+                      style={{ objectFit: "contain" }}
+                      //   onClick={() => dispatch(openMenu("visible"))}
+                    />
+                  </a>
+                </div>
+              ) : null}
             </div>
           </div>
         </div>
