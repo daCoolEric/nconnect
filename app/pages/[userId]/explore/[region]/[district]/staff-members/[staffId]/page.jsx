@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 function IndividualStaff() {
-  let { staffProfileId } = useParams();
+  let { staffId } = useParams();
   const region = useSelector((state) => state.region.value);
   const district = useSelector((state) => state.districts.value);
 
@@ -31,8 +31,8 @@ function IndividualStaff() {
         console.log(staffProfileId);
 
         const response = await axios.get(
-          // `http://localhost:3000/api/userId/${region.toLowerCase()}/${district.toLowerCase()}/${staffProfileId}`
-          `https://nconnect-nu.vercel.app/api/userId/${region.toLowerCase()}/${district.toLowerCase()}/${staffProfileId}`
+          // `http://localhost:3000/api/userId/${region.toLowerCase()}/${district.toLowerCase()}/${staffId}`
+          `https://nconnect-nu.vercel.app/api/userId/${region.toLowerCase()}/${district.toLowerCase()}/${staffId}`
         );
 
         setStaffProfile(response.data);
