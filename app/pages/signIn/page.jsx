@@ -1,6 +1,6 @@
 "use client";
 import Input from "@components/Input";
-// import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid";
 // import Button from "@components/Button";
 // import { setEmail } from "@app/GlobalRedux/Features/signup/emailSlice";
 // import { setPassword } from "@app/GlobalRedux/Features/signup/passwordSlice";
@@ -19,7 +19,7 @@ function SignIn() {
       await signIn("credentials", {
         email,
         password,
-        callbackUrl: `https://nconnect-nu.vercel.app/pages/20534b86-70ca-409d-854d-d729519d409a/explore`,
+        callbackUrl: `https://nconnect-nu.vercel.app/pages/${uuidv4()}/explore`,
         //callbackUrl: `http://localhost:3000/pages/20534b86-70ca-409d-854d-d729519d409a/explore`,
       });
       console.log(email, password);
@@ -43,12 +43,7 @@ function SignIn() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form
-            className="space-y-6"
-            action="#"
-            method="POST"
-            onSubmit={handleLogin}
-          >
+          <div className="space-y-6">
             <div className="space-y-6">
               <div>
                 <label
@@ -99,7 +94,8 @@ function SignIn() {
 
                 <div className="h-full mt-3 //outline //outline-black">
                   <button
-                    type="submit"
+                    type="button"
+                    onClick={() => handleLogin}
                     className="my-2 px-4 py-2 text-center w-full inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
                     // disabled={loading ? true : false}
                   >
@@ -108,7 +104,7 @@ function SignIn() {
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
