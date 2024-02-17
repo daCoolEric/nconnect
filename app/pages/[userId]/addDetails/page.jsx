@@ -56,8 +56,8 @@ function AddDetails() {
     formData.set("image", avatar);
     try {
       await axios.post(
-        // "http://localhost:3000/api/userId/ashanti/subin/update_profile",
-        "https://nconnect-nu.vercel.app/api/userId/region/districts/update_profile",
+        // "http://localhost:3000/api/userId/region/district",
+        "https://nconnect-nu.vercel.app/api/userId/region/district",
         {
           forenames: forenames,
           surname: surname,

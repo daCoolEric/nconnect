@@ -57,7 +57,7 @@ export const POST = async (req, res) => {
     const result = await uploadToCloudinary(fileUri, "nconnect/profile_photos");
     let imageUrl = result.secure_url;
     userDetails.photoUrl = imageUrl;
-    const addedProfile = await prisma.profile.create({
+    await prisma.profile.create({
       data: userDetails,
     });
 
