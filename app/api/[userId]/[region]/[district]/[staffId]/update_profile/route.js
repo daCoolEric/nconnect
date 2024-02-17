@@ -20,6 +20,7 @@ export const POST = async (req, { params }) => {
   const email = formData.get("email");
   const contact = formData.get("contact");
   const order = Date.now();
+  console.log({ districtId, staffId });
 
   const userDetails = {
     forenames,
@@ -32,7 +33,7 @@ export const POST = async (req, { params }) => {
     order,
     staffId,
   };
-  userDetails[`${region}Id`] = districtId;
+  userDetails[`${region.toLowerCase()}Id`] = districtId;
 
   const fileBuffer = await file.arrayBuffer();
   if (!file) {
@@ -57,13 +58,17 @@ export const POST = async (req, { params }) => {
     const result = await uploadToCloudinary(fileUri, "nconnect/profile_photos");
     let imageUrl = result.secure_url;
     userDetails.photoUrl = imageUrl;
-    console.log(userDetails);
+    // console.log(userDetails);
     await prisma.profile.create({
       data: userDetails,
     });
 
     return NextResponse.json(
-      { success: true, userDetails: userDetails },
+      {
+        success: true,
+        userDetails: userDetails,
+        message: "User Details Added",
+      },
       { status: 200 }
     );
   } catch (error) {
