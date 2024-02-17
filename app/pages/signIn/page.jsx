@@ -16,29 +16,17 @@ function SignIn() {
   async function handleLogin() {
     setLoading(true);
     try {
-      // await login(username, password);
-
-      const response = await signIn("credentials", {
+      await signIn("credentials", {
         email,
         password,
         callbackUrl: `https://nconnect-nu.vercel.app/pages/${uuidv4()}/explore`,
         // callbackUrl: `http://localhost:3000/pages/${uuidv4()}/explore`,
       });
-      console.log(response);
-      // await connectToDatabase();
-      // await loginUser(email, password);
-      // if (response) {
-      //   redirect(
-      //     `http://localhost:3000/pages/${session?.data?.user?.id}/explore`
-      //   );
-      // }
-
-      console.log(session.data);
       console.log(email, password);
       setLoading(false);
     } catch {
       console.log("Error!");
-      console.log((email, password));
+      // console.log((email, password));
     }
   }
 
@@ -69,6 +57,7 @@ function SignIn() {
                 >
                   Email
                 </label>
+
                 <Input
                   id="email"
                   name="email"
@@ -86,6 +75,7 @@ function SignIn() {
                 >
                   Password
                 </label>
+
                 <Input
                   id="password"
                   name="password"
