@@ -9,13 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 
 import Input from "@components/Input";
-
 import Image from "next/image";
 import SignIn from "@app/pages/signIn/page";
 import axios from "axios";
 import { useState } from "react";
 
 function AddDetails() {
+  const officeIds = useSelector((state) => state.officeIds.value);
   const specificRegion = useSelector((state) => state.districts.value);
   const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState(
@@ -56,8 +56,8 @@ function AddDetails() {
     formData.set("image", avatar);
     try {
       await axios.post(
-        // "http://localhost:3000/api/userId/region/district",
-        "https://nconnect-nu.vercel.app/api/userId/region/district",
+        // `http://localhost:3000/api/${session.data.user?.id}/region/${officeIds.districtId}/${session.data.user?.id}/update_profile`,
+        `https://nconnect-nu.vercel.app/api/${session.data.user?.id}/region/${officeIds.districtId}/${session.data.user?.id}/update_profile`,
         {
           forenames: forenames,
           surname: surname,

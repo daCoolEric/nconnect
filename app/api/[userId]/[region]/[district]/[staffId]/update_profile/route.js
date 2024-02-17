@@ -6,7 +6,9 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export const POST = async (req, res) => {
+export const POST = async (req, { params }) => {
+  const districtId = params.district;
+  const staffId = params.staffId;
   const formData = await req.formData();
 
   const file = formData.get("image");
@@ -17,15 +19,12 @@ export const POST = async (req, res) => {
   const districtname = formData.get("district");
   const email = formData.get("email");
   const contact = formData.get("contact");
-  const order = 3;
-  const districtId = "65ace172306ebe94c19911fa";
-  const staffId = "65acc96b306ebe94c19911eb";
+  const order = Date.now();
 
   const userDetails = {
     forenames,
     surname,
     rank,
-    ashantiId: districtId,
     region,
     districtname,
     email,
@@ -33,6 +32,7 @@ export const POST = async (req, res) => {
     order,
     staffId,
   };
+  userDetails[`${region}Id`] = districtId;
 
   const fileBuffer = await file.arrayBuffer();
   if (!file) {
@@ -57,12 +57,13 @@ export const POST = async (req, res) => {
     const result = await uploadToCloudinary(fileUri, "nconnect/profile_photos");
     let imageUrl = result.secure_url;
     userDetails.photoUrl = imageUrl;
+    console.log(userDetails);
     await prisma.profile.create({
       data: userDetails,
     });
 
     return NextResponse.json(
-      { success: true, imageUrl: imageUrl, userDetails: userDetails },
+      { success: true, userDetails: userDetails },
       { status: 200 }
     );
   } catch (error) {
