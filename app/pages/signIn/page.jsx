@@ -21,7 +21,7 @@ function SignIn() {
       const response = await signIn("credentials", {
         email,
         password,
-        callbackUrl: "https://nconnect-nu.vercel.app/pages/${uuidv4()}/explore",
+        callbackUrl: `https://nconnect-nu.vercel.app/pages/${uuidv4()}/explore`,
         // callbackUrl: `http://localhost:3000/pages/${uuidv4()}/explore`,
       });
       console.log(response);
