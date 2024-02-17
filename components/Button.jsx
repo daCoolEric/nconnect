@@ -13,9 +13,15 @@ import { openUpdateModal } from "@app/GlobalRedux/Features/update/updateSlice";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createUser } from "@utils/database.js";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 
 function Button({ name, type, id }) {
+  const session = useSession({
+    required: true,
+    onUnauthenticated() {
+      return null;
+    },
+  });
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.loading.value);
   const pin = useSelector((state) => state.pin.value);
@@ -45,11 +51,12 @@ function Button({ name, type, id }) {
       await signIn("credentials", {
         email,
         password,
-        callbackUrl: "https://nconnect-nu.vercel.app/pages/userId/explore",
-        // callbackUrl: "http://localhost:3000/pages/userId/explore",
+        // callbackUrl: "https://nconnect-nu.vercel.app/pages/userId/explore",
+        callbackUrl: `http://localhost:3000/pages/${session?.data?.user?.id}/explore`,
       });
       // await connectToDatabase();
       // await loginUser(email, password);
+      console.log(session);
       console.log(email, password);
       dispatch(closeLoaderModal("hidden"));
     } catch {

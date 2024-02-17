@@ -3,11 +3,13 @@ import Image from "next/image";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+
 import InfoTab from "./InfoTab";
 
 import { openDeleteModal } from "@app/GlobalRedux/Features/delete/deleteSlice";
 import { openUpdateModal } from "@app/GlobalRedux/Features/update/updateSlice";
 import { setButtonType } from "@app/GlobalRedux/Features/button/buttonSlice";
+import { useSession } from "next-auth/react";
 
 function StaffCard({
   staffId,
@@ -20,6 +22,12 @@ function StaffCard({
 }) {
   const router = useRouter();
   const dispatch = useDispatch();
+  const session = useSession({
+    required: true,
+    onUnauthenticated() {
+      return null;
+    },
+  });
   return (
     <div className="w-full h-max //outline //outline-black">
       <div
@@ -69,31 +77,34 @@ function StaffCard({
             </div>
           </div>
         </div>
-        <div>
-          <div className="-mt-px flex divide-x divide-gray-200">
-            <div className="flex w-0 flex-1">
-              <button
-                className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                onClick={() => {
-                  router.push("/pages/userId/updateDetails");
-                }}
-              >
-                Edit
-              </button>
-            </div>
-            <div className="-ml-px flex w-0 flex-1">
-              <button
-                className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
-                onClick={() => {
-                  dispatch(openDeleteModal("visible"));
-                  dispatch(setButtonType("delete"));
-                }}
-              >
-                Delete
-              </button>
+        {console.log(staffId)}
+        {session?.data?.user?.id === staffId ? (
+          <div>
+            <div className="-mt-px flex divide-x divide-gray-200">
+              <div className="flex w-0 flex-1">
+                <button
+                  className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
+                  onClick={() => {
+                    router.push(`/pages/${session?.data?.user?.id}/addDetails`);
+                  }}
+                >
+                  Edit
+                </button>
+              </div>
+              <div className="-ml-px flex w-0 flex-1">
+                <button
+                  className="relative inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-br-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
+                  onClick={() => {
+                    dispatch(openDeleteModal("visible"));
+                    dispatch(setButtonType("delete"));
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        ) : null}
       </div>
     </div>
     // </div>

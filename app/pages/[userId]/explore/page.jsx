@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { regionDB } from "@utils/regions";
 import RegionsCard from "@components/RegionsCard";
 import { useSession } from "next-auth/react";
+import { v4 as uuidv4 } from "uuid";
 import { GUEST } from "@utils/guest";
 
 function Regions() {
@@ -20,7 +21,7 @@ function Regions() {
         // style={{ height: "100%" }}
       >
         {console.log(session)}
-        {session?.data || GUEST ? (
+        {session?.data || uuidv4() ? (
           <>
             <div
               className="w-11/12 text-2xl flex justify-center items-center text-green-600 font-medium "

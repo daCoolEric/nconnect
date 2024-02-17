@@ -3,18 +3,29 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
-function StaffMembersCard({ staffId, forenames, surname, rank, profilePic }) {
+function StaffMembersCard({
+  staffId,
+  forenames,
+  surname,
+  rank,
+  district,
+  region,
+  profilePic,
+}) {
   const router = useRouter();
+  // const region = useSelector((state) => state.region.value);
+  // const district = useSelector((state) => state.districts.value);
 
   return (
     <li key={staffId} className="w-full h-20 //outline //outline-green-500  ">
-      <button
-        onClick={() => {
-          router.push(
-            "/pages/userId/explore/region/district/staff-members/staffId"
-          );
-        }}
+      <Link
+        // onClick={() => {
+        //   router.push(
+        href={`/pages/userId/explore/${region.toLowerCase()}/${district.toLowerCase()}/staff-members/${staffId}`}
+        // );
+        // }}
         className="w-full h-full"
       >
         <div className=" flex items-center gap-x-3 pl-3 w-full h-full //outline //outline-red-500 bg-white shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 rounded-md ">
@@ -31,7 +42,7 @@ function StaffMembersCard({ staffId, forenames, surname, rank, profilePic }) {
             </p>
           </div>
         </div>
-      </button>
+      </Link>
     </li>
   );
 }

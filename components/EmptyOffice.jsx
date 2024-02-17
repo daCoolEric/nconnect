@@ -8,8 +8,10 @@ import { resetOffice } from "@app/GlobalRedux/Features/office/office";
 import { resetOfficeData } from "@app/GlobalRedux/Features/officeData/officeDataSlice";
 
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 function EmptyOffice() {
+  const dispatch = useDispatch();
   //   const router = useRouter();
   const session = useSession({
     required: true,

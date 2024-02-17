@@ -4,12 +4,19 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setDistricts } from "@app/GlobalRedux/Features/district/districtSlice";
-
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import { setRegion } from "@app/GlobalRedux/Features/region/regionSlice";
 import { setData } from "@app/GlobalRedux/Features/data/dataSlice";
+import { useSession } from "next-auth/react";
 
 const RegionsCard = ({ region }) => {
+  const session = useSession({
+    required: true,
+    onUnauthenticated() {
+      return null;
+    },
+  });
   const router = useRouter();
   const dispatch = useDispatch();
   const officeData = useSelector((state) => state.data.value);
@@ -17,7 +24,9 @@ const RegionsCard = ({ region }) => {
   const getRegionData = async ({ region }) => {
     try {
       const response = await axios.get(
-        `https://nconnect-nu.vercel.app/api/userId/${region}`
+        `https://nconnect-nu.vercel.app/api/${
+          session?.data?.user?.id || uuidv4()
+        }/${region}`
         // `http://localhost:3000/api/userId/${region}`
       );
       response.data.map((info) => {
@@ -36,7 +45,11 @@ const RegionsCard = ({ region }) => {
         className=" w-full h-full  bg-green-400 p-5 rounded-lg text-slate-50 font-semibold"
         onClick={() => {
           getRegionData(region);
-          router.push(`/pages/userId/explore/${region.toLowerCase()}/`);
+          router.push(
+            `/pages/${
+              session?.data?.user?.id || uuidv4()
+            }/explore/${region.toLowerCase()}/`
+          );
           dispatch(setDistricts(region));
           dispatch(setRegion(region));
         }}

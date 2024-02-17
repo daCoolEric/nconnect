@@ -6,9 +6,20 @@ import OfficeInfo from "@components/OfficeInfo";
 import { officeIcons } from "@utils/officeIcons";
 import { Gallery } from "@utils/gallery";
 import { useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
+import { v4 as uuidv4 } from "uuid";
+import { useParams } from "next/navigation";
 
 function Office() {
   const officeData = useSelector((state) => state.officeData.value);
+  const region = useSelector((state) => state.region.value);
+  const district = useSelector((state) => state.districts.value);
+  const session = useSession({
+    required: true,
+    onUnauthenticated() {
+      return null;
+    },
+  });
   return (
     <>
       <div className="//outline //outline-blue-700 w-screen h-fit relative mb-6">
@@ -88,10 +99,16 @@ function Office() {
           />
         </div>
         <div className="//outline //outline-yellow-600 w-11/12 m-auto mt-5 h-fit ">
-          <Link href="/pages/userId/explore/region/district/staff-members ">
+          <Link
+            href={`/pages/${
+              session?.data?.user?.id || uuidv4()
+            }/explore/${region.toLowerCase()}/${district.toLowerCase()}/staff-members`}
+          >
             <div className="w-full h-full mt-2 flex justify-center bg-green-400 rounded-lg hover:bg-green-300 py-1 pt-4 pb-4">
               <button type="submit" className="text-white text-2xl font-medium">
-                Meet our amazing team
+                {session?.data?.user?.id
+                  ? "Staff Members"
+                  : "Meet our amazing team"}
               </button>
             </div>
           </Link>

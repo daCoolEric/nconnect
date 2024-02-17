@@ -25,6 +25,7 @@ import passwordReducer from "./Features/signup/passwordSlice";
 import confirmPasswordReducer from "./Features/signup/confirmPasswordSlice";
 import pinReducer from "./Features/signup/pinSlice";
 import roleReducer from "./Features/signup/roleSlice";
+import officeIdsReducer from "./Features/officeData/officeIdSlice";
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   region: regionReducer,
   office: officeReducer,
   officeData: officeDataReducer,
+  officeIds: officeIdsReducer,
   districtName: districtNameReducer,
   address: addressReducer,
   location: locationReducer,
@@ -50,6 +52,7 @@ const rootReducer = combineReducers({
   confirm_password: confirmPasswordReducer,
   pin: pinReducer,
   role: roleReducer,
+
   //add all your reducers here
 });
 

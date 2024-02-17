@@ -1,12 +1,46 @@
 "use client";
 import Input from "@components/Input";
-import Button from "@components/Button";
-import { setEmail } from "@app/GlobalRedux/Features/signup/emailSlice";
-import { setPassword } from "@app/GlobalRedux/Features/signup/passwordSlice";
-import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
+// import Button from "@components/Button";
+// import { setEmail } from "@app/GlobalRedux/Features/signup/emailSlice";
+// import { setPassword } from "@app/GlobalRedux/Features/signup/passwordSlice";
+// import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 function SignIn() {
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleLogin() {
+    setLoading(true);
+    try {
+      // await login(username, password);
+
+      const response = await signIn("credentials", {
+        email,
+        password,
+        // callbackUrl: "https://nconnect-nu.vercel.app/pages/userId/explore",
+        callbackUrl: `http://localhost:3000/pages/${uuidv4()}/explore`,
+      });
+      console.log(response);
+      // await connectToDatabase();
+      // await loginUser(email, password);
+      // if (response) {
+      //   redirect(
+      //     `http://localhost:3000/pages/${session?.data?.user?.id}/explore`
+      //   );
+      // }
+
+      console.log(session.data);
+      console.log(email, password);
+      setLoading(false);
+    } catch {
+      console.log("Error!");
+      console.log((email, password));
+    }
+  }
 
   return (
     <div className="h-3/4 w-screen  //outline //outline-black">
@@ -21,53 +55,70 @@ function SignIn() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <div className="space-y-6">
-            <div>
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-green-600"
-              >
-                Email
-              </label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                onChange={(e) => dispatch(setEmail(e.target.value))}
-                autoComplete="email"
-                placeholder="Enter your email (ex. ayieric7@gmail.com)"
-              />
-            </div>
+          <form
+            className="space-y-6"
+            action="#"
+            method="POST"
+            onSubmit={handleLogin}
+          >
+            <div className="space-y-6">
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium leading-6 text-green-600"
+                >
+                  Email
+                </label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  onChange={(e) => setEmail(e.target.value)}
+                  autoComplete="email"
+                  placeholder="Enter your email (ex. ayieric7@gmail.com)"
+                />
+              </div>
 
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-green-600"
-              >
-                Password
-              </label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                onChange={(e) => dispatch(setPassword(e.target.value))}
-                autoComplete="current-password"
-                placeholder="Enter your password"
-              />
-            </div>
-            <div className="text-sm">
-              <a
-                href="/pages/forgotPassword/"
-                className="font-semibold text-red-600 hover:text-red-400"
-              >
-                Forgot password?
-              </a>
-            </div>
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-green-600"
+                >
+                  Password
+                </label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  onChange={(e) => setPassword(e.target.value)}
+                  autoComplete="current-password"
+                  placeholder="Enter your password"
+                />
+              </div>
+              <div className="text-sm">
+                <a
+                  href="/pages/forgotPassword/"
+                  className="font-semibold text-red-600 hover:text-red-400"
+                >
+                  Forgot password?
+                </a>
+              </div>
 
-            <div className="h-16">
-              <Button id="signIn" type="button" name="Sign In" />
+              <div className="h-16">
+                {/* <Button id="signIn" type="button" name="Sign In" /> */}
+
+                <div className="h-full mt-3 //outline //outline-black">
+                  <button
+                    type="submit"
+                    className="my-2 px-4 py-2 text-center w-full inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
+                    // disabled={loading ? true : false}
+                  >
+                    {loading ? "Logging User..." : "Login"}
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>

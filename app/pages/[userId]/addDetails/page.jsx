@@ -21,6 +21,7 @@ function AddDetails() {
   const [avatarPreview, setAvatarPreview] = useState(
     "/assets/images/profilePic.png"
   );
+
   const [forenames, setFornames] = useState("");
   const [surname, setSurname] = useState("");
   const [rank, setRank] = useState("SELECT YOUR RANK");
@@ -28,9 +29,11 @@ function AddDetails() {
   const [district, setDistrict] = useState("SELECT YOUR DISTRICT");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const data = {
       forenames: forenames,
       surname: surname,
@@ -74,6 +77,7 @@ function AddDetails() {
 
       alert("Image uploaded successfully");
       console.log(data);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -291,8 +295,7 @@ function AddDetails() {
                       className="my-2 px-4 py-2 text-center w-full inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
                       // disabled={loading ? true : false}
                     >
-                      {/*  {loading ? "Updating..." : "Update"} */}
-                      Update
+                      {loading ? "Updating..." : "Update"}
                     </button>
                     {/* <Button
                         id="addDetails"

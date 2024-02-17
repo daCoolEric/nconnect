@@ -7,10 +7,12 @@ import { uploadToCloudinary } from "@backend/utils/cloudinary";
 const prisma = new PrismaClient();
 
 // GET REQUEST FOR ALL DISTRICT OFFICES IN A SPECIFIC REGION
-export const GET = async (req, res) => {
+export const GET = async (req, { params }) => {
+  const region = params.region;
+
   try {
     await prisma.$connect();
-    const districts = await prisma.ashanti.findMany({});
+    const districts = await prisma[region].findMany({});
 
     let result = [];
 
@@ -26,7 +28,7 @@ export const GET = async (req, res) => {
 };
 
 // POST REQUEST FOR CREATING AN OFFICE
-export const POST = async (req) => {
+export const POST = async (req, { params }) => {
   const formData = await req.formData();
 
   const banner = formData.get("banner");
@@ -69,7 +71,7 @@ export const POST = async (req) => {
   try {
     const result = await uploadToCloudinary(
       fileUri,
-      "nconnect/ashanti/regional"
+      `nconnect/${region.toLowerCase()}/${districtname.toLowerCase()}`
     );
     let imageUrl = result.secure_url;
     officeDetails.banner = imageUrl;

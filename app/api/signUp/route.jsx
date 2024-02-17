@@ -1,7 +1,9 @@
 import { connectToDatabase } from "@utils/database.js";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import prisma from "@prisma";
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 export const POST = async (req) => {
   try {

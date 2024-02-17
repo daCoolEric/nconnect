@@ -12,12 +12,20 @@ import {
 } from "@app/GlobalRedux/Features/loader/loaderSlice";
 import { setLoading } from "@app/GlobalRedux/Features/loading/loadingSlice";
 import { openUpdateModal } from "@app/GlobalRedux/Features/update/updateSlice";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 import { useDispatch, useSelector } from "react-redux";
+import { resetOfficeIds } from "@app/GlobalRedux/Features/officeData/officeIdSlice";
 
 function MenuList({ name, page }) {
   const dispatch = useDispatch();
+
+  const session = useSession({
+    required: true,
+    onUnauthenticated() {
+      return null;
+    },
+  });
 
   const handleLogout = async () => {
     setLoading(true);
@@ -36,18 +44,42 @@ function MenuList({ name, page }) {
     <div className="w-full h-1/5 //outline //outline-black flex justify-center items-center">
       <button
         onClick={() => {
-          if (name === "Log Out") {
-            handleLogout();
+          switch (name) {
+            case "Log Out":
+              {
+                handleLogout();
+                dispatch(resetOfficeIds());
+                dispatch(openLoaderModal("visible"));
+                dispatch(resetOfficeData());
+                dispatch(resetData());
+                dispatch(resetOffice());
+              }
 
-            dispatch(openLoaderModal("visible"));
-            dispatch(resetOfficeData());
-            dispatch(resetData());
-            dispatch(resetOffice());
-          } else {
-            dispatch(resetOfficeData());
-            dispatch(resetData());
-            dispatch(resetOffice());
+              break;
+            case "Explore": {
+              dispatch(resetOfficeIds());
+            }
+
+            default:
+              {
+                dispatch(resetOfficeData());
+                dispatch(resetData());
+                dispatch(resetOffice());
+              }
+              break;
           }
+          //           if (name === "Log Out") {
+          //             handleLogout();
+          // dispatch(resetOfficeIds())
+          //             dispatch(openLoaderModal("visible"));
+          //             dispatch(resetOfficeData());
+          //             dispatch(resetData());
+          //             dispatch(resetOffice());
+          //           } else {
+          //             dispatch(resetOfficeData());
+          //             dispatch(resetData());
+          //             dispatch(resetOffice());
+          //           }
         }}
       >
         <Link href={page}>{name}</Link>

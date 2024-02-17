@@ -11,19 +11,21 @@ const prisma = new PrismaClient();
 
 // GET REQUEST FOR ALL DISTRICT OFFICES IN A SPECIFIC REGION
 export const GET = async (req, { params }) => {
-  const districtOffice = params.district;
+  const staffId = params.staffId;
+
   try {
     await prisma.$connect();
-    const profile = await prisma.profile.findMany({
+    const staffProfile = await prisma.profile.findUnique({
       where: {
-        districtname: districtOffice.toUpperCase(),
+        id: staffId,
       },
     });
+    console.log(staffId);
 
     let result = [];
 
-    console.log(profile);
-    return new Response(JSON.stringify(profile), {
+    console.log(staffProfile);
+    return new Response(JSON.stringify(staffProfile), {
       status: 200,
     });
   } catch (error) {
