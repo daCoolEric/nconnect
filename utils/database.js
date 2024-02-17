@@ -16,21 +16,21 @@ export const connectToDatabase = async () => {
 
 export const createUser = async (pin, email, password, role) => {
   try {
-    // const response = await axios.post(
-    //   "https://nconnect-nu.vercel.app/api/signUp",
-    //   {
-    //     pin,
-    //     email,
-    //     password,
-    //     role,
-    //   }
-    // );
-    const response = await axios.post("http://localhost:3000/api/signUp", {
-      pin,
-      email,
-      password,
-      role,
-    });
+    const response = await axios.post(
+      "https://nconnect-nu.vercel.app/api/signUp",
+      {
+        pin,
+        email,
+        password,
+        role,
+      }
+    );
+    // const response = await axios.post("http://localhost:3000/api/signUp", {
+    //   pin,
+    //   email,
+    //   password,
+    //   role,
+    // });
     console.log(response);
   } catch (error) {
     console.log(error);
