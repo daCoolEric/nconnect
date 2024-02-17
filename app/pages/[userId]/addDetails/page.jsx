@@ -75,7 +75,7 @@ function AddDetails() {
         }
       );
 
-      alert("Image uploaded successfully");
+      alert("Staff Details added successfully");
       console.log(data);
       setLoading(false);
     } catch (error) {
