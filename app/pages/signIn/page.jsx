@@ -1,6 +1,6 @@
 "use client";
 import Input from "@components/Input";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 // import Button from "@components/Button";
 // import { setEmail } from "@app/GlobalRedux/Features/signup/emailSlice";
 // import { setPassword } from "@app/GlobalRedux/Features/signup/passwordSlice";
@@ -19,8 +19,8 @@ function SignIn() {
       await signIn("credentials", {
         email,
         password,
-        callbackUrl: `https://nconnect-nu.vercel.app/pages/${uuidv4()}/explore`,
-        // callbackUrl: `http://localhost:3000/pages/${uuidv4()}/explore`,
+        callbackUrl: `https://nconnect-nu.vercel.app/pages/20534b86-70ca-409d-854d-d729519d409a/explore`,
+        //callbackUrl: `http://localhost:3000/pages/20534b86-70ca-409d-854d-d729519d409a/explore`,
       });
       console.log(email, password);
       setLoading(false);
