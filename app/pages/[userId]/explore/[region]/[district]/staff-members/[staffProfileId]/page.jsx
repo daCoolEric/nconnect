@@ -45,24 +45,20 @@ function IndividualStaff() {
   }, []);
   return (
     <div className="h-3/4 w-screen">
-      {session.data?.user ? (
-        <div
-          role="list"
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-        >
-          <StaffCard
-            forenames={staffProfile.forenames}
-            surname={staffProfile.surname}
-            rank={staffProfile.rank}
-            profilePic={staffProfile.photoUrl}
-            staffId={staffProfile.staffId}
-            email={staffProfile.email}
-            contact={staffProfile.contact}
-          />
-        </div>
-      ) : (
-        redirect("http://localhost:3000/pages/guest2024/explore")
-      )}
+      <div
+        role="list"
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+      >
+        <StaffCard
+          forenames={staffProfile.forenames}
+          surname={staffProfile.surname}
+          rank={staffProfile.rank}
+          profilePic={staffProfile.photoUrl}
+          staffId={staffProfile.staffId}
+          email={staffProfile.email}
+          contact={staffProfile.contact}
+        />
+      </div>
     </div>
   );
 }
