@@ -21,13 +21,15 @@ const RegionsCard = ({ region }) => {
   const dispatch = useDispatch();
   const officeData = useSelector((state) => state.data.value);
 
-  const getRegionData = async ({ region }) => {
+  const getRegionData = async (region) => {
     try {
       const response = await axios.get(
         `https://nconnect-nu.vercel.app/api/${
           session?.data?.user?.id || uuidv4()
-        }/${region}`
-        // `http://localhost:3000/api/userId/${region}`
+        }/${region.toLowerCase()}`
+        // `http://localhost:3000/api/${
+        //   session?.data?.user?.id || uuidv4()
+        // }/${region.toLowerCase()}`
       );
       response.data.map((info) => {
         dispatch(setData(info));

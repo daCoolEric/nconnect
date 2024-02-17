@@ -20,7 +20,7 @@ function SignIn() {
         email,
         password,
         callbackUrl: `https://nconnect-nu.vercel.app/pages/${uuidv4()}/explore`,
-        //callbackUrl: `http://localhost:3000/pages/20534b86-70ca-409d-854d-d729519d409a/explore`,
+        // callbackUrl: `http://localhost:3000/pages/20534b86-70ca-409d-854d-d729519d409a/explore`,
       });
       console.log(email, password);
       setLoading(false);
