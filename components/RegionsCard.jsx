@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setDistricts } from "@app/GlobalRedux/Features/district/districtSlice";
@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import { setRegion } from "@app/GlobalRedux/Features/region/regionSlice";
 import { setData } from "@app/GlobalRedux/Features/data/dataSlice";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const RegionsCard = ({ region }) => {
   const session = useSession({
@@ -19,10 +20,12 @@ const RegionsCard = ({ region }) => {
   });
   const router = useRouter();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const officeData = useSelector((state) => state.data.value);
 
   const getRegionData = async (region) => {
     try {
+      setLoading(true);
       const response = await axios.get(
         `https://nconnect-nu.vercel.app/api/${
           session?.data?.user?.id || uuidv4()
@@ -31,11 +34,26 @@ const RegionsCard = ({ region }) => {
         //   session?.data?.user?.id || uuidv4()
         // }/${region.toLowerCase()}`
       );
-      response.data.map((info) => {
-        dispatch(setData(info));
-      });
+
+      const resolvedPromises = await Promise.allSettled(
+        response.data.map((info) => {
+          dispatch(setData(info));
+        })
+      );
+
       console.log(response.data);
+      console.log(resolvedPromises);
+      if (resolvedPromises) {
+        router.push(
+          `/pages/${
+            session?.data?.user?.id || uuidv4()
+          }/explore/${region.toLowerCase()}/`
+        );
+        setLoading(false);
+      }
       // console.log(officeData);
+      return resolvedPromises;
+      //
     } catch (error) {
       console.error(error);
     }
@@ -44,19 +62,25 @@ const RegionsCard = ({ region }) => {
   return (
     <div className="w-full h-20 //outline //outline-black">
       <button
-        className=" w-full h-full  bg-green-400 p-5 rounded-lg text-slate-50 font-semibold"
+        className=" w-full h-full  flex justify-center items-center bg-green-400 p-5 rounded-lg text-slate-50 font-semibold"
         onClick={() => {
           getRegionData(region);
-          router.push(
-            `/pages/${
-              session?.data?.user?.id || uuidv4()
-            }/explore/${region.toLowerCase()}/`
-          );
+
           dispatch(setDistricts(region));
           dispatch(setRegion(region));
         }}
       >
-        {region}
+        {loading ? (
+          <Image
+            src="/assets/images/districtLoader.gif"
+            width={50}
+            height={50}
+            alt="district loader"
+            style={{ objectFit: "contain" }}
+          />
+        ) : (
+          region
+        )}
       </button>
     </div>
   );

@@ -2,6 +2,7 @@
 
 "use client";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+
 import menuReducer from "./Features/menu/menuSlice";
 import districtReducer from "./Features/district/districtSlice";
 import userNameReducer from "./Features/userName/userNameSlice";
@@ -26,6 +27,12 @@ import confirmPasswordReducer from "./Features/signup/confirmPasswordSlice";
 import pinReducer from "./Features/signup/pinSlice";
 import roleReducer from "./Features/signup/roleSlice";
 import officeIdsReducer from "./Features/officeData/officeIdSlice";
+import cropModalReducer from "./Features/cropModal/cropModalSlice";
+import bannerReducer from "./Features/cropModal/bannerSlice";
+import bannerPreviewReducer from "./Features/cropModal/bannerPreviewSlice";
+import avatarPreviewReducer from "./Features/cropModal/avatarPreviewSlice";
+import cropProfileModalReducer from "./Features/cropModal/cropProfileModalSlice";
+import avatarReducer from "./Features/cropModal/avatarSlice";
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -52,10 +59,20 @@ const rootReducer = combineReducers({
   confirm_password: confirmPasswordReducer,
   pin: pinReducer,
   role: roleReducer,
+  crop_modal: cropModalReducer,
+  crop_profile_modal: cropProfileModalReducer,
+  banner: bannerReducer,
+  bannerPreview: bannerPreviewReducer,
+  avatar: avatarReducer,
+  avatarPreview: avatarPreviewReducer,
 
   //add all your reducers here
 });
 
 export const store = configureStore({
   reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

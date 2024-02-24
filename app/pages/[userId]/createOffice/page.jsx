@@ -12,15 +12,18 @@ import Input from "@components/Input";
 import Image from "next/image";
 import axios from "axios";
 import { closeLoaderModal } from "@app/GlobalRedux/Features/loader/loaderSlice";
+import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlice";
+// import { setImageToCrop } from "@app/GlobalRedux/Features/cropModal/imageToBeCroppedSlice";
+import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
+import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
 
 function page() {
   const params = useParams();
   const dispatch = useDispatch();
   // states
-  const [banner, setBanner] = useState("");
-  const [bannerPreview, setBannerPreview] = useState(
-    "/assets/images/officePlaceholder.png"
-  );
+  const defaultBanner = "/assets/images/officePlaceholder.png";
+
+  const bannerPreview = useSelector((state) => state.bannerPreview.value);
 
   const [address, setAddress] = useState("");
   const [location, setLocation] = useState("");
@@ -28,22 +31,10 @@ function page() {
   const [region, setRegion] = useState("SELECT YOUR REGION");
   const [staffCapacity, setStaffCapacity] = useState("");
   const [contact, setContact] = useState("");
-  // Route -> /shop/[tag]/[item]
-  // URL -> /shop/shoes/nike-air-max-97
-  // `params` -> { tag: 'shoes', item: 'nike-air-max-97' }
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const data = {
-      region,
-      districtname,
-      location,
-      address,
-      staffCapacity,
-      contact,
-      banner,
-    };
     const formData = new FormData();
 
     formData.set("region", region);
@@ -52,7 +43,7 @@ function page() {
     formData.set("address", address);
     formData.set("staffCapacity", staffCapacity);
     formData.set("contact", contact);
-    formData.set("banner", banner);
+    formData.set("banner", bannerPreview);
 
     try {
       console.log({
@@ -62,7 +53,7 @@ function page() {
         address,
         staffCapacity,
         contact,
-        banner,
+        banner: bannerPreview,
       });
       const response = await axios.post(
         //`http://localhost:3000/api/userId/ashanti`,
@@ -74,7 +65,7 @@ function page() {
           address,
           staffCapacity,
           contact,
-          banner,
+          banner: bannerPreview,
         },
         {
           headers: {
@@ -92,16 +83,20 @@ function page() {
     }
   };
 
+  const editBanner = () => {
+    dispatch(openCropModal("visible"));
+  };
+
   const onChange = (e) => {
     const reader = new FileReader();
 
     reader.onload = () => {
       if (reader.readyState === 2) {
-        setBannerPreview(reader.result);
+        dispatch(setBannerPreview(reader.result));
       }
     };
 
-    setBanner(e.target.files[0]);
+    dispatch(setBanner(URL.createObjectURL(e.target.files[0])));
     reader.readAsDataURL(e.target.files[0]);
   };
 
@@ -122,11 +117,11 @@ function page() {
             onSubmit={submitHandler}
           >
             <div className="flex justify-center items-center //outline //outline-green-500 w-full h-56 ">
-              <div className="flex justify-center items-center //outline //outline-red-500 w-full h-full gap-x-3 relative">
+              <div className="flex justify-center items-center //outline //outline-red-500 w-full h-full overflow-hidden gap-x-3 relative">
                 <Image
                   src={bannerPreview}
-                  width={400}
-                  height={400}
+                  width={640}
+                  height={427}
                   alt="Profile Picture"
                   style={{ objectFit: "contain" }}
                 />
@@ -136,13 +131,29 @@ function page() {
                 >
                   +
                 </button> */}
+                {bannerPreview !== defaultBanner && (
+                  <button
+                    type="button"
+                    className="rounded-md bg-white px-2 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 absolute top-1 right-1 "
+                    onClick={editBanner}
+                  >
+                    <Image
+                      src="/assets/icons/edit.png"
+                      width={30}
+                      height={30}
+                      alt="Profile Picture"
+                      style={{ objectFit: "contain" }}
+                    />
+                  </button>
+                )}
+
                 <button
                   type="button"
-                  className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 absolute bottom-1 right-1 "
+                  className="rounded-md bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 absolute bottom-1 right-1 "
                 >
                   <label
                     htmlFor="formFile"
-                    className="block text-sm font-medium leading-6 text-black-600"
+                    className="block text-lg font-medium leading-6 text-black-600"
                   >
                     +
                   </label>
@@ -277,29 +288,17 @@ function page() {
               />
             </div>
             <div className="h-16 //outline //outline-black">
-              <div className="h-full mt-3 //outline //outline-black">
+              <div
+                className="w-full h-full mt-2 flex justify-center items-center bg-green-400 rounded-lg hover:bg-green-300 py-1"
+                style={{ backgroundColor: "#6dab3c" }}
+              >
                 <button
                   type="submit"
-                  className="my-2 px-4 py-2 text-center w-full inline-block text-white bg-blue-600 border border-transparent rounded-md hover:bg-blue-700"
-                  // disabled={loading ? true : false}
+                  className="my-2 px-4 py-2 text-center w-full inline-block text-2xl text-white border border-transparent "
                 >
-                  {/*  {loading ? "Updating..." : "Update"} */}
                   Create Office
                 </button>
-                {/* <Button
-                        id="addDetails"
-                        type="submit"
-                        name="Add details"
-                      /> */}
               </div>
-              {/* <div
-                onClick={() => {
-                  createOffice();
-                }}
-                className="h-full mt-3 //outline //outline-black"
-              >
-                <Button id="createOffice" type="submit" name="Create Office" />
-              </div> */}
             </div>
           </form>
         </div>

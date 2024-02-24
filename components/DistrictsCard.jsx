@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,7 @@ import { setOffice } from "@app/GlobalRedux/Features/office/office";
 import { setOfficeData } from "@app/GlobalRedux/Features/officeData/officeDataSlice";
 import { useSession } from "next-auth/react";
 import { setOfficeIds } from "@app/GlobalRedux/Features/officeData/officeIdSlice";
+import Image from "next/image";
 
 function DistrictsCard({ district, userId }) {
   const session = useSession({
@@ -17,7 +18,9 @@ function DistrictsCard({ district, userId }) {
     },
   });
   const router = useRouter();
+
   // const districtName = useSelector((state) => state.districts.value);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const region = useSelector((state) => state.districts.value);
   const officeData = useSelector((state) => state.data.value);
@@ -25,24 +28,38 @@ function DistrictsCard({ district, userId }) {
 
   let subin = "subin";
 
-  const getDistrictData = (district) => {
-    console.log(officeData);
-    console.log(region);
-    console.log(district);
-    officeData.map((office) => {
-      if (office.districtname === district.toLowerCase()) {
-        dispatch(setOffice(true));
-        dispatch(setOfficeData(office));
-        dispatch(
-          setOfficeIds({
-            districtId: office.id,
-            regionId: office.region,
-          })
+  const getDistrictData = async (district) => {
+    try {
+      setLoading(true);
+      console.log(officeData);
+      console.log(region);
+      console.log(district);
+      const resolvedPromises = await Promise.allSettled(
+        officeData.map((office) => {
+          if (office.districtname === district.toLowerCase()) {
+            dispatch(setOffice(true));
+            dispatch(setOfficeData(office));
+            dispatch(
+              setOfficeIds({
+                districtId: office.id,
+                regionId: office.region,
+              })
+            );
+            console.log(office);
+            console.log(officeIds);
+          }
+        })
+      );
+      if (resolvedPromises) {
+        router.push(
+          `/pages/${
+            session?.data?.user?.id || uuidv4()
+          }/explore/${region.toLowerCase()}/${district.toLowerCase()}`
         );
-        console.log(office);
-        console.log(officeIds);
+        setLoading(false);
       }
-    });
+    } catch (error) {}
+
     // console.log(district);
   };
   return (
@@ -50,17 +67,21 @@ function DistrictsCard({ district, userId }) {
       <button
         className=" w-full h-full  bg-green-400 p-5 rounded-lg text-slate-50 font-semibold"
         onClick={() => {
-          router.push(
-            `/pages/${
-              session?.data?.user?.id || uuidv4()
-            }/explore/${region.toLowerCase()}/${district.toLowerCase()}`
-          );
-
           getDistrictData(district);
           dispatch(setDistricts(district));
         }}
       >
-        {district}
+        {loading ? (
+          <Image
+            src="/assets/images/districtLoader.gif"
+            width={50}
+            height={50}
+            alt="office loader"
+            style={{ objectFit: "contain" }}
+          />
+        ) : (
+          district
+        )}
       </button>
     </div>
   );

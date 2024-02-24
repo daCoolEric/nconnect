@@ -7,10 +7,12 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
+import StaffMembersCardSkeleton from "@components/StaffMembersCardSkeleton";
 
 // import { Office_Staff } from "@utils/staff";
 
 function StaffMembers() {
+  const [loading, setLoading] = useState(false);
   const session = useSession({
     required: true,
     onUnauthenticated() {
@@ -24,6 +26,7 @@ function StaffMembers() {
   useEffect(() => {
     const getStaffProfiles = async () => {
       try {
+        setLoading(true);
         console.log(region.toLowerCase());
         console.log(district.toLowerCase());
         const response = await axios.get(
@@ -36,6 +39,7 @@ function StaffMembers() {
         );
         setStaffProfiles(response.data);
         console.log(staffProfiles);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -57,22 +61,28 @@ function StaffMembers() {
             role="list"
             className="grid gap-x-2 gap-y-6 sm:grid-cols-2 sm:gap-y-6 xl:col-span-2 w-11/12 //outline //outline-black"
           >
-            {console.log(staffProfiles)}
-            {staffProfiles.map((staff) => {
-              // setStaffId(staff?.id);
-              return (
-                <StaffMembersCard
-                  key={staff?.id}
-                  staffId={staff?.id}
-                  forenames={staff?.forenames}
-                  surname={staff?.surname}
-                  rank={staff?.rank}
-                  district={staff?.districtname}
-                  region={staff?.region}
-                  profilePic={staff?.photoUrl}
-                />
-              );
-            })}
+            {loading ? (
+              <StaffMembersCardSkeleton number={4} />
+            ) : (
+              <>
+                {console.log(staffProfiles)}
+                {staffProfiles.map((staff) => {
+                  // setStaffId(staff?.id);
+                  return (
+                    <StaffMembersCard
+                      key={staff?.id}
+                      staffId={staff?.id}
+                      forenames={staff?.forenames}
+                      surname={staff?.surname}
+                      rank={staff?.rank}
+                      district={staff?.districtname}
+                      region={staff?.region}
+                      profilePic={staff?.photoUrl}
+                    />
+                  );
+                })}
+              </>
+            )}
           </ul>
         </div>
       </div>

@@ -12,7 +12,7 @@ const prisma = new PrismaClient();
 // GET REQUEST FOR ALL DISTRICT OFFICES IN A SPECIFIC REGION
 export const GET = async (req, { params }) => {
   const staffId = params.staffId;
-
+  console.log(staffId);
   try {
     await prisma.$connect();
     const staffProfile = await prisma.profile.findUnique({

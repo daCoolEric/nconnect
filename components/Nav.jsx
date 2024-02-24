@@ -10,6 +10,9 @@ import UpdateModal from "./UpdateModal";
 import LoadingModal from "./LoadingModal";
 import { useSession } from "next-auth/react";
 import { GUEST } from "@utils/guest";
+import CropImageModal from "./CropImageModal";
+import CropProfilePic from "./CropProfilePic";
+import CropProfilePicModal from "./CropProfilePicModal";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -29,6 +32,8 @@ const Nav = () => {
       <DeleteModal />
       <LoadingModal />
       <Modal />
+      <CropImageModal />
+      <CropProfilePicModal />
       <div className="w-full flex justify-between h-1/2 //outline //outline-black">
         <div className="w-1/6 h-10/12 //outline //outline-blue-500 flex justify-center items-center pt-2 pb-2">
           <Image

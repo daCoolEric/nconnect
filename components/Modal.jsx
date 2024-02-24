@@ -80,8 +80,8 @@ function Modal() {
     },
     {
       id: 11,
-      name: "Upload Image",
-      path: "/pages/upload",
+      name: "Loading Skeleton",
+      path: "/pages/loading-skeleton",
     },
   ];
 
