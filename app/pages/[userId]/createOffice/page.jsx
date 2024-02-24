@@ -19,6 +19,7 @@ import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPrev
 
 function page() {
   const params = useParams();
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   // states
   const defaultBanner = "/assets/images/officePlaceholder.png";
@@ -34,6 +35,7 @@ function page() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const formData = new FormData();
 
@@ -78,6 +80,7 @@ function page() {
         dispatch(closeLoaderModal("hidden"));
         console.log(response.data);
       }
+      setLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -296,7 +299,7 @@ function page() {
                   type="submit"
                   className="my-2 px-4 py-2 text-center w-full inline-block text-2xl text-white border border-transparent "
                 >
-                  Create Office
+                  {loading ? "Creating Office" : "Create Office"}
                 </button>
               </div>
             </div>
