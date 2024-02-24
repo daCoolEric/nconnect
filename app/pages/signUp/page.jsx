@@ -1,12 +1,12 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Input from "@components/Input";
 import Button from "@components/Button";
 import { useDispatch, useSelector } from "react-redux";
 
 import { NIA_Staff } from "@utils/users";
-import { useState } from "react";
+
 import RankSelector from "@components/RankSelector";
 
 import { setLoading } from "@app/GlobalRedux/Features/loading/loadingSlice";
@@ -20,10 +20,17 @@ import { useRouter } from "next/navigation";
 import Regions from "../[userId]/explore/page";
 import RoleSelector from "@components/RoleSelector";
 import { setPin } from "@app/GlobalRedux/Features/signup/pinSlice";
+import { createUser } from "@utils/database";
 
 function SignUp() {
   //useSelector gets the state from store
+  const [loading, setLoading] = useState(false);
   const userNameState = useSelector((state) => state.userName.value);
+  const pin = useSelector((state) => state.pin.value);
+  const email = useSelector((state) => state.email.value);
+  const password = useSelector((state) => state.password.value);
+  const confirm_password = useSelector((state) => state.confirm_password.value);
+  const role = useSelector((state) => state.role.value);
 
   const router = useRouter();
 
@@ -35,6 +42,20 @@ function SignUp() {
 
   const dispatch = useDispatch();
   // const  = useSelector((state) => state.username.value);
+
+  async function handleSignup() {
+    setLoading(true);
+    try {
+      const response = await createUser(pin, email, password, role);
+      alert("User succesfully created!!!");
+      if (response) {
+        router.push(`/pages/signIn`);
+      }
+      setLoading(false);
+    } catch {
+      alert("Error!, Failed to create user");
+    }
+  }
 
   return (
     <div className="w-screen h-3/4 flex flex-col justify-center items-center //outline //outline-black">
@@ -121,8 +142,19 @@ function SignUp() {
               <RoleSelector name="role" />
             </div>
 
-            <div className="h-16">
-              <Button id="signUp" type="button" name="Sign Up" />
+            <div className="h-16 //outline //outline-black">
+              <div
+                className="w-full h-full mt-2 flex justify-center items-center bg-green-400 rounded-lg hover:bg-green-300 py-1"
+                style={{ backgroundColor: "#6dab3c" }}
+              >
+                <button
+                  type="button"
+                  onClick={() => handleSignup()}
+                  className="my-2 px-4 py-2 text-center w-full inline-block text-2xl text-white border border-transparent "
+                >
+                  {loading ? "Creating User..." : "Sign Up"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
