@@ -3,7 +3,7 @@ import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPrev
 import { closeCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlice";
 import getCroppedImg from "@components/Crop";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import Cropper from "react-easy-crop";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,11 +15,11 @@ const CropImage = () => {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
-  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+  const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
-  }, []);
+  };
 
-  const showCroppedImage = useCallback(async () => {
+  const showCroppedImage = async () => {
     try {
       const croppedImage = await getCroppedImg(banner, croppedAreaPixels);
       console.log("Done", { croppedImage });
@@ -29,11 +29,11 @@ const CropImage = () => {
     } catch (e) {
       console.error(e);
     }
-  }, [croppedAreaPixels, banner]);
+  };
 
-  const onClose = useCallback(() => {
+  const onClose = () => {
     dispatch(closeCropModal("hidden"));
-  }, []);
+  };
 
   return (
     <div className="h-screen w-screen  bg-black/60 absolute z-10 //outline //outline-black">
@@ -46,6 +46,7 @@ const CropImage = () => {
           onCropChange={setCrop}
           onCropComplete={onCropComplete}
           onZoomChange={setZoom}
+          style={{ objectFit: "contain" }}
         />
       </div>
 

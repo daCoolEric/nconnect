@@ -3,7 +3,7 @@ import { setAvatarPreview } from "@app/GlobalRedux/Features/cropModal/avatarPrev
 import { closeCropProfileModal } from "@app/GlobalRedux/Features/cropModal/cropProfileModalSlice";
 import getCroppedImg from "@components/Crop";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import Cropper from "react-easy-crop";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,11 +15,11 @@ const CropProfilePic = () => {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
 
-  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+  const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
-  }, []);
+  };
 
-  const showCroppedImage = useCallback(async () => {
+  const showCroppedImage = async () => {
     try {
       const croppedImage = await getCroppedImg(avatar, croppedAreaPixels);
       console.log("Done", { croppedImage });
@@ -29,11 +29,11 @@ const CropProfilePic = () => {
     } catch (e) {
       console.error(e);
     }
-  }, [croppedAreaPixels, avatar]);
+  };
 
-  const onClose = useCallback(() => {
+  const onClose = () => {
     dispatch(closeCropProfileModal("hidden"));
-  }, []);
+  };
 
   return (
     <div className="h-screen w-screen  bg-black/60 absolute z-10 //outline //outline-black">
