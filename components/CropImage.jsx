@@ -24,7 +24,14 @@ const CropImage = () => {
       const croppedImage = await getCroppedImg(banner, croppedAreaPixels);
       console.log("Done", { croppedImage });
 
-      dispatch(setBannerPreview(croppedImage));
+      let reader = new FileReader();
+      reader.readAsDataURL(croppedImage);
+      reader.onloadend = function () {
+        let base64data = reader.result;
+        return base64data;
+      };
+      console.log(base64data);
+      dispatch(setBannerPreview(base64data));
       dispatch(closeCropModal("hidden"));
     } catch (e) {
       console.error(e);

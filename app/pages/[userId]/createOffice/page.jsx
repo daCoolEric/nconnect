@@ -101,6 +101,13 @@ function CreateOffice() {
     dispatch(openCropModal("visible"));
   };
 
+  // let reader = new FileReader();
+  // reader.readAsDataURL(banner);
+  // reader.onloadend = function () {
+  //   var base64data = reader.result;
+  //   console.log(base64data);
+  // };
+
   const onChange = (e) => {
     const reader = new FileReader();
 
