@@ -49,18 +49,19 @@ export const POST = async (req, { params }) => {
     banner,
   };
   console.log(officeDetails);
-  const fileBuffer = await banner.arrayBuffer();
+  // const fileBuffer = await banner.arrayBuffer();
   if (!banner) {
     return NextResponse.json({ error: "No files received." }, { status: 400 });
   }
 
-  let mime = banner.type;
-  let encoding = "base64";
-  let buffer = Buffer.from(fileBuffer).toString("base64");
-  let fileUri = "data:" + mime + ";" + encoding + "," + buffer;
+  //  let mime = banner.type;
+  //   let encoding = "base64";
+  //   let buffer = Buffer.from(fileBuffer).toString("base64");
+  //   let fileUri = "data:" + mime + ";" + encoding + "," + buffer;
 
   //   const buffer = Buffer.from(await file.arrayBuffer());
-  const filename = Date.now() + banner.name.replaceAll(" ", "_");
+  const filename = Date.now();
+  // + banner.name.replaceAll(" ", "_");
   const filePath = path.join(
     process.cwd(),
     "public/assets/uploads/" + filename
@@ -69,8 +70,13 @@ export const POST = async (req, { params }) => {
   // console.log(buffer);
 
   try {
+    // console.log(
+    //   `region: ${region.toLowerCase()}`,
+    //   `district: ${districtname.toLowerCase()} `
+    // );
     const result = await uploadToCloudinary(
-      fileUri,
+      // fileUri,
+      banner,
       `nconnect/${region.toLowerCase()}/${districtname.toLowerCase()}`
     );
     let imageUrl = result.secure_url;

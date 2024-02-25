@@ -16,8 +16,18 @@ import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlic
 // import { setImageToCrop } from "@app/GlobalRedux/Features/cropModal/imageToBeCroppedSlice";
 import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
 import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
-function page() {
+function CreateOffice() {
+  const session = useSession({
+    required: true,
+    onUnauthenticated() {
+      return null;
+    },
+  });
+
+  const router = useRouter();
   const params = useParams();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -77,8 +87,9 @@ function page() {
       );
 
       if (response.status === 200) {
-        dispatch(closeLoaderModal("hidden"));
         console.log(response.data);
+        alert("Office Created Successfully");
+        router.push(`/pages/${session?.data?.user?.id}/explore/`);
       }
       setLoading(false);
     } catch (error) {
@@ -309,5 +320,5 @@ function page() {
     </div>
   );
 }
-
-export default page;
+CreateOffice.requireAuth = true;
+export default CreateOffice;
