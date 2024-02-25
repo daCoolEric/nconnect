@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Button from "@components/Button";
-import { useParams } from "next/navigation";
+// import Button from "@components/Button";
+// import { useParams } from "next/navigation";
 import { regionDB } from "@utils/regions";
 import { districtDB } from "@utils/districts.js";
 
@@ -11,24 +11,24 @@ import Input from "@components/Input";
 
 import Image from "next/image";
 import axios from "axios";
-import { closeLoaderModal } from "@app/GlobalRedux/Features/loader/loaderSlice";
+// import { closeLoaderModal } from "@app/GlobalRedux/Features/loader/loaderSlice";
 import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlice";
 // import { setImageToCrop } from "@app/GlobalRedux/Features/cropModal/imageToBeCroppedSlice";
 import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
 import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
-import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
+// import { useRouter } from "next/router";
+// import { useSession } from "next-auth/react";
 
 function CreateOffice() {
-  const session = useSession({
-    required: true,
-    onUnauthenticated() {
-      return null;
-    },
-  });
+  // const session = useSession({
+  //   required: true,
+  //   onUnauthenticated() {
+  //     return null;
+  //   },
+  // });
 
-  const router = useRouter();
-  const params = useParams();
+  // const router = useRouter();
+  // const params = useParams();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   // states
@@ -89,7 +89,7 @@ function CreateOffice() {
       if (response.status === 200) {
         console.log(response.data);
         alert("Office Created Successfully");
-        router.push(`/pages/${session?.data?.user?.id}/explore/`);
+        // router.push(`/pages/${session?.data?.user?.id}/explore/`);
       }
       setLoading(false);
     } catch (error) {
@@ -139,12 +139,7 @@ function CreateOffice() {
                   alt="Profile Picture"
                   style={{ objectFit: "contain" }}
                 />
-                {/* <button
-                  type="button"
-                  className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 absolute bottom-1 right-1 "
-                >
-                  +
-                </button> */}
+
                 {bannerPreview !== defaultBanner && (
                   <button
                     type="button"
