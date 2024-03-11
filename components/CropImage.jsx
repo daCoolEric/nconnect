@@ -19,19 +19,24 @@ const CropImage = () => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
+  // const convertCropped = (croppedImage) => {
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(croppedImage);
+  //   reader.onloadend = () => {
+  //     dispatch(setBannerPreview(reader.result));
+  //   };
+  //   reader.onerror = () => {
+  //     console.error("error");
+  //   };
+  // };
+
   const showCroppedImage = async () => {
     try {
       const croppedImage = await getCroppedImg(banner, croppedAreaPixels);
       console.log("Done", { croppedImage });
 
-      let reader = new FileReader();
-      reader.readAsDataURL(croppedImage);
-      reader.onloadend = function () {
-        let base64data = reader.result;
-        return base64data;
-      };
-      console.log(base64data);
-      dispatch(setBannerPreview(base64data));
+      // convertCropped(croppedImage);
+      dispatch(setBannerPreview(croppedImage));
       dispatch(closeCropModal("hidden"));
     } catch (e) {
       console.error(e);
@@ -44,7 +49,7 @@ const CropImage = () => {
 
   return (
     <div className="h-screen w-screen  bg-black/60 absolute z-10 //outline //outline-black">
-      <div className="h-5/6 //outline //outline-green-500 overflow-hidden">
+      <div className="h-5/6 relative //outline //outline-green-500 overflow-hidden">
         <Cropper
           image={banner}
           crop={crop}
