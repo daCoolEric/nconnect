@@ -68,8 +68,9 @@ function CreateOffice() {
         banner: bannerPreview,
       });
       const response = await axios.post(
-        //`http://localhost:3000/api/userId/ashanti`,
-        `https://nconnect-nu.vercel.app/api/userId/ashanti`,
+        //`http://localhost:3000/api/userId/${region.toLowerCase()}`,
+        `https://nconnect-nu.vercel.app/api/userId/${region.toLowerCase()}`,
+
         {
           region: region.toLowerCase(),
           districtname: districtname.toLowerCase(),
