@@ -61,12 +61,14 @@ export const POST = async (req, { params }) => {
   // let fileUri = "data:" + mime + ";" + encoding + "," + buffer;
 
   //   const buffer = Buffer.from(await file.arrayBuffer());
-  const filename = Date.now();
+  //const filename = Date.now();
   // + banner.name.replaceAll(" ", "_");
-  const filePath = path.join(
-    process.cwd(),
-    "public/assets/uploads/" + filename
-  );
+
+  // const filePath = path.join(
+  //   process.cwd(),
+  //   "public/assets/uploads/" + filename
+  // );
+
   // console.log(filename);
   // console.log(buffer);
 
@@ -82,12 +84,13 @@ export const POST = async (req, { params }) => {
     );
     let imageUrl = result.secure_url;
     officeDetails.banner = imageUrl;
+
     await prisma.ashanti.create({
       data: officeDetails,
     });
 
     return NextResponse.json(
-      { success: true, imageUrl: imageUrl, officeDetails: officeDetails },
+      { success: true, officeDetails: officeDetails },
       { status: 200 }
     );
   } catch (error) {

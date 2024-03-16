@@ -27,7 +27,7 @@ const RegionsCard = ({ region }) => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://nconnect-nu.vercel.app/api/${
+        `https://nconnect-peid.vercel.app/api/${
           session?.data?.user?.id || uuidv4()
         }/${region.toLowerCase()}`
         // `http://localhost:3000/api/${

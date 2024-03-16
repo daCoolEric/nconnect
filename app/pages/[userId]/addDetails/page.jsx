@@ -62,7 +62,7 @@ function AddDetails() {
     try {
       await axios.post(
         // `http://localhost:3000/api/${session.data.user?.id}/region/${officeIds.districtId}/${session.data.user?.id}/update_profile`,
-        `https://nconnect-nu.vercel.app/api/${session.data.user?.id}/region/${officeIds.districtId}/${session.data.user?.id}/update_profile`,
+        `https://nconnect-peid.vercel.app/api/${session.data.user?.id}/region/${officeIds.districtId}/${session.data.user?.id}/update_profile`,
         {
           forenames: forenames,
           surname: surname,

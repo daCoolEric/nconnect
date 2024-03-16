@@ -1,5 +1,4 @@
 import { v2 as cloudinary } from "cloudinary";
-import { unlink } from "fs/promises";
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -23,7 +22,7 @@ cloudinary.config({
 
 const uploadToCloudinary = (fileUri, folder) => {
   return new Promise((resolve, reject) => {
-    var result = cloudinary.uploader
+    cloudinary.uploader
       .upload(fileUri, {
         invalidate: true,
         folder,

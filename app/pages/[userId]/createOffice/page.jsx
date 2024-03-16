@@ -16,6 +16,7 @@ import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlic
 // import { setImageToCrop } from "@app/GlobalRedux/Features/cropModal/imageToBeCroppedSlice";
 import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
 import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
+
 // import { useRouter } from "next/router";
 // import { useSession } from "next-auth/react";
 
@@ -67,32 +68,34 @@ function CreateOffice() {
         contact,
         banner: bannerPreview,
       });
-      const response = await axios.post(
-        //`http://localhost:3000/api/userId/${region.toLowerCase()}`,
-        `https://nconnect-nu.vercel.app/api/userId/${region.toLowerCase()}`,
 
-        {
-          region: region.toLowerCase(),
-          districtname: districtname.toLowerCase(),
-          location,
-          address,
-          staffCapacity,
-          contact,
-          banner: bannerPreview,
-        },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
+      if (result) {
+        const response = await axios.post(
+          //`http://localhost:3000/api/userId/${region.toLowerCase()}`,
+          `https://nconnect-peid.vercel.app/api/userId/${region.toLowerCase()}`,
+
+          {
+            region: region.toLowerCase(),
+            districtname: districtname.toLowerCase(),
+            location,
+            address,
+            staffCapacity,
+            contact,
+            banner: bannerPreview,
           },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        if (response.status === 200) {
+          console.log(response.data);
+          alert("Office Created Successfully");
+          // router.push(`/pages/${session?.data?.user?.id}/explore/`);
         }
-      );
-
-      if (response.status === 200) {
-        console.log(response.data);
-        alert("Office Created Successfully");
-        // router.push(`/pages/${session?.data?.user?.id}/explore/`);
+        setLoading(false);
       }
-      setLoading(false);
     } catch (error) {
       console.error(error);
     }
