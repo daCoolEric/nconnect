@@ -20,11 +20,6 @@ import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPrev
 // import { useRouter } from "next/router";
 // import { useSession } from "next-auth/react";
 
-// This function can run for a maximum of 60 seconds
-export const config = {
-  maxDuration: 60,
-};
-
 function CreateOffice() {
   // const session = useSession({
   //   required: true,
