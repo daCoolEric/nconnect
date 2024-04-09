@@ -1,0 +1,25 @@
+    // console.log(
+    //   `region: ${region.toLowerCase()}`,
+    //   `district: ${districtname.toLowerCase()} `
+    // );
+    const result = await uploadToCloudinary(
+      // fileUri,
+      banner,
+      `nconnect/${region.toLowerCase()}/${districtname.toLowerCase()}`
+    );
+    let imageUrl = result.secure_url;
+    officeDetails.banner = imageUrl;
+
+    await prisma.ashanti.create({
+      data: officeDetails,
+    });
+
+    return NextResponse.json(
+      { success: true, officeDetails: officeDetails },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.log(error);
+    return new Response("Failed to create an office", { status: 500 });
+    // return new Response(req.body, { status: 500 });
+  }
