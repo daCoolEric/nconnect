@@ -26,7 +26,6 @@ const uploadToCloudinary = (fileUri, folder) => {
       .upload(fileUri, {
         invalidate: true,
         folder,
-        timeout: 120000,
       })
       .then((result) => {
         console.log(result);
