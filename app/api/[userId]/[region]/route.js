@@ -49,16 +49,16 @@ export const POST = async (req, { params }) => {
     banner,
   };
   console.log(officeDetails);
-  console.log(banner);
-  // const fileBuffer = await banner.arrayBuffer();
+  // console.log(banner);
+  const fileBuffer = await banner.arrayBuffer();
   if (!banner) {
     return NextResponse.json({ error: "No files received." }, { status: 400 });
   }
 
-  //  let mime = banner.type;
-  // let encoding = "base64";
-  // let buffer = Buffer.from(fileBuffer).toString("base64");
-  // let fileUri = "data:" + mime + ";" + encoding + "," + buffer;
+  let mime = banner.type;
+  let encoding = "base64";
+  let buffer = Buffer.from(fileBuffer).toString("base64");
+  let fileUri = "data:" + mime + ";" + encoding + "," + buffer;
 
   //   const buffer = Buffer.from(await file.arrayBuffer());
   //const filename = Date.now();
@@ -78,8 +78,8 @@ export const POST = async (req, { params }) => {
     //   `district: ${districtname.toLowerCase()} `
     // );
     const result = await uploadToCloudinary(
-      // fileUri,
-      banner,
+      fileUri,
+      // banner,
       `nconnect/${region.toLowerCase()}/${districtname.toLowerCase()}`
     );
     let imageUrl = result.secure_url;

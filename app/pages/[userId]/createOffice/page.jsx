@@ -17,7 +17,6 @@ import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlic
 import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
 import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
 
-// import { useRouter } from "next/router";
 // import { useSession } from "next-auth/react";
 
 function CreateOffice() {
@@ -28,7 +27,6 @@ function CreateOffice() {
   //   },
   // });
 
-  // const router = useRouter();
   // const params = useParams();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -36,6 +34,7 @@ function CreateOffice() {
   const defaultBanner = "/assets/images/officePlaceholder.png";
 
   const bannerPreview = useSelector((state) => state.bannerPreview.value);
+  const banner = useSelector((state) => state.banner.value);
 
   const [address, setAddress] = useState("");
   const [location, setLocation] = useState("");
@@ -43,6 +42,7 @@ function CreateOffice() {
   const [region, setRegion] = useState("SELECT YOUR REGION");
   const [staffCapacity, setStaffCapacity] = useState("");
   const [contact, setContact] = useState("");
+  const [officeCreated, setOfficeCreated] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ function CreateOffice() {
     formData.set("address", address);
     formData.set("staffCapacity", staffCapacity);
     formData.set("contact", contact);
-    formData.set("banner", bannerPreview);
+    formData.set("banner", banner);
 
     try {
       console.log({
@@ -66,7 +66,7 @@ function CreateOffice() {
         address,
         staffCapacity,
         contact,
-        banner: bannerPreview,
+        banner,
       });
       const response = await axios.post(
         //`http://localhost:3000/api/userId/${region.toLowerCase()}`,
@@ -79,7 +79,7 @@ function CreateOffice() {
           address,
           staffCapacity,
           contact,
-          banner: bannerPreview,
+          banner,
         },
         {
           headers: {
@@ -90,7 +90,7 @@ function CreateOffice() {
       if (response.status === 200) {
         console.log(response.data);
         alert("Office Created Successfully");
-        // router.push(`/pages/${session?.data?.user?.id}/explore/`);
+        setOfficeCreated(true);
       }
       setLoading(false);
     } catch (error) {
@@ -117,8 +117,8 @@ function CreateOffice() {
         dispatch(setBannerPreview(reader.result));
       }
     };
-
-    dispatch(setBanner(URL.createObjectURL(e.target.files[0])));
+    dispatch(setBanner(e.target.files[0]));
+    // dispatch(setBanner(URL.createObjectURL(e.target.files[0])));
     reader.readAsDataURL(e.target.files[0]);
   };
 
@@ -313,7 +313,9 @@ function CreateOffice() {
                   type="submit"
                   className="my-2 px-4 py-2 text-center w-full inline-block text-2xl text-white border border-transparent "
                 >
-                  {loading ? "Creating Office" : "Create Office"}
+                  {loading && !officeCreated
+                    ? "Creating Office"
+                    : "Create Office"}
                 </button>
               </div>
             </div>
