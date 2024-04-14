@@ -60,18 +60,6 @@ export const POST = async (req, { params }) => {
   let buffer = Buffer.from(fileBuffer).toString("base64");
   let fileUri = "data:" + mime + ";" + encoding + "," + buffer;
 
-  //   const buffer = Buffer.from(await file.arrayBuffer());
-  //const filename = Date.now();
-  // + banner.name.replaceAll(" ", "_");
-
-  // const filePath = path.join(
-  //   process.cwd(),
-  //   "public/assets/uploads/" + filename
-  // );
-
-  // console.log(filename);
-  // console.log(buffer);
-
   try {
     // console.log(
     //   `region: ${region.toLowerCase()}`,
@@ -79,13 +67,12 @@ export const POST = async (req, { params }) => {
     // );
     const result = await uploadToCloudinary(
       fileUri,
-      // banner,
       `nconnect/${region.toLowerCase()}/${districtname.toLowerCase()}`
     );
     let imageUrl = result.secure_url;
     officeDetails.banner = imageUrl;
 
-    await prisma.ashanti.create({
+    await prisma[region.toLowerCase()].create({
       data: officeDetails,
     });
 

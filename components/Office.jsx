@@ -24,15 +24,36 @@ function Office() {
     <>
       <div className="//outline //outline-blue-700 w-screen h-fit relative mb-6">
         {console.log(officeData)}
-        <h1
-          className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight"
-          style={{ color: "#6dab3c" }}
-        >
-          {`${
-            officeData.districtname[0].toUpperCase() +
-            officeData.districtname.substring(1)
-          } Office`}
-        </h1>
+        <div className="//outline //outline-blue-700 w-full flex justify-center items-center">
+          <h1
+            className=" text-center text-2xl font-bold leading-9 tracking-tight "
+            style={{ color: "#6dab3c" }}
+          >
+            {`${
+              officeData.districtname[0].toUpperCase() +
+              officeData.districtname.substring(1)
+            } Office`}
+          </h1>
+        </div>
+        {session?.data?.user?.role !== "admin" ? null : (
+          <div className="//outline //outline-red-700  w-full flex justify-end items-center">
+            <Link
+              href={`/pages/${
+                session?.data?.user?.id || uuidv4()
+              }/explore/${region.toLowerCase()}/${district.toLowerCase()}/updateOffice`}
+              className="//outline //outline-red-700  w-2/12 flex justify-end items-center  "
+            >
+              <Image
+                src="/assets/icons/edit.png"
+                width={60}
+                height={60}
+                alt="Edit Button"
+                style={{ objectFit: "contain" }}
+                className="p-3  "
+              />
+            </Link>
+          </div>
+        )}
       </div>
       <div
         className="w-full text-xl flex justify-center items-center text-red-600 font-medium mb-5 //outline //outline-black "
@@ -138,6 +159,16 @@ function Office() {
             Registration Process
           </a>
         </div>
+
+        {/* {session?.data?.user?.role !== "admin" ? null : (
+          <div className="//outline //outline-yellow-600 w-11/12 m-auto mt-5 h-fit ">
+            <div className="w-1/2 h-full mt-2 flex justify-center bg-green-400 rounded-lg hover:bg-green-300 py-1 pt-4 pb-4">
+              <button type="button" className="text-white text-2xl font-medium">
+                Remove Office
+              </button>
+            </div>
+          </div>
+        )} */}
       </div>
     </>
   );
