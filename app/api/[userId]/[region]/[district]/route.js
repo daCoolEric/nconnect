@@ -3,35 +3,35 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+// GET REQUEST FOR ALL DISTRICT OFFICES IN A SPECIFIC REGION
+export const GET = async (req, { params }) => {
+  const region = params.region;
+  const district = params.district;
+
+  try {
+    await prisma.$connect();
+    const office = await prisma[region].findUnique({
+      where: {
+        districtname: district,
+      },
+    });
+
+    console.log(office);
+    return new Response(JSON.stringify(office), {
+      status: 200,
+    });
+  } catch (error) {
+    return new Response("Failed to get the desire district office", {
+      status: 500,
+    });
+  }
+};
+
 // async function main() {
 //   // ... you will write your Prisma Client queries here
 //   const ashantis = await prisma.ashanti.findMany();
 //   console.log(ashantis);
 // }
-
-// GET REQUEST FOR ALL DISTRICT OFFICES IN A SPECIFIC REGION
-// export const GET = async (req, { params }) => {
-//   const districtOffice = params.district;
-//   try {
-//     await prisma.$connect();
-//     const profile = await prisma.profile.findMany({
-//       where: {
-//         districtname: districtOffice.toUpperCase(),
-//       },
-//     });
-
-//     let result = [];
-
-//     console.log(profile);
-//     return new Response(JSON.stringify(profile), {
-//       status: 200,
-//     });
-//   } catch (error) {
-//     return new Response("Failed to fetch all district offices", {
-//       status: 500,
-//     });
-//   }
-// };
 
 // POST REQUEST FOR CREATING A PROFILE
 // export const POST = async (req) => {

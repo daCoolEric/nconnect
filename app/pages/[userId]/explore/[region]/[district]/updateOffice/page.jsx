@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import Button from "@components/Button";
 // import { useParams } from "next/navigation";
 import { regionDB } from "@utils/regions";
@@ -16,6 +16,7 @@ import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlic
 // import { setImageToCrop } from "@app/GlobalRedux/Features/cropModal/imageToBeCroppedSlice";
 import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
 import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
+import TextArea from "@components/TextArea";
 
 // import { useSession } from "next-auth/react";
 
@@ -37,14 +38,19 @@ function UpdateOffice() {
   const bannerPreview = useSelector((state) => state.bannerPreview.value);
   const banner = useSelector((state) => state.banner.value);
 
-  const [address, setAddress] = useState("");
-  const [location, setLocation] = useState("");
-  const [districtname, setDistrictName] = useState("SELECT YOUR RANK");
-  const [region, setRegion] = useState("SELECT YOUR REGION");
-  const [staffCapacity, setStaffCapacity] = useState("");
-  const [contact, setContact] = useState("");
+  const [address, setAddress] = useState(officeData.address);
+  const [location, setLocation] = useState(officeData.location);
+  const [districtname, setDistrictName] = useState(officeData.districtname);
+  const [districtId, setDistrictId] = useState(officeData.id);
+  const [region, setRegion] = useState(officeData.region);
+  const [staffCapacity, setStaffCapacity] = useState(officeData.staffCapacity);
+  const [contact, setContact] = useState(officeData.contact);
   const [officeUpdated, setOfficeUpdated] = useState(false);
+  const [oldBanner, setOldBanner] = useState(officeData.banner);
 
+  // useEffect(() => {
+
+  // }, []);
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -58,9 +64,12 @@ function UpdateOffice() {
     formData.set("staffCapacity", staffCapacity);
     formData.set("contact", contact);
     formData.set("banner", banner);
+    formData.set("districtId", districtId);
+    formData.set("oldBanner", oldBanner);
 
     try {
       console.log({
+        districtId,
         region,
         districtname,
         location,
@@ -68,12 +77,14 @@ function UpdateOffice() {
         staffCapacity,
         contact,
         banner,
+        oldBanner,
       });
-      const response = await axios.post(
-        //`http://localhost:3000/api/userId/${region.toLowerCase()}`,
-        `https://nconnect-peid.vercel.app/api/userId/${region.toLowerCase()}`,
+      const response = await axios.put(
+        //`http://localhost:3000/api/userId/${region.toLowerCase()}/updateOffice`,
+        `https://nconnect-peid.vercel.app/api/userId/${region.toLowerCase()}/updateOffice`,
 
         {
+          districtId,
           region: region.toLowerCase(),
           districtname: districtname.toLowerCase(),
           location,
@@ -81,6 +92,7 @@ function UpdateOffice() {
           staffCapacity,
           contact,
           banner,
+          oldBanner,
         },
         {
           headers: {
@@ -90,7 +102,7 @@ function UpdateOffice() {
       );
       if (response.status === 200) {
         console.log(response.data);
-        alert("Office Created Successfully");
+        alert("Office Updated Successfully");
         setOfficeUpdated(true);
       }
       setLoading(false);
@@ -103,13 +115,6 @@ function UpdateOffice() {
     dispatch(openCropModal("visible"));
   };
 
-  // let reader = new FileReader();
-  // reader.readAsDataURL(banner);
-  // reader.onloadend = function () {
-  //   var base64data = reader.result;
-  //   console.log(base64data);
-  // };
-
   const onChange = (e) => {
     const reader = new FileReader();
 
@@ -119,12 +124,14 @@ function UpdateOffice() {
       }
     };
     dispatch(setBanner(e.target.files[0]));
-    // dispatch(setBanner(URL.createObjectURL(e.target.files[0])));
+
     reader.readAsDataURL(e.target.files[0]);
   };
 
   return (
     <div className="w-screen h-3/4  //outline //outline-black">
+      {console.log(officeData.banner)}
+
       <div className="flex h-fit flex-1 flex-col justify-start px-4  lg:px-8 //outline //outline-black">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm h-fit //outline //outline-black">
           <h2 className="mt-5 text-center text-2xl font-bold leading-9 tracking-tight text-green-600">
@@ -136,13 +143,17 @@ function UpdateOffice() {
           <form
             className="space-y-6"
             action="#"
-            method="POST"
+            method="PUT"
             onSubmit={submitHandler}
           >
             <div className="flex justify-center items-center //outline //outline-green-500 w-full h-56 ">
               <div className="flex justify-center items-center //outline //outline-red-500 w-full h-full overflow-hidden gap-x-3 relative">
                 <Image
-                  src={bannerPreview}
+                  src={
+                    bannerPreview === "/assets/images/officePlaceholder.png"
+                      ? officeData.banner
+                      : bannerPreview
+                  }
                   width={640}
                   height={427}
                   alt="Profile Picture"
@@ -195,15 +206,10 @@ function UpdateOffice() {
               </label>
               <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
                 <select
-                  value={region}
-                  onChange={(e) => {
-                    setRegion(e.target.value);
-                  }}
+                  disabled={true}
                   className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
                 >
-                  {regionDB.map((region) => (
-                    <option value={region.region}>{region.region}</option>
-                  ))}
+                  <option value={region}>{region.toUpperCase()}</option>
                 </select>
               </div>
             </div>
@@ -216,19 +222,12 @@ function UpdateOffice() {
               </label>
               <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
                 <select
-                  value={districtname}
-                  onChange={(e) => {
-                    setDistrictName(e.target.value);
-                  }}
+                  disabled={true}
                   className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
                 >
-                  {region !== "SELECT YOUR REGION"
-                    ? districtDB[region].map((district) => (
-                        <option value={district.district}>
-                          {district.district}
-                        </option>
-                      ))
-                    : null}
+                  <option value={districtname}>
+                    {districtname.toUpperCase()}
+                  </option>
                 </select>
               </div>
             </div>
@@ -239,11 +238,12 @@ function UpdateOffice() {
               >
                 Staff Capacity
               </label>
+
               <Input
                 id="text"
                 name="text"
                 type="text"
-                value={officeData?.staffCapacity}
+                value={staffCapacity}
                 onChange={(e) => {
                   setStaffCapacity(e.target.value);
                 }}
@@ -259,15 +259,14 @@ function UpdateOffice() {
               >
                 Location
               </label>
-              <Input
-                id="text"
-                name="text"
-                type="text"
+              <TextArea
+                rows={4}
+                cols={35}
+                value={location}
                 onChange={(e) => {
                   setLocation(e.target.value);
                 }}
-                autoComplete="text"
-                placeholder="Enter office location"
+                placeholder={"Describe your location here"}
               />
             </div>
             <div>
@@ -281,6 +280,7 @@ function UpdateOffice() {
                 id="text"
                 name="text"
                 type="text"
+                value={address}
                 onChange={(e) => {
                   setAddress(e.target.value);
                 }}
@@ -299,6 +299,7 @@ function UpdateOffice() {
                 id="contact"
                 name="contact"
                 type="contact"
+                value={contact}
                 onChange={(e) => {
                   setContact(e.target.value);
                 }}

@@ -1,29 +1,35 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import OfficeInfo from "@components/OfficeInfo";
 import { officeIcons } from "@utils/officeIcons";
 import { Gallery } from "@utils/gallery";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 import { v4 as uuidv4 } from "uuid";
 import { useParams } from "next/navigation";
+import { removeBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
 
 function Office() {
   const officeData = useSelector((state) => state.officeData.value);
   const region = useSelector((state) => state.region.value);
   const district = useSelector((state) => state.districts.value);
+  const dispatch = useDispatch();
   const session = useSession({
     required: true,
     onUnauthenticated() {
       return null;
     },
   });
+  useEffect(() => {
+    dispatch(() => removeBannerPreview());
+  }, []);
   return (
     <>
       <div className="//outline //outline-blue-700 w-screen h-fit relative mb-6">
         {console.log(officeData)}
+        {/* {dispatch(() => removeBannerPreview())} */}
         <div className="//outline //outline-blue-700 w-full flex justify-center items-center">
           <h1
             className=" text-center text-2xl font-bold leading-9 tracking-tight "

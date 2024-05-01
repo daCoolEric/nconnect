@@ -23,40 +23,20 @@ const RegionsCard = ({ region }) => {
   const [loading, setLoading] = useState(false);
   const officeData = useSelector((state) => state.data.value);
 
-  const getRegionData = async (region) => {
-    try {
-      setLoading(true);
-      const response = await axios.get(
-        `https://nconnect-peid.vercel.app/api/${
-          session?.data?.user?.id || uuidv4()
-        }/${region.toLowerCase()}`
-        // `http://localhost:3000/api/${
-        //   session?.data?.user?.id || uuidv4()
-        // }/${region.toLowerCase()}`
-      );
-
-      const resolvedPromises = await Promise.allSettled(
-        response.data.map((info) => {
-          dispatch(setData(info));
-        })
-      );
-
-      console.log(response.data);
-      console.log(resolvedPromises);
-      if (resolvedPromises) {
-        router.push(
-          `/pages/${
-            session?.data?.user?.id || uuidv4()
-          }/explore/${region.toLowerCase()}/`
-        );
-        setLoading(false);
-      }
-      // console.log(officeData);
-      return resolvedPromises;
-      //
-    } catch (error) {
-      console.error(error);
-    }
+  const getRegionData = () => {
+    router.push(
+      `/pages/${
+        session?.data?.user?.id || uuidv4()
+      }/explore/${region.toLowerCase()}/`
+    );
+    //   setLoading(false);
+    // }
+    // // console.log(officeData);
+    // return resolvedPromises;
+    // //
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   return (
@@ -70,7 +50,7 @@ const RegionsCard = ({ region }) => {
           dispatch(setRegion(region));
         }}
       >
-        {loading ? (
+        {/* {loading ? (
           <Image
             src="/assets/images/districtLoader.gif"
             width={50}
@@ -78,9 +58,9 @@ const RegionsCard = ({ region }) => {
             alt="district loader"
             style={{ objectFit: "contain" }}
           />
-        ) : (
-          region
-        )}
+        ) : ( */}
+        {region}
+        {/* )} */}
       </button>
     </div>
   );

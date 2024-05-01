@@ -7,25 +7,20 @@ cloudinary.config({
   secure: true,
 });
 
-// const uploads = (filePath, folder) => {
-//   cloudinary.uploader
-//     .upload(filePath, { folder })
-//     .then((result) => {
-//       console.log({
-//         public_id: result.public_id,
-//         url: result.url,
-//       });
-//       unlink(filePath);
-//     })
-//     .catch((error) => console.warn(error));
-// };
+const deleteFromCloudinary = (public_id) => {
+  cloudinary.uploader.destroy(public_id).then((result) => console.log(result));
+};
 
-const uploadToCloudinary = (fileUri, folder) => {
+const uploadToCloudinary = (fileUri, folder, oldBannerId) => {
   return new Promise((resolve, reject) => {
     cloudinary.uploader
       .upload(fileUri, {
         invalidate: true,
+        public_id: oldBannerId,
         folder,
+        overwrite: true,
+        use_filename: true,
+        unique_filename: false,
       })
       .then((result) => {
         console.log(result);
@@ -38,4 +33,4 @@ const uploadToCloudinary = (fileUri, folder) => {
   });
 };
 
-export { uploadToCloudinary, cloudinary };
+export { uploadToCloudinary, deleteFromCloudinary, cloudinary };

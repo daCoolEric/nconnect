@@ -87,52 +87,6 @@ export const POST = async (req, { params }) => {
   }
 };
 
-// UPDATE REQUEST FOR UPDATING OFFICE DETAILS
-export const PUT = async (req) => {
-  const {
-    districtId,
-    districtname,
-    location,
-    address,
-    staffCapacity,
-    contact,
-  } = await req.json();
-
-  const data = {
-    districtId,
-    districtname,
-    location,
-    address,
-    staffCapacity,
-    contact,
-  };
-  console.log(data);
-  try {
-    await prisma.$connect();
-    const Ashanti = await prisma.ashanti.update({
-      where: {
-        id: districtId,
-      },
-      data: {
-        districtname,
-        location,
-        address,
-        staffCapacity,
-        contact,
-      },
-    });
-
-    console.log(Ashanti);
-    return new Response("Office successfully updated", {
-      status: 200,
-    });
-  } catch (error) {
-    console.log(error);
-    return new Response("Failed to update the office", { status: 500 });
-    // return new Response(req.body, { status: 500 });
-  }
-};
-
 // DELETE REQUEST FOR REMOVING AN OFFICE
 export const DELETE = async (req) => {
   const { districtId } = await req.json();

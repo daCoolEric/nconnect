@@ -32,10 +32,10 @@ function StaffMembers() {
         const response = await axios.get(
           // `http://localhost:3000/api/${
           //   session?.data?.user?.id || uuidv4()
-          // } /${region.toLowerCase()}/${district.toLowerCase()}`
+          // } /${region.toLowerCase()}/${district.toLowerCase()}/staffmembers`
           `https://nconnect-nu.vercel.app/api/${
             session?.data?.user?.id || uuidv4()
-          }/${region.toLowerCase()}/${district.toLowerCase()}`
+          }/${region.toLowerCase()}/${district.toLowerCase()}/staffmembers`
         );
         setStaffProfiles(response.data);
         console.log(staffProfiles);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,30 +27,64 @@ function DistrictsCard({ district, userId }) {
   const officeIds = useSelector((state) => state.officeIds.value);
 
   let subin = "subin";
+  // useEffect(() => {
+  //   getDistrictData(district);
+  // }, []);
 
   const getDistrictData = async (district) => {
+    // try {
+    //   setLoading(true);
+    //   console.log(officeData);
+    //   console.log(region);
+    //   console.log(district);
+    //   const resolvedPromises = await Promise.allSettled(
+    //     officeData.map((office) => {
+    //       if (office.districtname === district.toLowerCase()) {
+    //         dispatch(setOffice(true));
+    //         dispatch(setOfficeData(office));
+    //         dispatch(
+    //           setOfficeIds({
+    //             districtId: office.id,
+    //             regionId: office.region,
+    //           })
+    //         );
+    //         console.log(office);
+    //         console.log(officeIds);
+    //       }
+    //     })
+    //   );
+    //   if (resolvedPromises) {
+    //     router.push(
+    //       `/pages/${
+    //         session?.data?.user?.id || uuidv4()
+    //       }/explore/${region.toLowerCase()}/${district.toLowerCase()}`
+    //     );
+    //     setLoading(false);
+    //   }
+    // } catch (error) {}
+
+    // console.log(district);
+
     try {
       setLoading(true);
-      console.log(officeData);
-      console.log(region);
-      console.log(district);
-      const resolvedPromises = await Promise.allSettled(
-        officeData.map((office) => {
-          if (office.districtname === district.toLowerCase()) {
-            dispatch(setOffice(true));
-            dispatch(setOfficeData(office));
-            dispatch(
-              setOfficeIds({
-                districtId: office.id,
-                regionId: office.region,
-              })
-            );
-            console.log(office);
-            console.log(officeIds);
-          }
-        })
+      const response = await axios.get(
+        // `https://nconnect-peid.vercel.app/api/${
+        //   session?.data?.user?.id || uuidv4()
+        // }/${region.toLowerCase()}`
+        `http://localhost:3000/api/${
+          session?.data?.user?.id || uuidv4()
+        }/${region.toLowerCase()}/${district.toLowerCase()}/`
       );
-      if (resolvedPromises) {
+      console.log(response.data);
+
+      // const resolvedPromise = await Promise.allSettled(() => {
+
+      // });
+
+      if (response) {
+        dispatch(setOffice(true));
+        dispatch(setOfficeData(response.data));
+        dispatch(setDistricts(district));
         router.push(
           `/pages/${
             session?.data?.user?.id || uuidv4()
@@ -58,17 +92,24 @@ function DistrictsCard({ district, userId }) {
         );
         setLoading(false);
       }
-    } catch (error) {}
+      // router.push(
+      //   `/pages/${
+      //     session?.data?.user?.id || uuidv4()
+      //   }/explore/${region.toLowerCase()}/${district.toLowerCase()}`
+      // );
 
-    // console.log(district);
+      return result;
+      //
+    } catch (error) {
+      console.error(error);
+    }
   };
   return (
     <div className="w-full h-20 //outline //outline-black">
       <button
-        className=" w-full h-full  bg-green-400 p-5 rounded-lg text-slate-50 font-semibold"
+        className=" w-full h-full flex justify-center items-center bg-green-400 p-5 rounded-lg text-slate-50 font-semibold"
         onClick={() => {
           getDistrictData(district);
-          dispatch(setDistricts(district));
         }}
       >
         {loading ? (
