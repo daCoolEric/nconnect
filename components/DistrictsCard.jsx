@@ -98,7 +98,7 @@ function DistrictsCard({ district, userId }) {
       //   }/explore/${region.toLowerCase()}/${district.toLowerCase()}`
       // );
 
-      return result;
+      return response;
       //
     } catch (error) {
       console.error(error);
