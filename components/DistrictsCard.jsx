@@ -68,12 +68,12 @@ function DistrictsCard({ district, userId }) {
     try {
       setLoading(true);
       const response = await axios.get(
-        // `https://nconnect-peid.vercel.app/api/${
-        //   session?.data?.user?.id || uuidv4()
-        // }/${region.toLowerCase()}`
-        `http://localhost:3000/api/${
+        `https://nconnect-peid.vercel.app/api/${
           session?.data?.user?.id || uuidv4()
-        }/${region.toLowerCase()}/${district.toLowerCase()}/`
+        }/${region.toLowerCase()}`
+        // `http://localhost:3000/api/${
+        //   session?.data?.user?.id || uuidv4()
+        // }/${region.toLowerCase()}/${district.toLowerCase()}/`
       );
       console.log(response.data);
 
