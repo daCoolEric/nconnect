@@ -33,7 +33,7 @@ function StaffMembers() {
           // `http://localhost:3000/api/${
           //   session?.data?.user?.id || uuidv4()
           // } /${region.toLowerCase()}/${district.toLowerCase()}/staffmembers`
-          `https://nconnect-nu.vercel.app/api/${
+          `https://nconnect-peid.vercel.app/api/${
             session?.data?.user?.id || uuidv4()
           }/${region.toLowerCase()}/${district.toLowerCase()}/staffmembers`
         );
