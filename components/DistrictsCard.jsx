@@ -81,10 +81,10 @@ function DistrictsCard({ district, userId }) {
 
       // });
 
-      if (response) {
-        dispatch(setOffice(true));
-        dispatch(setOfficeData(response.data));
-        dispatch(setDistricts(district));
+      if (response !== null) {
+        dispatch(() => setOffice(true));
+        dispatch(() => setOfficeData(response.data));
+        dispatch(() => setDistricts(district));
         router.push(
           `/pages/${
             session?.data?.user?.id || uuidv4()
