@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setDistricts } from "@app/GlobalRedux/Features/district/districtSlice";
 import { v4 as uuidv4 } from "uuid";
-import { setOffice } from "@app/GlobalRedux/Features/office/office";
+import { resetOffice, setOffice } from "@app/GlobalRedux/Features/office/office";
 import { setOfficeData } from "@app/GlobalRedux/Features/officeData/officeDataSlice";
 import { useSession } from "next-auth/react";
 import { setOfficeIds } from "@app/GlobalRedux/Features/officeData/officeIdSlice";
@@ -81,22 +81,29 @@ function DistrictsCard({ district, userId }) {
 
       // });
 
-      if (response !== null) {
-        dispatch(() => setOffice(true));
-        dispatch(() => setOfficeData(response.data));
-        dispatch(() => setDistricts(district));
+      if (response.data?.districtname === district.toLowerCase()) {
+        dispatch(setOffice(true));
+        dispatch(setOfficeData(response.data));
+        dispatch(setDistricts(district));
         router.push(
           `/pages/${
             session?.data?.user?.id || uuidv4()
           }/explore/${region.toLowerCase()}/${district.toLowerCase()}`
         );
         setLoading(false);
+        // dispatch(resetOffice());
+      }else {
+        dispatch(resetOffice());
+        router.push(
+          `/pages/${
+            session?.data?.user?.id || uuidv4()
+          }/explore/${region.toLowerCase()}/${district.toLowerCase()}`
+        );
+  
+
       }
-      // router.push(
-      //   `/pages/${
-      //     session?.data?.user?.id || uuidv4()
-      //   }/explore/${region.toLowerCase()}/${district.toLowerCase()}`
-      // );
+      
+     
 
       return response;
       //
