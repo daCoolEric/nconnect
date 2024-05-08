@@ -20,6 +20,9 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 function CreateOffice() {
+
+  const router = useRouter(); 
+  
   const session = useSession({
     required: true,
     onUnauthenticated() {
@@ -44,7 +47,7 @@ function CreateOffice() {
   const [contact, setContact] = useState("");
   const [officeCreated, setOfficeCreated] = useState(false);
 
-  const router = useRouter();
+ 
 
   const submitHandler = async (e) => {
     e.preventDefault();
