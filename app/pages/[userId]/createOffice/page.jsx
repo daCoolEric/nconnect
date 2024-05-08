@@ -16,6 +16,7 @@ import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlic
 // import { setImageToCrop } from "@app/GlobalRedux/Features/cropModal/imageToBeCroppedSlice";
 import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
 import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
+import { useRouter } from "next/router";
 
 // import { useSession } from "next-auth/react";
 
@@ -43,6 +44,8 @@ function CreateOffice() {
   const [staffCapacity, setStaffCapacity] = useState("");
   const [contact, setContact] = useState("");
   const [officeCreated, setOfficeCreated] = useState(false);
+
+  const router = useRouter();
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -91,6 +94,10 @@ function CreateOffice() {
         console.log(response.data);
         alert("Office Created Successfully");
         setOfficeCreated(true);
+        router.push(
+          `/pages/${
+            session?.data?.user?.id || uuidv4()
+          }/explore/`)
       }
       setLoading(false);
     } catch (error) {
