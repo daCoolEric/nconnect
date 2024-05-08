@@ -11,18 +11,19 @@ import Input from "@components/Input";
 
 import Image from "next/image";
 import axios from "axios";
+import { redirect } from 'next/navigation'
 // import { closeLoaderModal } from "@app/GlobalRedux/Features/loader/loaderSlice";
 import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlice";
 // import { setImageToCrop } from "@app/GlobalRedux/Features/cropModal/imageToBeCroppedSlice";
 import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
 import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 function CreateOffice() {
 
-  const router = useRouter(); 
-  
+  // const router = useRouter(); 
+
   const session = useSession({
     required: true,
     onUnauthenticated() {
@@ -96,7 +97,7 @@ function CreateOffice() {
         console.log(response.data);
         alert("Office Created Successfully");
         setOfficeCreated(true);
-        router.push(
+        redirect(
           `/pages/${
             session?.data?.user?.id || uuidv4()
           }/explore/`)
