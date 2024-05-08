@@ -17,16 +17,15 @@ import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlic
 import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
 import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
 import { useRouter } from "next/router";
-
-// import { useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 function CreateOffice() {
-  // const session = useSession({
-  //   required: true,
-  //   onUnauthenticated() {
-  //     return null;
-  //   },
-  // });
+  const session = useSession({
+    required: true,
+    onUnauthenticated() {
+      return null;
+    },
+  });
 
   // const params = useParams();
   const [loading, setLoading] = useState(false);
