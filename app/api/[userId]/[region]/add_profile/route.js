@@ -1,14 +1,18 @@
+// import prisma from "@prisma";
+import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import path from "path";
-import { writeFile } from "fs/promises";
-import { uploadToCloudinary, uploads } from "@backend/utils/cloudinary";
-import { PrismaClient } from "@prisma/client";
+import {uploadToCloudinary,
+} from "@backend/utils/cloudinary";
+
 
 const prisma = new PrismaClient();
 
+
+
+// POST REQUEST FOR ADDING USER DETAILS
 export const POST = async (req, { params }) => {
-  const districtId = params.district;
-  const staffId = params.staffId;
+  
   const formData = await req.formData();
 
   const file = formData.get("image");
@@ -19,6 +23,9 @@ export const POST = async (req, { params }) => {
   const districtname = formData.get("district");
   const email = formData.get("email");
   const contact = formData.get("contact");
+  const districtId = formData.get("districtId");
+  const staffId =  formData.get("staffId");
+  
   const order = Date.now();
   console.log({ districtId, staffId });
 
@@ -76,3 +83,6 @@ export const POST = async (req, { params }) => {
     return NextResponse.json({ Message: "Failed", status: 500 });
   }
 };
+
+
+

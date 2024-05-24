@@ -17,12 +17,12 @@ import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlic
 // import { setImageToCrop } from "@app/GlobalRedux/Features/cropModal/imageToBeCroppedSlice";
 import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
 import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
-// import { useRouter } from "next/router";
+import { useRouter } from 'next/navigation'
 import { useSession } from "next-auth/react";
 
 function CreateOffice() {
 
-  // const router = useRouter(); 
+  const router = useRouter(); 
 
   const session = useSession({
     required: true,
@@ -75,8 +75,8 @@ function CreateOffice() {
         banner,
       });
       const response = await axios.post(
-        //`http://localhost:3000/api/userId/${region.toLowerCase()}`,
-        `https://nconnect-peid.vercel.app/api/userId/${region.toLowerCase()}`,
+        //`http://localhost:3000/api/userId/${region.toLowerCase()}/create_office`,
+        `https://nconnect-peid.vercel.app/api/userId/${region.toLowerCase()}/create_office`,
 
         {
           region: region.toLowerCase(),
@@ -93,13 +93,13 @@ function CreateOffice() {
           },
         }
       );
+      console.log(response.data);
+      alert("Office Created Successfully");
       if (response.status === 200) {
-        console.log(response.data);
-        alert("Office Created Successfully");
         setOfficeCreated(true);
-        redirect(
+        router.push(
           `/pages/${
-            session?.data?.user?.id || uuidv4()
+            session?.data?.user?.id 
           }/explore/`)
       }
       setLoading(false);

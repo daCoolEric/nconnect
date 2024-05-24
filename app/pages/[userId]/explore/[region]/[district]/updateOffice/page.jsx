@@ -80,7 +80,7 @@ function UpdateOffice() {
         oldBanner,
       });
       const response = await axios.put(
-        //`http://localhost:3000/api/userId/${region.toLowerCase()}/updateOffice`,
+        // `http://localhost:3000/api/userId/${region.toLowerCase()}/updateOffice`,
         `https://nconnect-peid.vercel.app/api/userId/${region.toLowerCase()}/updateOffice`,
 
         {

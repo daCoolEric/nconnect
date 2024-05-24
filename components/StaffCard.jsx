@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
 import InfoTab from "./InfoTab";
@@ -10,6 +10,7 @@ import { openDeleteModal } from "@app/GlobalRedux/Features/delete/deleteSlice";
 import { openUpdateModal } from "@app/GlobalRedux/Features/update/updateSlice";
 import { setButtonType } from "@app/GlobalRedux/Features/button/buttonSlice";
 import { useSession } from "next-auth/react";
+
 
 function StaffCard({
   staffId,
@@ -87,7 +88,7 @@ function StaffCard({
                 <button
                   className="relative -mr-px inline-flex w-0 flex-1 items-center justify-center gap-x-3 rounded-bl-lg border border-transparent py-4 text-sm font-semibold text-gray-900"
                   onClick={() => {
-                    router.push(`/pages/${session?.data?.user?.id}/addDetails`);
+                    router.push(`/pages/${session?.data?.user?.id}/updateUser`);
                   }}
                 >
                   Edit

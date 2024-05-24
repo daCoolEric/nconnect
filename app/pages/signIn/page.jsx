@@ -9,6 +9,7 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 
 function SignIn() {
+ 
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +21,7 @@ function SignIn() {
         email,
         password,
         callbackUrl: `https://nconnect-peid.vercel.app/pages/${uuidv4()}/explore`,
-        //callbackUrl: `http://localhost:3000/pages/20534b86-70ca-409d-854d-d729519d409a/explore`,
+        // callbackUrl: `http://localhost:3000/pages/20534b86-70ca-409d-854d-d729519d409a/explore`,
       });
       console.log(email, password);
       setLoading(false);

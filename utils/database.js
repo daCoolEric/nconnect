@@ -17,7 +17,7 @@ export const connectToDatabase = async () => {
 export const createUser = async (pin, email, password, role) => {
   try {
     const response = await axios.post(
-      "https://nconnect-nu.vercel.app/api/signUp",
+      "https://nconnect-peid.vercel.app/api/signUp",
       {
         pin,
         email,

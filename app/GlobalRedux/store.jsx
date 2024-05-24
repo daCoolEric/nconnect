@@ -33,6 +33,7 @@ import bannerPreviewReducer from "./Features/cropModal/bannerPreviewSlice";
 import avatarPreviewReducer from "./Features/cropModal/avatarPreviewSlice";
 import cropProfileModalReducer from "./Features/cropModal/cropProfileModalSlice";
 import avatarReducer from "./Features/cropModal/avatarSlice";
+import staffDataReducer from "./Features/staff/staffDataSlice";
 
 const rootReducer = combineReducers({
   menu: menuReducer,
@@ -65,6 +66,7 @@ const rootReducer = combineReducers({
   bannerPreview: bannerPreviewReducer,
   avatar: avatarReducer,
   avatarPreview: avatarPreviewReducer,
+  staffData: staffDataReducer,
 
   //add all your reducers here
 });

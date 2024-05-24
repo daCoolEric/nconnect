@@ -60,23 +60,40 @@ const handler = NextAuth({
   ],
 
   callbacks: {
-    async jwt({ token, user, session }) {
-      console.log("jwt callback", { token, user, session });
+    async jwt({ token, user,account, session }) {
+      
 
-      // pass in user Id and user role to the token
+      if (account) {
+        token.accessToken = account.access_token;
+        token.idToken = account.id_token;
+       
+    }
+
+    // // Decrypting JWT to check if expired
+    // var tokenParsed = JSON.parse(Buffer.from(token?.idToken.split('.')[1], 'base64').toString());
+    // const dateNowInSeconds = new Date().getTime() / 1000
+    // if (dateNowInSeconds > tokenParsed.exp) {
+    //      throw Error("expired token");
+    // }
+   //pass in user Id and user role to the token
       if (user) {
+        
         return {
           ...token,
           id: user.id,
           pin: user?.pin,
           role: user?.role,
           photoUrl: user?.photoUrl,
+       
         };
       }
+      console.log("jwt callback", { token, user, session });
+   
       return token;
     },
     async session({ session, token, user }) {
       console.log("session callback", { session, token, user });
+      
 
       return {
         ...session,
@@ -86,10 +103,34 @@ const handler = NextAuth({
           pin: token?.pin,
           role: token?.role,
           photoUrl: token?.photoUrl,
+         
         },
       };
     },
   },
+  session: {
+  // Choose how you want to save the user session.
+  // The default is `"jwt"`, an encrypted JWT (JWE) stored in the session cookie.
+  // If you use an `adapter` however, we default it to `"database"` instead.
+  // You can still force a JWT session by explicitly defining `"jwt"`.
+  // When using `"database"`, the session cookie will only contain a `sessionToken` value,
+  // which is used to look up the session in the database.
+  strategy: "jwt",
+
+  // Seconds - How long until an idle session expires and is no longer valid.
+  maxAge: 60, // 30 days
+
+  // Seconds - Throttle how frequently to write to database to extend a session.
+  // Use it to limit write operations. Set to 0 to always update the database.
+  // Note: This option is ignored if using JSON Web Tokens
+  // updateAge: 24 * 60 * 60, // 24 hours
+
+  // The session token is usually either a random UUID or string, however if you
+  // need a more customized session token string, you can define your own generate function.
+  generateSessionToken: () => {
+    return randomUUID?.() ?? randomBytes(32).toString("hex")
+  }
+},
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
 });

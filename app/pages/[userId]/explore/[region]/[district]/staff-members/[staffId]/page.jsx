@@ -1,15 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import StaffCard from "@components/StaffCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { redirect, useParams } from "next/navigation";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import StaffCardSkeleton from "@components/StaffCardSkeleton";
+import { setStaffData } from "@app/GlobalRedux/Features/staff/staffDataSlice";
 
 function IndividualStaff() {
   let { staffId } = useParams();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const region = useSelector((state) => state.region.value);
   const district = useSelector((state) => state.districts.value);
@@ -32,6 +34,7 @@ function IndividualStaff() {
         );
 
         setStaffProfile(response.data);
+        dispatch(setStaffData(response.data));
         console.log(response);
         setLoading(false);
       } catch (error) {
