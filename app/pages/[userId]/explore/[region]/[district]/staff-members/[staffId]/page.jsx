@@ -29,8 +29,8 @@ function IndividualStaff() {
       try {
         setLoading(true);
         const response = await axios.get(
-          // `http://localhost:3000/api/${session.data.user?.id}/${region.toLowerCase()}/${district.toLowerCase()}/${staffId}`
-          `https://nconnect-peid.vercel.app/api/${session.data.user?.id || "guest"}/${region.toLowerCase()}/${district.toLowerCase()}/${staffId}`
+          // `http://localhost:3000/api/userId/${region.toLowerCase()}/${district.toLowerCase()}/${staffId}`
+          `https://nconnect-peid.vercel.app/api/userId/${region.toLowerCase()}/${district.toLowerCase()}/${staffId}`
         );
 
         setStaffProfile(response.data);
