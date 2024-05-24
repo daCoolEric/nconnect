@@ -132,33 +132,38 @@ export const PUT = async (req, { params }) => {
 
   userDetails[`${region.toLowerCase()}Id`] = districtId;
 
-  let oldImageId = oldImage.split("/").pop().split(".")[0];
-  console.log(oldImageId);
-  const fileBuffer = await image.arrayBuffer();
-  if (!image) {
-    return NextResponse.json({ error: "No files received." }, { status: 400 });
-  }
-
-  let mime = image.type;
-  let encoding = "base64";
-  let buffer = Buffer.from(fileBuffer).toString("base64");
-  let fileUri = "data:" + mime + ";" + encoding + "," + buffer;
-
-  deleteFromCloudinary(
-    `nconnect/profile_photos/${oldImageId}`
-  );
-
   try {
     await prisma.$connect();
+
+    if (image) {
+      let oldImageId = oldImage.split("/").pop().split(".")[0];
+      console.log(oldImageId);
+    
+      const fileBuffer = await image.arrayBuffer();
+      let mime = image.type;
+    let encoding = "base64";
+    let buffer = Buffer.from(fileBuffer).toString("base64");
+    let fileUri = "data:" + mime + ";" + encoding + "," + buffer;
+  
+    deleteFromCloudinary(
+      `nconnect/profile_photos/${oldImageId}`
+    );
 
     const result = await uploadToCloudinary(
       fileUri,
       `nconnect/profile_photos`,
       oldImageId
     );
+
     let imageUrl = result.secure_url;
     userDetails.photoUrl = imageUrl;
+    
+      
+    }else{
+      userDetails.photoUrl = oldImage;
 
+    }
+   
     const updateUser = await prisma.profile.update({
       where: {
         id: profileId,
@@ -170,6 +175,9 @@ export const PUT = async (req, { params }) => {
     return new Response("User successfully updated", {
       status: 200,
     });
+  
+    
+   
   } catch (error) {
     console.log(error);
     return new Response("Failed to update user", { status: 500 });
