@@ -39,14 +39,16 @@ function AddDetails() {
   const [forenames, setFornames] = useState("");
   const [surname, setSurname] = useState("");
   const [rank, setRank] = useState("SELECT YOUR RANK");
-  const [region, setRegion] = useState("SELECT YOUR REGION");
   const [district, setDistrict] = useState("SELECT YOUR DISTRICT");
-  const [email, setEmail] = useState("");
+
   const [contact, setContact] = useState("");
   const [loading, setLoading] = useState(false);
 
   const staffId = session.data.user?.id;
-  let districtId = officeData.id;
+  const email = session.data.user?.email;
+  const districtId = officeData.id;
+  const districtname = officeData.districtname.toUpperCase();
+  const region = officeData.region.toUpperCase();
 
 
   const submitHandler = async (e) => {
@@ -57,7 +59,7 @@ function AddDetails() {
       surname: surname,
       rank: rank,
       region: region,
-      district: district,
+      district: districtname,
       email: email,
       contact: contact,
       image: avatar,
@@ -248,51 +250,39 @@ function AddDetails() {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="text"
-                    className="block text-sm font-medium leading-6 text-green-600"
-                  >
-                    Region
-                  </label>
-                  <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
-                    <select
-                      value={region}
-                      onChange={(e) => {
-                        setRegion(e.target.value);
-                      }}
-                      className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
-                    >
-                      {regionDB.map((region) => (
-                        <option value={region.region}>{region.region}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="text"
-                    className="block text-sm font-medium leading-6 text-green-600"
-                  >
-                    District
-                  </label>
-                  <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
-                    <select
-                      value={district}
-                      onChange={(e) => {
-                        setDistrict(e.target.value);
-                      }}
-                      className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
-                    >
-                      {region !== "SELECT YOUR REGION"
-                        ? districtDB[region].map((district) => (
-                            <option value={district.district}>
-                              {district.district}
-                            </option>
-                          ))
-                        : null}
-                    </select>
-                  </div>
-                </div>
+              <label
+                htmlFor="text"
+                className="block text-sm font-medium leading-6 text-green-600"
+              >
+                Region
+              </label>
+              <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
+                <select
+                  disabled={true}
+                  className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
+                >
+                  <option value={region}>{region.toUpperCase()}</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="text"
+                className="block text-sm font-medium leading-6 text-green-600"
+              >
+                District
+              </label>
+              <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
+                <select
+                  disabled={true}
+                  className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
+                >
+                  <option value={districtname}>
+                    {districtname.toUpperCase()}
+                  </option>
+                </select>
+              </div>
+            </div>
                 <div>
                   <label
                     htmlFor="email"
@@ -300,14 +290,16 @@ function AddDetails() {
                   >
                     Email
                   </label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
-                    placeholder="Enter your email address"
-                  />
+                  <div className="mt-2 ">
+      <input
+        id="email"
+        name="email"
+        type="text"
+        value={email}
+       disabled={true}
+        className="block w-full rounded-md border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
+      />
+    </div>
                 </div>
                 <div>
                   <label

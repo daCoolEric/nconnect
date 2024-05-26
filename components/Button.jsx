@@ -12,7 +12,7 @@ import { openUpdateModal } from "@app/GlobalRedux/Features/update/updateSlice";
 // import { signUp, logout, login, useAuth } from "@utils/database";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser } from "@utils/database.js";
+
 import { signIn, useSession } from "next-auth/react";
 
 function Button({ name, type, id }) {
@@ -31,18 +31,7 @@ function Button({ name, type, id }) {
   const role = useSelector((state) => state.role.value);
 
   // functions
-  async function handleSignup() {
-    setLoading(true);
-    try {
-      await createUser(pin, email, password, role);
-      alert("User succesfully created!!!");
-      dispatch(closeLoaderModal("hidden"));
-    } catch {
-      alert("Error!, Failed to create user");
-      dispatch(closeLoaderModal("hidden"));
-    }
-    setLoading(false);
-  }
+  
 
   async function handleLogin() {
     setLoading(true);

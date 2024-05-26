@@ -51,11 +51,12 @@ const Nav = () => {
               <div>{session.data?.user?.pin || GUEST.id}</div>
               <div>{session.data?.user?.role || GUEST.role}</div>
             </div>
-            <div className="mr-4">
+            <div className="mr-4 rounded-full //outline //outline-red-500">
               <Image
-                src="/assets/images/profilePic.png"
+                src={session.data?.user?.photoUrl || "/assets/images/profilePic.png"}
                 width={50}
                 height={50}
+                className=" rounded-full"
                 alt="Navigation Icon"
                 style={{ objectFit: "contain" }}
                 //   onClick={() => dispatch(openMenu("visible"))}

@@ -14,6 +14,8 @@ model Users {
   hashedPassword String   @unique
   photoUrl       String?
   role           String
+  region         String
+  districtname   String
   createdAt      DateTime @default(now())
   updatedAt      DateTime @default(now())
 }
@@ -41,7 +43,7 @@ model Greater_Accra {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -56,7 +58,7 @@ model Bono {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner       String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -71,7 +73,7 @@ model Bono_East {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -86,7 +88,7 @@ model Ahafo {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -101,7 +103,7 @@ model Savanna {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -116,7 +118,7 @@ model Volta {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -131,7 +133,7 @@ model Oti {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -146,7 +148,7 @@ model Northern {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -161,7 +163,7 @@ model North_East {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -176,7 +178,7 @@ model Upper_West {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -191,7 +193,7 @@ model Upper_East {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -206,7 +208,7 @@ model Western {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -221,7 +223,7 @@ model Western_North {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -236,7 +238,7 @@ model Eastern {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -251,7 +253,7 @@ model Central {
   address       String           @unique
   staffCapacity String
   contact       String
-   banner        String
+  banner        String
   staffmembers  Profile[]
   gallery       Office_Gallery[]
   createdAt     DateTime         @default(now())
@@ -259,17 +261,17 @@ model Central {
 }
 
 model Profile {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  forenames    String
-  surname      String
-  rank         String
-  email        String
-  contact      String
-  photoUrl     String
-  region       String
-  districtname String
-  order        Int
-  staffId      String   @unique @db.ObjectId
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  forenames       String
+  surname         String
+  rank            String
+  email           String
+  contact         String
+  photoUrl        String
+  region          String
+  districtname    String
+  order           Int
+  staffId         String         @unique @db.ObjectId
   Ashanti         Ashanti?       @relation(fields: [ashantiId], references: [id])
   ashantiId       String?        @db.ObjectId
   Greater_Accra   Greater_Accra? @relation(fields: [greater_AccraId], references: [id])
@@ -302,15 +304,15 @@ model Profile {
   easternId       String?        @db.ObjectId
   Central         Central?       @relation(fields: [centralId], references: [id])
   centralId       String?        @db.ObjectId
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now())
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @default(now())
 }
 
 model Office_Gallery {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  imageUrl     String
-  region        String
-  districtname String
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  imageUrl        String
+  region          String
+  districtname    String
   Ashanti         Ashanti?       @relation(fields: [ashantiId], references: [id])
   ashantiId       String?        @db.ObjectId
   Greater_Accra   Greater_Accra? @relation(fields: [greater_AccraId], references: [id])
@@ -343,6 +345,6 @@ model Office_Gallery {
   easternId       String?        @db.ObjectId
   Central         Central?       @relation(fields: [centralId], references: [id])
   centralId       String?        @db.ObjectId
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now())
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @default(now())
 }

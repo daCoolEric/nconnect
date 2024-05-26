@@ -21,7 +21,7 @@ const handler = NextAuth({
         email: { label: "email", type: "email", placeholder: "jsmith" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) {
           throw new Error("Invalid credentials");
         }
@@ -60,7 +60,7 @@ const handler = NextAuth({
   ],
 
   callbacks: {
-    async jwt({ token, user,account, session }) {
+    async jwt({ token, user,account, session, trigger }) {
       
 
       if (account) {
@@ -69,12 +69,12 @@ const handler = NextAuth({
        
     }
 
-    // // Decrypting JWT to check if expired
-    // var tokenParsed = JSON.parse(Buffer.from(token?.idToken.split('.')[1], 'base64').toString());
-    // const dateNowInSeconds = new Date().getTime() / 1000
-    // if (dateNowInSeconds > tokenParsed.exp) {
-    //      throw Error("expired token");
-    // }
+    // TO UPDATE PROFILE PICTURE
+    if (trigger === "update" && session?.photoUrl) {
+     
+      token.photoUrl = session.photoUrl
+    }
+    
    //pass in user Id and user role to the token
       if (user) {
         
@@ -83,6 +83,8 @@ const handler = NextAuth({
           id: user.id,
           pin: user?.pin,
           role: user?.role,
+          region: user?.region,
+          districtname: user?.districtname,
           photoUrl: user?.photoUrl,
        
         };
@@ -102,6 +104,8 @@ const handler = NextAuth({
           id: token?.id,
           pin: token?.pin,
           role: token?.role,
+          region: token?.region,
+          districtname: token?.districtname,
           photoUrl: token?.photoUrl,
          
         },
@@ -109,12 +113,7 @@ const handler = NextAuth({
     },
   },
   session: {
-  // Choose how you want to save the user session.
-  // The default is `"jwt"`, an encrypted JWT (JWE) stored in the session cookie.
-  // If you use an `adapter` however, we default it to `"database"` instead.
-  // You can still force a JWT session by explicitly defining `"jwt"`.
-  // When using `"database"`, the session cookie will only contain a `sessionToken` value,
-  // which is used to look up the session in the database.
+
   strategy: "jwt",
 
   // Seconds - How long until an idle session expires and is no longer valid.

@@ -21,6 +21,7 @@ import { useRouter } from 'next/navigation'
 // import { setAvatar } from "@app/GlobalRedux/Features/cropModal/avatarSlice";
 
 function updateUser() {
+  const { update } = useSession()
 
   const session = useSession({
     required: true,
@@ -49,9 +50,9 @@ function updateUser() {
   const [contact, setContact] = useState(staffData.contact);
   const [loading, setLoading] = useState(false);
   const [profileId, setProfileId] =useState(staffData.id);
- 
+  
   const [userID, setUserID] = useState(staffData.staffId);
-  let districtId = staffData[`${region}Id`]
+  let districtId = staffData[`${region}Id`];
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -70,7 +71,7 @@ function updateUser() {
       districtId: districtId,
       staffId: userID,
     };
-    console.log(staffData.photoUrl);
+    // console.log(staffData.photoUrl);
 
    
     const formData = new FormData();
@@ -87,12 +88,13 @@ function updateUser() {
     formData.set("profileId", profileId);
     formData.set("districtId", districtId);
     formData.set("staffId", userID);
+    formData.set("role", session.data.user?.role);
    
 
     try {
-      const response = await axios.put(
-        // `http://localhost:3000/api/${session.data.user?.id}/region/${officeIds.districtId}/update_profile/`,
-       `https://nconnect-peid.vercel.app/api/${session.data.user?.id}/region/${officeIds.districtId}/update_profile`,
+      const responseFromProfileUpdate = await axios.put(
+        // `http://localhost:3000/api/${session.data.user?.id}/region/update_profile/`,
+        `https://nconnect-peid.vercel.app/api/${session.data.user?.id}/region/update_profile`,
         data,
         {
           headers: {
@@ -100,10 +102,15 @@ function updateUser() {
           },
         }
       );
-
-      alert("Staff Details updated successfully");
-      console.log(response);
-      if (response?.status === 200) {
+          
+      if (responseFromProfileUpdate?.status === 200 ) {
+     
+        update({ photoUrl: previousAvatar })
+        alert("Staff Details updated successfully");
+      console.log(
+        responseFromProfileUpdate
+       
+      );
         router.push(`/pages/${
          session?.data?.user?.id
        }/explore/${region.toLowerCase()}/${districtname.toLowerCase()}/staff-members`)
@@ -141,7 +148,7 @@ function updateUser() {
       <div className="flex h-fit flex-1 flex-col justify-center items-center px-6 py-3 lg:px-8 //outline //outline-black">
         {console.log(session)}
         
-        {console.log(staffData)}
+        {/* {console.log(staffData)} */}
         {session?.data ? (
           <>
             <div className="sm:mx-auto sm:w-full sm:max-w-sm h-fit //outline //outline-black">
@@ -263,7 +270,7 @@ function updateUser() {
                   </div>
                 </div>
 
-                <div>
+            <div>
               <label
                 htmlFor="text"
                 className="block text-sm font-medium leading-6 text-green-600"

@@ -6,10 +6,6 @@ import {uploadToCloudinary,
 
 const prisma = new PrismaClient();
 
-
-
-
-
 // POST REQUEST FOR CREATING AN OFFICE
 export const POST = async (req, { params }) => {
     const formData = await req.formData();

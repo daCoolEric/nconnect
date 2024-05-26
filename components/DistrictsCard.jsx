@@ -77,9 +77,6 @@ function DistrictsCard({ district, userId }) {
       );
       console.log(response.data);
 
-      // const resolvedPromise = await Promise.allSettled(() => {
-
-      // });
 
       if (response.data?.districtname === district.toLowerCase()) {
         dispatch(setOffice(true));

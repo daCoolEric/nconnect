@@ -67,7 +67,7 @@ function StaffMembers() {
               <>
                 {console.log(staffProfiles)}
                 {staffProfiles.map((staff) => {
-                  // setStaffId(staff?.id);
+                (session?.data?.user?.id === staff?.id)? setStaffId(staff?.id): null;
                   return (
                     <StaffMembersCard
                       key={staff?.id}
@@ -88,7 +88,7 @@ function StaffMembers() {
       </div>
 
       <div className="w-full mt-2 flex justify-end ">
-        {session?.data?.user?.id ? (
+        {session?.data?.user?.districtname === district && staffId === ""  ? (
           <Link
             className="w-1/3 flex justify-center items-center //outline //outline-red-500"
             href={`/pages/${session?.data?.user?.id}/addDetails`}
