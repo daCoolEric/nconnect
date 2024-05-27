@@ -20,6 +20,8 @@ import { useRouter } from 'next/navigation'
 
 
 function AddDetails() {
+  const { update } = useSession();
+  
   const session = useSession({
     required: true,
     onUnauthenticated() {
@@ -92,6 +94,7 @@ function AddDetails() {
         }
       );
 
+      update({ photoUrl: avatarPreview })
       alert("Staff Details added successfully");
       console.log(data);
       if (response?.status === 200) {
