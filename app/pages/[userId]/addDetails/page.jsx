@@ -21,7 +21,7 @@ import { useRouter } from 'next/navigation'
 
 function AddDetails() {
   const { update } = useSession();
-  
+
   const session = useSession({
     required: true,
     onUnauthenticated() {
@@ -45,6 +45,7 @@ function AddDetails() {
 
   const [contact, setContact] = useState("");
   const [loading, setLoading] = useState(false);
+  const [sessionPhoto , setSessionPhoto] = useState("");
 
   const staffId = session.data.user?.id;
   const email = session.data.user?.email;
@@ -94,7 +95,7 @@ function AddDetails() {
         }
       );
 
-      update({ photoUrl: avatarPreview })
+      update({ photoUrl: sessionPhoto })
       alert("Staff Details added successfully");
       console.log(data);
       if (response?.status === 200) {
@@ -124,7 +125,7 @@ function AddDetails() {
     };
 
     dispatch(setAvatar(e.target.files[0]));
-    // dispatch(setAvatar(URL.createObjectURL(e.target.files[0])));
+    setSessionPhoto(URL.createObjectURL(e.target.files[0]));
     reader.readAsDataURL(e.target.files[0]);
   };
 

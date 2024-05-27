@@ -21,7 +21,7 @@ function Modal() {
     },
   });
 
-  const userMenuList = [
+  const adminMenuList = [
     {
       id: 1,
       name: "Explore",
@@ -78,11 +78,66 @@ function Modal() {
       name: "Create Office",
       path: `/pages/${session?.data?.user?.id}/createOffice`,
     },
+    // {
+    //   id: 11,
+    //   name: "Loading Skeleton",
+    //   path: "/pages/loading-skeleton",
+    // },
+  ];
+
+  const userMenuList = [
     {
-      id: 11,
-      name: "Loading Skeleton",
-      path: "/pages/loading-skeleton",
+      id: 1,
+      name: "Explore",
+      path: `/pages/${session?.data?.user?.id}/explore/`,
     },
+    {
+      id: 2,
+      name: "Sign-In",
+      path: `/pages/signIn/`,
+    },
+    {
+      id: 3,
+      name: "Add Details",
+      path: `/pages/${session?.data?.user?.id}/addDetails`,
+    },
+    {
+      id: 4,
+      name: "Profile",
+      path: `/pages/${
+        session?.data?.user?.id
+      }/explore/${region.toLowerCase()}/${district.toLowerCase()}/staff-members/staffProfileId`,
+    },
+    {
+      id: 5,
+      name: "Log Out",
+      path: `/pages/signIn/`,
+    },
+    {
+      id: 6,
+      name: "Forgot Password",
+      path: `/pages/forgotPassword/`,
+    },
+    {
+      id: 7,
+      name: "Staff members",
+      path: `/pages/${
+        session?.data?.user?.id
+      }/explore/${region.toLowerCase()}/${district.toLowerCase()}/staff-members`,
+    },
+    {
+      id: 8,
+      name: "Specific Office",
+      path: `/pages/${
+        session?.data?.user?.id || "guest2024"
+      }/explore/region/district`,
+    },
+    {
+      id: 9,
+      name: "Create Office",
+      path: `/pages/${session?.data?.user?.id}/createOffice`,
+    },
+    
   ];
 
   const guestMenuList = [
@@ -96,16 +151,7 @@ function Modal() {
       name: "Sign-In",
       path: `/pages/signIn/`,
     },
-    {
-      id: 3,
-      name: "Sign-Up",
-      path: `/pages/signUp/`,
-    },
-    {
-      id: 4,
-      name: "Log Out",
-      path: `/pages/signIn/`,
-    },
+   
   ];
 
   return (
@@ -116,17 +162,24 @@ function Modal() {
     >
       <div className="w-8/12 h-full bg-white">
         <div className="w-full h-2/3 //outline //outline-red-500 flex flex-col justify-evenly">
-          {session?.data?.user
-            ? userMenuList.map((item) => {
-                return (
-                  <MenuList key={item.id} name={item.name} page={item.path} />
-                );
+          {(session?.data?.user?.role === "admin")? (adminMenuList.map((item) => {
+              return (
+                <MenuList key={item.id} name={item.name} page={item.path} />
+              );
+            })):
+            (session?.data?.user?.role === "staff")? (userMenuList.map((item) => {
+              return (
+                <MenuList key={item.id} name={item.name} page={item.path} />
+              );
+            })):
+            guestMenuList.map((item) => {
+              return (
+                <MenuList key={item.id} name={item.name} page={item.path} />
+              );
               })
-            : guestMenuList.map((item) => {
-                return (
-                  <MenuList key={item.id} name={item.name} page={item.path} />
-                );
-              })}
+
+          }
+          
         </div>
       </div>
     </div>

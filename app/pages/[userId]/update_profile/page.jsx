@@ -93,8 +93,8 @@ function updateUser() {
 
     try {
       const responseFromProfileUpdate = await axios.put(
-        `http://localhost:3000/api/${session.data.user?.id}/region/update_profile/`,
-        //`https://nconnect-peid.vercel.app/api/${session.data.user?.id}/region/update_profile`,
+        //`http://localhost:3000/api/${session.data.user?.id}/region/update_profile/`,
+        `https://nconnect-peid.vercel.app/api/${session.data.user?.id}/region/update_profile`,
         data,
         {
           headers: {
