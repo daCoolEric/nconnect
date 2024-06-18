@@ -10,23 +10,19 @@ import RoleSelector from "@components/RoleSelector";
 import axios from "axios";
 import validateEmail from "@utils/validateEmail";
 
-
-
-
 function SignUp() {
   const router = useRouter();
- 
+
   const [loading, setLoading] = useState(false);
- 
+
   const role = useSelector((state) => state.role.value);
 
-  const [ pin, setPin] = useState("");
-  const [ email, setEmail] = useState("");
-  const [ password, setPassword] = useState("");
-  const [ confirmPassword, setConfirmPassword] = useState("");
-  const [ region, setRegion] = useState("SELECT YOUR REGION");
-  const [ districtname, setDistrictname] = useState("");
-
+  const [pin, setPin] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [region, setRegion] = useState("SELECT YOUR REGION");
+  const [districtname, setDistrictname] = useState("");
 
   const validate_NIA_Staff = () => {
     if (!NIA_Staff[userNameState]) {
@@ -36,44 +32,43 @@ function SignUp() {
 
   const dispatch = useDispatch();
 
-
   async function handleSignup(e) {
-     e.preventDefault();
-  
-    if(password !== confirmPassword) {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
       alert("Both passwords are not the same!!!");
     }
 
-      setLoading(true);
-      const formData = new FormData();
-      formData.set("pin", pin);
-      formData.set("email", email);
-      formData.set("password", password);
-      formData.set("role", role);
-      formData.set("region", region);
-      formData.set("districtname", districtname);
+    setLoading(true);
+    const formData = new FormData();
+    formData.set("pin", pin);
+    formData.set("email", email);
+    formData.set("password", password);
+    formData.set("role", role);
+    formData.set("region", region);
+    formData.set("districtname", districtname);
 
-      const data = {
-        pin: pin,
-        email: email,
-        password: password,
-        role: role,
-        region: region,
-        districtname: districtname
-      }
+    const data = {
+      pin: pin,
+      email: email,
+      password: password,
+      role: role,
+      region: region,
+      districtname: districtname,
+    };
 
-      console.log(data);
-      try {
-         const response = await axios.post(
-        "https://nconnect-peid.vercel.app/api/signUp", data,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-       
+    console.log(data);
+    try {
+      const response = await axios.post(
+        "https://nconnect-peid.vercel.app/api/signUp",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
-      
+
       // const response = await axios.post("http://localhost:3000/api/signUp",
       // data,
       // {
@@ -83,17 +78,14 @@ function SignUp() {
       // }
       // );
       console.log(response);
-        alert("User succesfully created!!!");
-        if (response) {
-          router.push(`/pages/signIn`);
-        }
-        setLoading(false);
-      } catch {
-        alert("Error!, Failed to create user");
+      alert("User succesfully created!!!");
+      if (response) {
+        router.push(`/pages/signIn`);
       }
-
-    
-    
+      setLoading(false);
+    } catch {
+      alert("Error!, Failed to create user");
+    }
   }
 
   return (
@@ -106,13 +98,12 @@ function SignUp() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-         <form
-                className="space-y-6"
-                action="#"
-                method="POST"
-                onSubmit={handleSignup}
+          <form
+            className="space-y-6"
+            action="#"
+            method="POST"
+            onSubmit={handleSignup}
           >
-         
             <div>
               <label
                 htmlFor="text"
@@ -141,15 +132,13 @@ function SignUp() {
                   id="email"
                   name="email"
                   type="email"
-                  value={value}
-                  autoComplete= "email"
+                  autoComplete="email"
                   required
                   placeholder="Enter your email (ex. ayi.eric@nia.gov.gh )"
                   onChange={(e) => setEmail(e.target.value)}
                   className="block w-full rounded-md border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
                 />
               </div>
-             
             </div>
 
             <div>
@@ -194,51 +183,51 @@ function SignUp() {
               <RoleSelector name="role" />
             </div>
             <div>
-                  <label
-                    htmlFor="text"
-                    className="block text-sm font-medium leading-6 text-green-600"
-                  >
-                    Region
-                  </label>
-                  <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
-                    <select
-                      value={region}
-                      onChange={(e) => {
-                        setRegion(e.target.value);
-                      }}
-                      className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
-                    >
-                      {regionDB.map((region) => (
-                        <option value={region.region}>{region.region}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div>
-                  <label
-                    htmlFor="text"
-                    className="block text-sm font-medium leading-6 text-green-600"
-                  >
-                    District
-                  </label>
-                  <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
-                    <select
-                      value={districtname}
-                      onChange={(e) => {
-                        setDistrictname(e.target.value);
-                      }}
-                      className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
-                    >
-                      {region !== "SELECT YOUR REGION"
-                        ? districtDB[region].map((district) => (
-                            <option value={district.district}>
-                              {district.district}
-                            </option>
-                          ))
-                        : null}
-                    </select>
-                  </div>
-                </div>
+              <label
+                htmlFor="text"
+                className="block text-sm font-medium leading-6 text-green-600"
+              >
+                Region
+              </label>
+              <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
+                <select
+                  value={region}
+                  onChange={(e) => {
+                    setRegion(e.target.value);
+                  }}
+                  className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
+                >
+                  {regionDB.map((region) => (
+                    <option value={region.region}>{region.region}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="text"
+                className="block text-sm font-medium leading-6 text-green-600"
+              >
+                District
+              </label>
+              <div className="mt-2" style={{ backgroundColor: "#FFFFFF" }}>
+                <select
+                  value={districtname}
+                  onChange={(e) => {
+                    setDistrictname(e.target.value);
+                  }}
+                  className="block w-full rounded-md bg-transparent border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
+                >
+                  {region !== "SELECT YOUR REGION"
+                    ? districtDB[region].map((district) => (
+                        <option value={district.district}>
+                          {district.district}
+                        </option>
+                      ))
+                    : null}
+                </select>
+              </div>
+            </div>
 
             <div className="h-16 //outline //outline-black">
               <div
@@ -254,7 +243,6 @@ function SignUp() {
                 </button>
               </div>
             </div>
-         
           </form>
         </div>
       </div>
