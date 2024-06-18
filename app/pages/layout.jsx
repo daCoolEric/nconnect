@@ -1,5 +1,5 @@
-import "@styles/globals.css";
-import Nav from "@components/Nav";
+import Nav from "../../components/Nav";
+import "../../styles/globals.css";
 
 import { SkeletonTheme } from "react-loading-skeleton";
 // import Provider from "@app/sessionProvider";

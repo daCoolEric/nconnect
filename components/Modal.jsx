@@ -78,6 +78,11 @@ function Modal() {
       name: "Create Office",
       path: `/pages/${session?.data?.user?.id}/createOffice`,
     },
+    {
+      id: 11,
+      name: "Reset Password",
+      path: `/pages/resetPassword/`,
+    },
     // {
     //   id: 11,
     //   name: "Loading Skeleton",
@@ -137,7 +142,11 @@ function Modal() {
       name: "Create Office",
       path: `/pages/${session?.data?.user?.id}/createOffice`,
     },
-    
+    {
+      id: 10,
+      name: "Reset Password",
+      path: `/pages/resetPassword/`,
+    },
   ];
 
   const guestMenuList = [
@@ -151,7 +160,21 @@ function Modal() {
       name: "Sign-In",
       path: `/pages/signIn/`,
     },
-   
+    {
+      id: 3,
+      name: "Send Token",
+      path: `/pages/sendToken/`,
+    },
+    {
+      id: 4,
+      name: "Verify Token",
+      path: `/pages/verifyToken/`,
+    },
+    {
+      id: 5,
+      name: "Reset Password",
+      path: `/pages/resetPassword/`,
+    },
   ];
 
   return (
@@ -162,24 +185,23 @@ function Modal() {
     >
       <div className="w-8/12 h-full bg-white">
         <div className="w-full h-2/3 //outline //outline-red-500 flex flex-col justify-evenly">
-          {(session?.data?.user?.role === "admin")? (adminMenuList.map((item) => {
-              return (
-                <MenuList key={item.id} name={item.name} page={item.path} />
-              );
-            })):
-            (session?.data?.user?.role === "staff")? (userMenuList.map((item) => {
-              return (
-                <MenuList key={item.id} name={item.name} page={item.path} />
-              );
-            })):
-            guestMenuList.map((item) => {
-              return (
-                <MenuList key={item.id} name={item.name} page={item.path} />
-              );
+          {session?.data?.user?.role === "admin"
+            ? adminMenuList.map((item) => {
+                return (
+                  <MenuList key={item.id} name={item.name} page={item.path} />
+                );
               })
-
-          }
-          
+            : session?.data?.user?.role === "staff" || "manager"
+            ? userMenuList.map((item) => {
+                return (
+                  <MenuList key={item.id} name={item.name} page={item.path} />
+                );
+              })
+            : guestMenuList.map((item) => {
+                return (
+                  <MenuList key={item.id} name={item.name} page={item.path} />
+                );
+              })}
         </div>
       </div>
     </div>

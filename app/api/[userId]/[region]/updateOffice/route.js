@@ -1,5 +1,3 @@
-// import prisma from "@prisma";
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
 import path from "path";
 import {
@@ -7,8 +5,9 @@ import {
   uploadToCloudinary,
 } from "@backend/utils/cloudinary";
 import { v2 as cloudinary } from "cloudinary";
+import { prisma } from "@prisma";
 
-const prisma = new PrismaClient();
+
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -68,7 +67,7 @@ export const PUT = async (req, { params }) => {
     );
     let imageUrl = result.secure_url;
 
-    const Ashanti = await prisma.ashanti.update({
+    const Office = await prisma[region.toLowerCase()].update({
       where: {
         id: districtId,
       },
@@ -83,7 +82,7 @@ export const PUT = async (req, { params }) => {
       },
     });
 
-    console.log(Ashanti);
+    console.log(Office);
     return new Response("Office successfully updated", {
       status: 200,
     });

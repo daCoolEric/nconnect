@@ -1,29 +1,42 @@
 "use client";
-import Input from "@components/Input";
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+// import Input from "../../../components/Input";
+// import { setStaffEmail } from "../../GlobalRedux/Features/staff/staffEmailSlice";
+
+import Input from "@components/Input";
+import { setStaffEmail } from "@app/GlobalRedux/Features/staff/staffEmailSlice";
 
 function SignIn() {
- 
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   async function handleLogin() {
     setLoading(true);
-    try {
-      await signIn("credentials", {
-        email,
-        password,
-        callbackUrl: `https://nconnect-peid.vercel.app/pages/${uuidv4()}/explore`,
-      //callbackUrl: `http://localhost:3000/pages/20534b86-70ca-409d-854d-d729519d409a/explore`,
-      });
-      console.log(email, password);
-      setLoading(false);
-    } catch {
-      console.log("Error!");
-      // console.log((email, password));
+
+    if (password === "nconnect2024") {
+      dispatch(setStaffEmail(email));
+      router.push("/pages/resetPassword");
+    } else {
+      try {
+        await signIn("credentials", {
+          email,
+          password,
+          callbackUrl: `https://nconnect-peid.vercel.app/pages/resetPassword`,
+          //callbackUrl: "http://localhost:3000/pages/userId/explore",
+        });
+        console.log(email, password);
+        setLoading(false);
+      } catch {
+        console.log("Error!");
+        // console.log((email, password));
+      }
     }
   }
 
@@ -79,7 +92,7 @@ function SignIn() {
               </div>
               <div className="text-sm">
                 <a
-                  href="/pages/forgotPassword/"
+                  href="/pages/sendToken/"
                   className="font-semibold text-red-600 hover:text-red-400"
                 >
                   Forgot password?

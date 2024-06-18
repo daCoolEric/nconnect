@@ -8,6 +8,8 @@ import { NIA_Staff } from "@utils/users";
 import { useRouter } from "next/navigation";
 import RoleSelector from "@components/RoleSelector";
 import axios from "axios";
+import validateEmail from "@utils/validateEmail";
+
 
 
 
@@ -134,14 +136,20 @@ function SignUp() {
               >
                 Email
               </label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                onChange={(e) => setEmail(e.target.value)}
-                autoComplete="email"
-                placeholder="Enter your email (ex. ayieric7@gmail.com )"
-              />
+              <div className="mt-2 ">
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={value}
+                  autoComplete= "email"
+                  required
+                  placeholder="Enter your email (ex. ayi.eric@nia.gov.gh )"
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="block w-full rounded-md border border-green-400 pl-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 //focus:ring-2 //focus:ring-inset focus:outline-green-500 sm:text-sm sm:leading-6"
+                />
+              </div>
+             
             </div>
 
             <div>

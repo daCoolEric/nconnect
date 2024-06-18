@@ -1,4 +1,4 @@
-import { setUserName } from "@app/GlobalRedux/Features/userName/userNameSlice";
+import { setUserName } from "../app/GlobalRedux/Features/userName/userNameSlice";
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 

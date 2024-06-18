@@ -1,0 +1,10 @@
+.spin-button-none::-webkit-outer-spin-button,
+.spin-button-none::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

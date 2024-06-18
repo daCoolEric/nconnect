@@ -5,8 +5,13 @@ const prisma = new PrismaClient();
 
 // GET REQUEST FOR ALL DISTRICT OFFICES IN A SPECIFIC REGION
 export const GET = async (req, { params }) => {
-  const region = params.region;
-  const district = params.district;
+  const region = params.region.split(" ").join("");
+  const district = params.district.split(" ").join("");
+
+ console.log(region);
+ console.log(district);
+
+ 
 
   try {
     await prisma.$connect();
