@@ -28,7 +28,7 @@ function SignIn() {
         await signIn("credentials", {
           email,
           password,
-          callbackUrl: `https://nconnect-peid.vercel.app/pages/userId/explore`,
+          callbackUrl: `https://www.niaconnect.com/pages/userId/explore`,
           //callbackUrl: "http://localhost:3000/pages/userId/explore",
         });
         console.log(email, password);

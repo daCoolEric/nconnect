@@ -71,7 +71,7 @@ function DistrictsCard({ district, userId }) {
     try {
       setLoading(true);
       const response = await axios.get(
-        `https://nconnect-peid.vercel.app/api/${
+        `https://www.niaconnect.com/api/${
           session?.data?.user?.id || uuidv4()
         }/${region.toLowerCase()}/${district.toLowerCase()}/`
         //`http://localhost:3000/api/${

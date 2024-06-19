@@ -23,10 +23,10 @@ export default function VerifyToken({ verificationCode }) {
           <Section style={coverSection}>
             <Section style={imageSection}>
               <Img
-                src="https://nconnect-peid.vercel.app/_next/image?url=%2Fassets%2Fimages%2Flogo.png&w=640&q=75"
+                src="https://www.niaconnect.com/_next/image?url=%2Fassets%2Fimages%2Flogo.png&w=640&q=75"
                 width="100"
                 height="19"
-                alt="AWS's Logo"
+                alt="NConnect's Logo"
               />
             </Section>
             <Section style={upperSection}>

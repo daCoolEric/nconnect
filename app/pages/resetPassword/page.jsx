@@ -44,7 +44,7 @@ function ResetPassword() {
       try {
         const responseFromPasswordUpdate = await axios.put(
           //`http://localhost:3000/api/resetPassword`,
-          "https://nconnect-peid.vercel.app/api/resetPassword",
+          "https://www.niaconnect.com/api/resetPassword",
           data,
           {
             headers: {

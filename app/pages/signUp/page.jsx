@@ -60,7 +60,7 @@ function SignUp() {
     console.log(data);
     try {
       const response = await axios.post(
-        "https://nconnect-peid.vercel.app/api/signUp",
+        "https://www.niaconnect.com/api/signUp",
         data,
         {
           headers: {

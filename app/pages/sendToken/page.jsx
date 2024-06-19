@@ -50,7 +50,7 @@ function SendToken() {
       } else {
         responseFromUpdatedToken = await axios.post(
           //`http://localhost:3000/api/emails?userEmail=${email}`,
-          `https://nconnect-peid.vercel.app/api/emails?userEmail=${email}`,
+          `https://www.niaconnect.com/api/emails?userEmail=${email}`,
           data,
           {
             headers: {

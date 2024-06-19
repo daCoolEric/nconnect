@@ -24,7 +24,7 @@ function VerifyToken() {
       try {
         responseFromFoundToken = await axios.get(
           //`http://localhost:3000/api/emails?userEmail=${staffEmail}`
-          `https://nconnect-peid.vercel.app/api/emails?userEmail=${staffEmail}`
+          `https://www.niaconnect.com/api/emails?userEmail=${staffEmail}`
         );
         setOtpFromServer(responseFromFoundToken.data);
       } catch (error) {

@@ -11,18 +11,17 @@ import Input from "@components/Input";
 
 import Image from "next/image";
 import axios from "axios";
-import { redirect } from 'next/navigation'
+import { redirect } from "next/navigation";
 // import { closeLoaderModal } from "@app/GlobalRedux/Features/loader/loaderSlice";
 import { openCropModal } from "@app/GlobalRedux/Features/cropModal/cropModalSlice";
 // import { setImageToCrop } from "@app/GlobalRedux/Features/cropModal/imageToBeCroppedSlice";
 import { setBanner } from "@app/GlobalRedux/Features/cropModal/bannerSlice";
 import { setBannerPreview } from "@app/GlobalRedux/Features/cropModal/bannerPreviewSlice";
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 function CreateOffice() {
-
-  const router = useRouter(); 
+  const router = useRouter();
 
   const session = useSession({
     required: true,
@@ -47,8 +46,6 @@ function CreateOffice() {
   const [staffCapacity, setStaffCapacity] = useState("");
   const [contact, setContact] = useState("");
   const [officeCreated, setOfficeCreated] = useState(false);
-
- 
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -76,7 +73,7 @@ function CreateOffice() {
       });
       const response = await axios.post(
         //`http://localhost:3000/api/userId/${region.toLowerCase()}/create_office`,
-        `https://nconnect-peid.vercel.app/api/userId/${region.toLowerCase()}/create_office`,
+        `https://www.niaconnect.com/api/userId/${region.toLowerCase()}/create_office`,
 
         {
           region: region.toLowerCase(),
@@ -97,10 +94,7 @@ function CreateOffice() {
       alert("Office Created Successfully");
       if (response.status === 200) {
         setOfficeCreated(true);
-        router.push(
-          `/pages/${
-            session?.data?.user?.id 
-          }/explore/`)
+        router.push(`/pages/${session?.data?.user?.id}/explore/`);
       }
       setLoading(false);
     } catch (error) {
